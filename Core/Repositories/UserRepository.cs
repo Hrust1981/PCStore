@@ -1,11 +1,10 @@
-﻿using Core.Repositories;
-using Core.Entities;
+﻿using Core.Entities;
 
 namespace Core.Repositories
 {
     public abstract class UserRepository : IUserRepository
     {
-        private List<User> _users;
+        private readonly List<User> _users;
 
         protected UserRepository(List<User> users)
         {
@@ -14,12 +13,21 @@ namespace Core.Repositories
 
         public void Add(User user)
         {
-            throw new NotImplementedException();
+            if (_users.Any(s => string.Equals(s.Login, user.Login)))
+            {
+                throw new Exception($"Seller with login '{user.Login}' already exists");
+            }
+            _users.Add(new Seller(user.Name, user.Login, user.Password, user.Email));
         }
 
         public void Delete(string login)
         {
-            throw new NotImplementedException();
+            var user = _users.FirstOrDefault(s => string.Equals(s.Login, login));
+            if (user == null)
+            {
+                return;
+            }
+            _users.Remove(user);
         }
 
         public User Get(string login)
@@ -32,9 +40,13 @@ namespace Core.Repositories
             return users;
         }
 
+        // ToDo: Use automapper
         public void Update(User user)
         {
-            throw new NotImplementedException();
+            var foundSeller = Get(user.Login);
+            foundSeller.Name = user.Name;
+            foundSeller.Password = user.Password;
+            foundSeller.Email = user.Email;
         }
     }
 }
