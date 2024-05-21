@@ -1,12 +1,12 @@
 ﻿using Core.Entities;
 
-namespace Core.Data
+namespace Core.Repositories
 {
     public interface IUserRepository
     {
         User Get(string login);
-        void Add(User seller);
-        void Update(User seller);
+        void Add(User user);
+        void Update(User user);
         void Delete(string login);
     }
 }

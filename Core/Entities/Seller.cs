@@ -4,7 +4,8 @@
     {
         private bool _isAuthenticated;
 
-        public Seller(string name, string login, string password, string email) : base(name, login, password, email)
+        public Seller(string name, string login, string password, string email)
+            : base(name, login, password, email)
         {
             Name = name;
             Login = login;

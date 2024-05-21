@@ -16,3 +16,4 @@ C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\refint\GUI.dll
 C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\GUI.pdb
 C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\GUI.genruntimeconfig.cache
 C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\ref\GUI.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\GUI.sourcelink.json

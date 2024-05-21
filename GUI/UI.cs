@@ -1,5 +1,7 @@
 ﻿using Core;
 using Core.Data;
+using Core.Entities;
+using Core.Repositories;
 
 namespace GUI
 {
@@ -14,7 +16,7 @@ namespace GUI
             string password = HiddenPasswordInput();
 
             Authentication authentication
-                = new Authentication(new SellerRepository());
+                = new Authentication(new SellerRepository(DB._users));
             
             var user = authentication.Authenticate(login, password);
             message = user.IsAuthenticated ?

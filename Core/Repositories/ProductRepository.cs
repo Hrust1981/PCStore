@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
 
-namespace Core.Data
+namespace Core.Repositories
 {
     public class ProductRepository
     {

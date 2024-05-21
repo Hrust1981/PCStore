@@ -1,14 +1,15 @@
 ﻿using Core.Entities;
 
-namespace Core.Data
+namespace Core.Repositories
 {
     public class SellerRepository : IUserRepository
     {
-        private List<Seller> _sellers = new List<Seller>()
+        private List<User> _sellers;
+
+        public SellerRepository(List<User> sellers)
         {
-            new Seller("Seller1", "Seller1", "Seller1", "seller1@mailru"),
-            new Seller("Seller2", "Seller2", "Seller2", "seller2@mailru"),
-        };
+            _sellers = sellers;
+        }
 
         public User Get(string login)
         {
