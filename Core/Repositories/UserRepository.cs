@@ -15,9 +15,9 @@ namespace Core.Repositories
         {
             if (_users.Any(s => string.Equals(s.Login, user.Login)))
             {
-                throw new Exception($"Seller with login '{user.Login}' already exists");
+                throw new Exception($"{user.Role} with login '{user.Login}' already exists");
             }
-            _users.Add(new Seller(user.Name, user.Login, user.Password, user.Email));
+            _users.Add(new User(user.Name, user.Login, user.Password, user.Email, user.Role));
         }
 
         public void Delete(string login)
@@ -32,12 +32,12 @@ namespace Core.Repositories
 
         public User Get(string login)
         {
-            var users = _users.FirstOrDefault(s => string.Equals(s.Login, login));
-            if (users == null)
+            var user = _users.FirstOrDefault(s => string.Equals(s.Login, login));
+            if (user == null)
             {
-                throw new Exception($"Seller with login '{login}' is not found");
+                throw new Exception($"{user.Role} with login '{login}' is not found");
             }
-            return users;
+            return user;
         }
 
         // ToDo: Use automapper

@@ -1,19 +1,21 @@
 ﻿namespace Core.Entities
 {
-    public abstract class User
+    public class User
     {
-        protected User(string name, string login, string password, string email)
+        public User(string name, string login, string password, string email, Role role)
         {
             Name = name;
             Login = login;
             Password = password;
             Email = email;
+            Role = role;
         }
 
-        public abstract string Name { get; set; }
-        public abstract string Login { get; set; }
-        public abstract string Password { get; set; }
-        public abstract string Email { get; set; }
-        public abstract bool IsAuthenticated { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Login { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public Role Role { get; set; }
+        public bool IsAuthenticated { get; set; }
     }
 }
