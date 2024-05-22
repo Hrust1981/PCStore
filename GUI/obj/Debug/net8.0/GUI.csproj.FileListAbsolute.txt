@@ -36,3 +36,7 @@ C:\Users\Hrust\source\repos\PCStore\GUI\obj\Debug\net8.0\refint\GUI.dll
 C:\Users\Hrust\source\repos\PCStore\GUI\obj\Debug\net8.0\GUI.pdb
 C:\Users\Hrust\source\repos\PCStore\GUI\obj\Debug\net8.0\GUI.genruntimeconfig.cache
 C:\Users\Hrust\source\repos\PCStore\GUI\obj\Debug\net8.0\ref\GUI.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll

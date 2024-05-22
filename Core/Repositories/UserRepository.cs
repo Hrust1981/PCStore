@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using AutoMapper;
+using Core.Entities;
 
 namespace Core.Repositories
 {
@@ -40,13 +41,12 @@ namespace Core.Repositories
             return user;
         }
 
-        // ToDo: Use automapper
         public void Update(User user)
         {
-            var foundSeller = Get(user.Login);
-            foundSeller.Name = user.Name;
-            foundSeller.Password = user.Password;
-            foundSeller.Email = user.Email;
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, User>());
+            var mapper = config.CreateMapper();
+            var foundUser = Get(user.Login);
+            mapper.Map<User, User>(user, foundUser);
         }
     }
 }

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{AA47D422-E910-4451-8CC4-EC42A2FC51CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GUI", "GUI\GUI.csproj", "{AA47D422-E910-4451-8CC4-EC42A2FC51CB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CD1A2CB0-7F4F-4978-9D70-CD31240F377C} = {CD1A2CB0-7F4F-4978-9D70-CD31240F377C}
 	EndProjectSection

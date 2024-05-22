@@ -7,10 +7,14 @@
             while (true)
             {
                 UI ui = new UI();
-                bool isAuthenticated = ui.Authentication();
-                if (isAuthenticated)
+                var user = ui.Authentication();
+                while (true)
                 {
-                    ui.Menu();
+                    bool isAuthenticated = user.IsAuthenticated;
+                    if (isAuthenticated)
+                    {
+                        ui.Menu(user);
+                    }
                 }
             }
         }

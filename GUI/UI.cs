@@ -7,11 +7,11 @@ namespace GUI
 {
     public class UI
     {
-        public bool Authentication()
+        public User Authentication()
         {
             string message = $"Авторизуйтесь{Environment.NewLine}Логин: ";
             Display(message);
-            string login = Console.ReadLine();
+            string login = DataInput();
             Display("Пароль: ");
             string password = HiddenPasswordInput();
 
@@ -25,7 +25,36 @@ namespace GUI
 
             Display(message);
             Clear(2000);
-            return user.IsAuthenticated;
+            return user;
+        }
+
+        public int Menu(User user)
+        {
+            string message = string.Empty;
+
+            if (user.Role == Role.Buyer)
+            {
+                message = $"""
+                        1.Выбрать товар
+                        2.Оплата
+                        3.Корзина
+                        4.Разлогиниться{Environment.NewLine}
+                        """;
+            }
+            else if (user.Role == Role.Seller)
+            {
+                message = $"""
+                        1.Добавить товар
+                        2.Удалить товар
+                        3.Разлогиниться{Environment.NewLine}
+                        """;
+            }
+            
+            Display(message);
+            string value = DataInput();
+            Clear(0);
+            int.TryParse(value, out int outValue);
+            return outValue;
         }
 
         public void Payment()
@@ -33,31 +62,19 @@ namespace GUI
 
         }
 
-        public int Menu()
-        {
-            string message = $"1.Оплата{Environment.NewLine}2.Возврат{Environment.NewLine}3.Товары{Environment.NewLine}4.Разлогиниться{Environment.NewLine}";
-            Display(message);
-            string value = Console.ReadLine();
-            if (!value.Any(x => x.Equals("1") ||
-                                x.Equals("2") ||
-                                x.Equals("3") ||
-                                x.Equals("4")))
-            {
-                Clear(0);
-                Menu();
-            }
-            int.TryParse(value, out int outValue);
-            return outValue;
-        }
-
-        public void Refund()
-        {
-
-        }
-
         public void Goods()
         {
 
+        }
+
+        private string DataInput()
+        {
+            string data = Console.ReadLine();
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new Exception("Please, enter the required data");
+            }
+            return data;
         }
 
         private void Display(string message)

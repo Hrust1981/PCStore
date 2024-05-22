@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "zJfk+NN1Cy8csml2qQhG3ltuVzbjDQcZhAYO+XUu4oVJpwdAfzIv7eXN2SlebGu6CxO6gD86NdPouw3De+8h0Q==",
+  "dgSpecHash": "MXkiyEr0jqIjDoWhKwBWJPidJ+cXpa08/bwsGC3zZtJqiWku80wiIZthM0NF09bz+QsY4hz9rBwJ1NHC/mWtxw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\GUI\\GUI.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\GUI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
