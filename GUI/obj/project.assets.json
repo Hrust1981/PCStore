@@ -230,9 +230,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\GUI.csproj",
-      "projectName": "GUI",
-      "projectPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\GUI.csproj",
+      "projectUniqueName": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\TUI.csproj",
+      "projectName": "TUI",
+      "projectPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\TUI.csproj",
       "packagesPath": "C:\\Users\\SharipovRR\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\obj\\",
       "projectStyle": "PackageReference",

@@ -3,7 +3,7 @@ using Core.Data;
 using Core.Entities;
 using Core.Repositories;
 
-namespace GUI
+namespace TUI
 {
     public class UI
     {

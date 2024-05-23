@@ -1,4 +1,4 @@
-﻿namespace GUI
+﻿namespace TUI
 {
     public class Program
     {
