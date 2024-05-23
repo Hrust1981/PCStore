@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2d0eb9f829cb357183f38bed3ea73ca0f94a5fa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1eba8dab0fb10983f466afe562aba4d9ce6eaa53")]
 [assembly: System.Reflection.AssemblyProductAttribute("TUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

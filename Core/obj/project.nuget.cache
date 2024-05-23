@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "F8nDOc7RB/hMk4t8AVuqzf+hRUIQ8euxKGhP/tL5ztuLR4KhawF9CP/CRUPPnPPOKcLE9Y4BmyKDO2TKJ5R8Nw==",
+  "dgSpecHash": "3pnHwdq/R9ABG5FaTHvmrcvX3enD5cXCt2UCSZWXSrTbkA7S+sMtNKGKhMg1ccCg8J5HLsX/RJPseMDc+oWF0Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\Hrust\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\Hrust\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Hrust\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\Hrust\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\Hrust\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
