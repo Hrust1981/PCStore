@@ -23,7 +23,7 @@ namespace Core.Repositories
 
         public void Delete(string login)
         {
-            var user = _users.FirstOrDefault(s => string.Equals(s.Login, login));
+            var user = Get(login);
             if (user == null)
             {
                 return;
@@ -36,17 +36,21 @@ namespace Core.Repositories
             var user = _users.FirstOrDefault(s => string.Equals(s.Login, login));
             if (user == null)
             {
-                throw new Exception($"{user.Role} with login '{login}' is not found");
+                throw new Exception($"{user.Role} with login '{login}' was not found");
             }
             return user;
         }
 
         public void Update(User user)
         {
+            var updateUser = Get(user.Login);
+            if (updateUser == null)
+            {
+                throw new Exception($"User with login {user.Login} was not found");
+            }
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, User>());
-            var mapper = config.CreateMapper();
-            var foundUser = Get(user.Login);
-            mapper.Map<User, User>(user, foundUser);
+            var mapper = config.CreateMapper();            
+            mapper.Map<User, User>(user, updateUser);
         }
     }
 }
