@@ -16,7 +16,7 @@ namespace TUI
             string password = HiddenPasswordInput();
 
             Authentication authentication
-                = new Authentication(new SellerRepository(DB._users));
+                = new Authentication(new SellerRepository(DB.users));
             
             var user = authentication.Authenticate(login, password);
             message = user.IsAuthenticated ?

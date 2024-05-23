@@ -4,17 +4,14 @@
     {
         static void Main(string[] args)
         {
+            UI ui = new UI();
             while (true)
             {
-                UI ui = new UI();
                 var user = ui.Authentication();
-                while (true)
+                bool isAuthenticated = user.IsAuthenticated;
+                while (isAuthenticated)
                 {
-                    bool isAuthenticated = user.IsAuthenticated;
-                    if (isAuthenticated)
-                    {
-                        ui.Menu(user);
-                    }
+                    ui.Menu(user);
                 }
             }
         }

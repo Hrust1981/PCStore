@@ -5,7 +5,7 @@
         private bool _isAuthenticated;
         private static List<Product> _shoppingCart;
 
-        public Buyer(string name, string login, string password, string email, Role role, DiscountCard discountCard)
+        public Buyer(string name, string login, string password, string email, Role role)
             : base(name, login, password, email, role)
         {
         }
