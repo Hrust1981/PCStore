@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Core.Entities;
+﻿using Core.Entities;
 
 namespace Core.Repositories
 {

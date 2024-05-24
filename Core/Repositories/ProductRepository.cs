@@ -11,6 +11,9 @@ namespace Core.Repositories
         {
             _products = products;
         }
+
+        public int Count { get => _products.Count; }
+
         public void Add(Product product)
         {
             if (_products.Any(p => p.Id == product.Id))
@@ -20,7 +23,7 @@ namespace Core.Repositories
             _products.Add(new Product(product.Name, product.Description, product.Price, product.Quantity));
         }
 
-        public Product Get(Guid id)
+        public Product Get(int id)
         {
             var product = _products.FirstOrDefault(p => p.Id == id);
             if (product == null)
@@ -32,7 +35,7 @@ namespace Core.Repositories
 
         public List<Product> GetAll()
         {
-            return _products;
+            return _products.Where(p => p.Quantity > 0).ToList();
         }
 
         public void Update(Product product)
@@ -47,7 +50,7 @@ namespace Core.Repositories
             mapper.Map<Product, Product>(product, updateProduct);
         }
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             var product = Get(id);
             if (product == null)

@@ -7,6 +7,13 @@ namespace TUI
 {
     public class UI
     {
+        private readonly ProductRepository _repository;
+
+        public UI(ProductRepository repository)
+        {
+            _repository = repository;
+        }
+
         public User Authentication()
         {
             string message = $"Авторизуйтесь{Environment.NewLine}Логин: ";
@@ -28,14 +35,14 @@ namespace TUI
             return user;
         }
 
-        public int Menu(User user)
+        public string Menu(User user)
         {
             string message = string.Empty;
 
             if (user.Role == Role.Buyer)
             {
                 message = $"""
-                        1.Выбрать товар
+                        1.Каталог товаров
                         2.Оплата
                         3.Корзина
                         4.Разлогиниться{Environment.NewLine}
@@ -53,8 +60,7 @@ namespace TUI
             Display(message);
             string value = DataInput();
             Clear(0);
-            int.TryParse(value, out int outValue);
-            return outValue;
+            return value;
         }
 
         public void Payment()
@@ -62,7 +68,46 @@ namespace TUI
 
         }
 
-        public void Goods()
+        public void ShowProducts()
+        {
+            var enteredValue = string.Empty;
+            while (!string.Equals(enteredValue.ToLower(), "q"))
+            {
+                var products = _repository.GetAll();
+                foreach (var product in products)
+                {
+                    Console.WriteLine(product);
+                }
+                Display("Выбери товар: ");
+                enteredValue = DataInput();
+                int.TryParse(enteredValue, out int valueId);
+                if (valueId > 0 && valueId <= _repository.Count)
+                {
+                    var selectedProduct = _repository.Get(valueId);
+                    selectedProduct.Quantity--;
+                    _repository.Update(selectedProduct); 
+                }
+                Clear(0);
+            }
+            Clear(0);
+        }
+
+        public void ShowCart()
+        {
+
+        }
+
+        public void AddProduct()
+        {
+
+        }
+
+        public void RemoveProduct()
+        {
+
+        }
+
+        public void SignOut()
         {
 
         }

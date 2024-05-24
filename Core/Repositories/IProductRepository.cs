@@ -6,8 +6,8 @@ namespace Core.Repositories
     {
         void Add(Product product);
         List<Product> GetAll();
-        Product Get(Guid id);
+        Product Get(int id);
         void Update(Product product);
-        void Delete(Guid id);
+        void Delete(int id);
     }
 }

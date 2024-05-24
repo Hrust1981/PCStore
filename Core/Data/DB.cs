@@ -4,6 +4,8 @@ namespace Core.Data
 {
     public class DB
     {
+        private static int counterId;
+
         public static List<User> users = new List<User>()
         {
             new Seller("Seller1", "Seller1", "Seller1", "seller1@mailru", Role.Seller),
@@ -18,5 +20,7 @@ namespace Core.Data
             new Product("Monitor Xiaomi A22i", "1920x1080 (FullHD)@75 Гц, VA, LED", 8999, 5),
             new Product("Printer Brother HL-1210W", "A4, 2400x600 dpi, USB, Wi-Fi", 9099, 2)
         };
+
+        public static int CounterId { get => ++counterId; }
     }
 }

@@ -1,22 +1,27 @@
-﻿namespace Core.Entities
+﻿using Core.Data;
+
+namespace Core.Entities
 {
     public class Product
     {
-        private readonly Guid _id;
-
         public Product(string name, string description, int price, int quantity)
         {
-            _id = Guid.NewGuid();
+            Id = DB.CounterId;
             Name = name;
             Description = description;
             Price = price;
             Quantity = quantity;
         }
 
-        public Guid Id { get; }
+        public int Id { get; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int Price { get; set; }
         public int Quantity { get; set; }
+
+        public override string? ToString()
+        {
+            return Id + "    " + Name + "|    " + Description + "|    " + Price + "|    " + Quantity;
+        }
     }
 }
