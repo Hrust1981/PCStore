@@ -1,6 +1,8 @@
 ﻿using Core;
 using Core.Data;
+using Core.Entities;
 using Core.Repositories;
+using Core.Services;
 
 namespace TUI
 {
@@ -8,7 +10,8 @@ namespace TUI
     {
         static void Main(string[] args)
         {
-            UI ui = new UI(new ProductRepository(DB.products));
+            UI ui = new UI(new ProductRepository(DB.products),
+                           new ShoppingCartService());
             while (true)
             {
                 var user = ui.Authentication();
@@ -21,13 +24,13 @@ namespace TUI
                         switch (menuItem)
                         {
                             case "1":
-                                ui.ShowProducts();
+                                ui.ShowProducts((Buyer)user);
                                 break;
                             case "2":
                                 ui.Payment();
                                 break;
                             case "3":
-                                ui.ShowCart();
+                                ui.ShowCart((Buyer)user);
                                 break;
                             case "4":
                                 ui.SignOut();

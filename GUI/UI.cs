@@ -2,16 +2,19 @@
 using Core.Data;
 using Core.Entities;
 using Core.Repositories;
+using Core.Services;
 
 namespace TUI
 {
     public class UI
     {
-        private readonly ProductRepository _repository;
+        private readonly IProductRepository _repository;
+        private readonly IShoppingCartService _service;
 
-        public UI(ProductRepository repository)
+        public UI(IProductRepository repository, IShoppingCartService service)
         {
             _repository = repository;
+            _service = service;
         }
 
         public User Authentication()
@@ -68,7 +71,7 @@ namespace TUI
 
         }
 
-        public void ShowProducts()
+        public void ShowProducts(Buyer buyer)
         {
             var enteredValue = string.Empty;
             while (!string.Equals(enteredValue.ToLower(), "q"))
@@ -81,20 +84,23 @@ namespace TUI
                 Display("Выбери товар: ");
                 enteredValue = DataInput();
                 int.TryParse(enteredValue, out int valueId);
-                if (valueId > 0 && valueId <= _repository.Count)
-                {
-                    var selectedProduct = _repository.Get(valueId);
-                    selectedProduct.Quantity--;
-                    _repository.Update(selectedProduct); 
-                }
+                
                 Clear(0);
             }
             Clear(0);
         }
 
-        public void ShowCart()
+        public void ShowCart(Buyer buyer)
         {
-
+            List<ProductDTO> products = buyer.ShoppingCart;
+            if (products == null)
+            {
+                throw new Exception("Our shopping cart is empty");
+            }
+            foreach (var product in products)
+            {
+                Console.WriteLine(product);
+            }
         }
 
         public void AddProduct()
