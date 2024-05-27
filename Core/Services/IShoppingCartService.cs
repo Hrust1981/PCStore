@@ -4,8 +4,8 @@ namespace Core.Services
 {
     public interface IShoppingCartService
     {
-        void Add(ProductDTO product, Buyer buyer, int valueId);
-        void Update(ProductDTO product);
-        void Delete(int id);
+        void AddProduct(Buyer buyer, int productId);
+        void UpdateQuantityProduct(Buyer buyer, int productId, int quantity);
+        void DeleteProduct(int id);
     }
 }

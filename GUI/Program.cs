@@ -10,8 +10,8 @@ namespace TUI
     {
         static void Main(string[] args)
         {
-            UI ui = new UI(new ProductRepository(DB.products),
-                           new ShoppingCartService());
+            var _repository = new ProductRepository(DB.products);
+            UI ui = new UI(_repository,new ShoppingCartService(_repository));
             while (true)
             {
                 var user = ui.Authentication();
@@ -24,7 +24,7 @@ namespace TUI
                         switch (menuItem)
                         {
                             case "1":
-                                ui.ShowProducts((Buyer)user);
+                                ui.SelectProducts((Buyer)user);
                                 break;
                             case "2":
                                 ui.Payment();

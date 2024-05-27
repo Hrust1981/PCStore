@@ -17,8 +17,8 @@ namespace Core.Services
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, Product>());
             var mapper = config.CreateMapper();
-            var product1 = mapper.Map<Product>(product);
-            _repository.Add(product1);
+            var productDTO = mapper.Map<Product>(product);
+            _repository.Add(productDTO);
         }
 
         public void Delete(int id)

@@ -9,12 +9,12 @@ namespace TUI
     public class UI
     {
         private readonly IProductRepository _repository;
-        private readonly IShoppingCartService _service;
+        private readonly IShoppingCartService _shoppingCartService;
 
-        public UI(IProductRepository repository, IShoppingCartService service)
+        public UI(IProductRepository repository, IShoppingCartService shoppingCartService)
         {
             _repository = repository;
-            _service = service;
+            _shoppingCartService = shoppingCartService;
         }
 
         public User Authentication()
@@ -27,7 +27,7 @@ namespace TUI
 
             Authentication authentication
                 = new Authentication(new SellerRepository(DB.users));
-            
+
             var user = authentication.Authenticate(login, password);
             message = user.IsAuthenticated ?
                 $"{Environment.NewLine}Здравствуйте {user.Name}, Вы авторизованы!{Environment.NewLine}" :
@@ -44,22 +44,24 @@ namespace TUI
 
             if (user.Role == Role.Buyer)
             {
-                message = $"""
-                        1.Каталог товаров
+                message = """
+                        1.Выбрать товар
                         2.Оплата
                         3.Корзина
-                        4.Разлогиниться{Environment.NewLine}
+                        4.Разлогиниться
+
                         """;
             }
             else if (user.Role == Role.Seller)
             {
-                message = $"""
+                message = """
                         1.Добавить товар
                         2.Удалить товар
-                        3.Разлогиниться{Environment.NewLine}
+                        3.Разлогиниться
+
                         """;
             }
-            
+
             Display(message);
             string value = DataInput();
             Clear(0);
@@ -71,7 +73,7 @@ namespace TUI
 
         }
 
-        public void ShowProducts(Buyer buyer)
+        public void SelectProducts(Buyer buyer)
         {
             var enteredValue = string.Empty;
             while (!string.Equals(enteredValue.ToLower(), "q"))
@@ -81,10 +83,10 @@ namespace TUI
                 {
                     Console.WriteLine(product);
                 }
-                Display("Выбери товар: ");
+                Display("Выбери товар в корзину: ");
                 enteredValue = DataInput();
                 int.TryParse(enteredValue, out int valueId);
-                
+                _shoppingCartService.AddProduct(buyer, valueId);
                 Clear(0);
             }
             Clear(0);
@@ -92,15 +94,42 @@ namespace TUI
 
         public void ShowCart(Buyer buyer)
         {
-            List<ProductDTO> products = buyer.ShoppingCart;
-            if (products == null)
+            var enteredValue = string.Empty;
+            var message = string.Empty;
+            while (!string.Equals(enteredValue.ToLower(), "q"))
             {
-                throw new Exception("Our shopping cart is empty");
+                var products = buyer.ShoppingCart;
+                foreach (var product in products)
+                {
+                    Console.WriteLine(product);
+                }
+                message = $"""
+                         1.Оплатить товар
+                         2.Изменить количество в каждой позиции
+                         3.Для выхода 'q'
+
+                         Выбери действие: 
+                         """;
+                Display(message);
+                enteredValue = DataInput();
+                int.TryParse(enteredValue, out int positionNumber);
+                if (positionNumber == 1)
+                {
+                    Payment();
+                }
+                else if (positionNumber == 2)
+                {
+                    Display("Введи ID товара: ");
+                    var indexProduct = DataInput();
+                    int.TryParse(indexProduct, out int productId);
+                    Display("Введи количество: ");
+                    var quantityString = DataInput();
+                    int.TryParse(quantityString, out int quantity);
+                    _shoppingCartService.UpdateQuantityProduct(buyer, productId, quantity);
+                }
+                Clear(0);
             }
-            foreach (var product in products)
-            {
-                Console.WriteLine(product);
-            }
+            Clear(0);
         }
 
         public void AddProduct()

@@ -4,9 +4,9 @@ namespace Core.Entities
 {
     public class ProductDTO
     {
-        public ProductDTO(string name, int price, int quantity)
+        public ProductDTO(int id, string name, int price, int quantity)
         {
-            Id = DB.CounterProductDTOId;
+            Id = id;
             Name = name;
             Price = price;
             Quantity = quantity;

@@ -1,14 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "4jHIage113P/RWLovgW9Mne3Eml9K6mP6K6xq/gGuvG7iw8YfDPurMF/MySoqZFyeAAqeijPOBifoE5JhkpS6g==",
+  "dgSpecHash": "j5imkyDnWwlx+/FmGH2ZiRZpTqIOMdTeXcQ2QzLgdhP3vraP5MePRL9zDzT5ymUanf7KDwsA5UzRpIvLDmuUyQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\TUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SharipovRR\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

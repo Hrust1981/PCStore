@@ -1,6 +1,6 @@
-﻿using Core.Entities;
+﻿using Core.Data;
+using Core.Entities;
 using Core.Repositories;
-using System;
 
 namespace Core.Services
 {
@@ -13,35 +13,48 @@ namespace Core.Services
             _repository = repository;
         }
 
-        public void Add(ProductDTO product, Buyer buyer, int valueId)
+        public void AddProduct(Buyer buyer, int id)
         {
-            if (valueId > 0 && valueId <= _repository.Count)
+            if (id > 0 && id <= _repository.Count)
             {
-                var selectedProduct = _repository.Get(valueId);
+                var selectedProduct = _repository.Get(id);
                 if (selectedProduct.Quantity > 0)
                 {
                     var shoppingCart = buyer.ShoppingCart;
-                    if (shoppingCart.Any(p => p.Id == valueId))
+                    if (shoppingCart.Any(p => p.Id == id))
                     {
-                        shoppingCart.SingleOrDefault(p => p.Id == valueId).Quantity++;
+                        shoppingCart.FirstOrDefault(p => p.Id == id).Quantity++;
                     }
                     else
                     {
-                        shoppingCart.Add(new ProductDTO(selectedProduct.Name, selectedProduct.Price, 1));
+                        shoppingCart.Add(new ProductDTO(selectedProduct.Id, 
+                                                        selectedProduct.Name,
+                                                        selectedProduct.Price,
+                                                        1));
                     }
                     selectedProduct.Quantity--;
                 }
             }
         }
 
-        public void Delete(int id)
+        public void UpdateQuantityProduct(Buyer buyer, int id, int quantity)
+        {
+            var product = _repository.Get(id);
+            if (quantity > 0 && quantity <= product.Quantity + 1)
+            {
+                buyer.ShoppingCart.FirstOrDefault(p => p.Id == id).Quantity = quantity;
+                _repository.Update(new Product(product.Id,
+                                               product.Name,
+                                               product.Description,
+                                               product.Price,
+                                               quantity));
+            }
+        }
+
+        public void DeleteProduct(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(ProductDTO product)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
