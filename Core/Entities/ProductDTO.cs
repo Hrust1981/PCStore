@@ -2,26 +2,24 @@
 
 namespace Core.Entities
 {
-    public class Product
+    public class ProductDTO
     {
-        public Product(string name, string description, int price, int quantity)
+        public ProductDTO(string name, int price, int quantity)
         {
-            Id = DB.CounterProductId;
+            Id = DB.CounterProductDTOId;
             Name = name;
-            Description = description;
             Price = price;
             Quantity = quantity;
         }
 
         public int Id { get; }
         public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
         public int Price { get; set; }
         public int Quantity { get; set; }
 
         public override string? ToString()
         {
-            return Id + "    " + Name + "|    " + Description + "|    " + Price + "|    " + Quantity;
+            return Id + "    " + Name + "|    " + Price + "|    " + Quantity;
         }
     }
 }

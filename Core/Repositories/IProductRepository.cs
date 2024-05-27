@@ -4,6 +4,7 @@ namespace Core.Repositories
 {
     public interface IProductRepository
     {
+        int Count { get; }
         void Add(Product product);
         List<Product> GetAll();
         Product Get(int id);
