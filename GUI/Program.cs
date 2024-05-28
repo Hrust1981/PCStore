@@ -1,8 +1,8 @@
 ﻿using Core;
-using Core.Data;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TUI
 {
@@ -10,8 +10,11 @@ namespace TUI
     {
         static void Main(string[] args)
         {
-            var _repository = new ProductRepository(DB.products);
-            UI ui = new UI(_repository,new ShoppingCartService(_repository));
+            var serviceProvider = ServiceProviderOfDI.BuildServiceProvider();
+            var productService = serviceProvider.GetService<IProductRepository>();
+            var shoppingCartService = serviceProvider.GetService<IShoppingCartService>();
+
+            UI ui = new UI(productService, shoppingCartService);
             while (true)
             {
                 var user = ui.Authentication();

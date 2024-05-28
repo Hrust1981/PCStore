@@ -26,7 +26,17 @@ namespace Core.Entities
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int Price { get; set; }
-        public int Quantity { get => _quantity; set { _quantity = value;  } }
+        public int Quantity 
+        { 
+            get => _quantity; 
+            set 
+            {
+                if (value > 0)
+                {
+                    _quantity = value;
+                }
+            } 
+        }
 
         public override string? ToString()
         {

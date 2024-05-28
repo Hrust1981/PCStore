@@ -1,16 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "j5imkyDnWwlx+/FmGH2ZiRZpTqIOMdTeXcQ2QzLgdhP3vraP5MePRL9zDzT5ymUanf7KDwsA5UzRpIvLDmuUyQ==",
+  "dgSpecHash": "B4r7DUNw0kVbuytRZyqw+owzXjRGz8h0MDtio1zV8/h7Scqav61qXkHwt3xOh/ERsB2oW7Bbe+QFyZ7/wpeAlA==",
   "success": true,
   "projectFilePath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\TUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SharipovRR\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
-    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.localization\\8.0.5\\microsoft.extensions.localization.8.0.5.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.localization.abstractions\\8.0.5\\microsoft.extensions.localization.abstractions.8.0.5.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.1\\microsoft.extensions.logging.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\xunit\\2.8.1\\xunit.2.8.1.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\xunit.analyzers\\1.14.0\\xunit.analyzers.1.14.0.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\xunit.assert\\2.8.1\\xunit.assert.2.8.1.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\xunit.core\\2.8.1\\xunit.core.2.8.1.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\xunit.extensibility.core\\2.8.1\\xunit.extensibility.core.2.8.1.nupkg.sha512",
+    "C:\\Users\\SharipovRR\\.nuget\\packages\\xunit.extensibility.execution\\2.8.1\\xunit.extensibility.execution.2.8.1.nupkg.sha512"
   ],
   "logs": []
 }

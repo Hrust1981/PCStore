@@ -1,5 +1,4 @@
-﻿using Core.Data;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Repositories;
 
 namespace Core.Services
@@ -27,10 +26,8 @@ namespace Core.Services
                     }
                     else
                     {
-                        shoppingCart.Add(new ProductDTO(selectedProduct.Id, 
-                                                        selectedProduct.Name,
-                                                        selectedProduct.Price,
-                                                        1));
+                        shoppingCart.Add(new ProductDTO(selectedProduct.Id, selectedProduct.Name,
+                                                        selectedProduct.Price, 1));
                     }
                     selectedProduct.Quantity--;
                 }
@@ -40,14 +37,12 @@ namespace Core.Services
         public void UpdateQuantityProduct(Buyer buyer, int id, int quantity)
         {
             var product = _repository.Get(id);
+            var oldQuantity = product.Quantity;
             if (quantity > 0 && quantity <= product.Quantity + 1)
             {
                 buyer.ShoppingCart.FirstOrDefault(p => p.Id == id).Quantity = quantity;
-                _repository.Update(new Product(product.Id,
-                                               product.Name,
-                                               product.Description,
-                                               product.Price,
-                                               quantity));
+                _repository.Update(new Product(product.Id, product.Name, product.Description,
+                                               product.Price, oldQuantity - quantity));
             }
         }
 

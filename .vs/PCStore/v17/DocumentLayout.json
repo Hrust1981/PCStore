@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|solutionrelative:gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\gui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|solutionrelative:gui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\gui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|solutionrelative:gui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|solutionrelative:gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,13 +34,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Entities\\Product.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Product.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Entities\\Product.cs",
+              "RelativeToolTip": "Core\\Entities\\Product.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAgwCQAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T10:54:55.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\Program.cs",
               "RelativeDocumentMoniker": "GUI\\Program.cs",
               "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\Program.cs",
               "RelativeToolTip": "GUI\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-27T11:17:08.013Z",
               "EditorCaption": ""
@@ -49,20 +66,20 @@
               "RelativeDocumentMoniker": "Core\\Services\\ShoppingCartService.cs",
               "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\ShoppingCartService.cs",
               "RelativeToolTip": "Core\\Services\\ShoppingCartService.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAowDQAAAAAAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAowCcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-27T09:21:38.664Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "UI.cs",
               "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\UI.cs",
               "RelativeDocumentMoniker": "GUI\\UI.cs",
               "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\UI.cs",
               "RelativeToolTip": "GUI\\UI.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAxwH0AAAA1AAAA",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAlwH8AAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-23T18:28:26.912Z",
               "EditorCaption": ""
