@@ -6,26 +6,31 @@ namespace Core.Services
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly IProductRepository _repository;
-        private int _quantityInStock;
+        private Dictionary<int, int> _quantityInStock;
         private int _oldQuantityValue;
 
         public ShoppingCartService(IProductRepository repository)
         {
             _repository = repository;
+            _quantityInStock = new();
         }
 
-        public void AddProduct(Buyer buyer, int id)
+        public void AddProduct(Buyer buyer, int productId)
         {
-            if (id > 0 && id <= _repository.Count)
+            if (productId > 0 && productId <= _repository.Count)
             {
-                var selectedProduct = _repository.Get(id);
-                _quantityInStock = selectedProduct.Quantity;
+                var selectedProduct = _repository.Get(productId);
+                if (!_quantityInStock.Any(id => id.Key == productId))
+                {
+                    _quantityInStock.Add(selectedProduct.Id, selectedProduct.Quantity);
+                }
+                
                 if (selectedProduct.Quantity > 0)
                 {
                     var shoppingCart = buyer.ShoppingCart;
-                    if (shoppingCart.Any(p => p.Id == id))
+                    if (shoppingCart.Any(p => p.Id == productId))
                     {
-                        shoppingCart.FirstOrDefault(p => p.Id == id).Quantity++;
+                        shoppingCart.FirstOrDefault(p => p.Id == productId).Quantity++;
                     }
                     else
                     {
@@ -37,23 +42,36 @@ namespace Core.Services
             }
         }
 
-        public void UpdateQuantityProduct(Buyer buyer, int id, int quantity)
+        public void UpdateQuantityProduct(Buyer buyer, int productId, int quantity)
         {
-            var product = _repository.Get(id);
-            if (quantity > 0 &&
-                quantity <= product.Quantity + 1 &&
-                _oldQuantityValue != quantity)
+            if (!buyer.ShoppingCart.Any(p => p.Id == productId))
             {
-                buyer.ShoppingCart.FirstOrDefault(p => p.Id == id).Quantity = quantity;
+                throw new Exception($"Product with ID = {productId} was not found");
+            }
+            var product = _repository.Get(productId);
+            if (quantity > 0 &&
+                _oldQuantityValue != quantity &&
+                quantity <= product.Quantity + 1)
+            {
+                buyer.ShoppingCart.FirstOrDefault(p => p.Id == productId).Quantity = quantity;
+                var quantityProduct = _quantityInStock.FirstOrDefault(x => x.Key == productId).Value;
                 _repository.Update(new Product(product.Id, product.Name, product.Description,
-                                               product.Price, _quantityInStock - quantity));
+                                               product.Price, quantityProduct - quantity));
                 _oldQuantityValue = quantity;
             }
         }
 
-        public void DeleteProduct(int id)
+        public void DeleteProduct(Buyer buyer, int productId)
         {
-            throw new NotImplementedException();
+            if (!buyer.ShoppingCart.Any(p => p.Id == productId))
+            {
+                throw new Exception($"Product with ID = {productId} was not found");
+            }
+            var product = buyer.ShoppingCart.FirstOrDefault(p => p.Id == productId);
+            var productFromDB = _repository.Get(productId);
+            productFromDB.Quantity += product.Quantity;
+            _repository.Update(productFromDB);
+            buyer.ShoppingCart.Remove(product);
         }
 
     }

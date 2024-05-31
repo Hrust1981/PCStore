@@ -28,7 +28,7 @@ namespace Core.Repositories
             var product = _products.FirstOrDefault(p => p.Id == id);
             if (product == null)
             {
-                throw new Exception($"Product with {id} is not found");
+                throw new Exception($"Product with {id} was not found");
             }
             return product;
         }

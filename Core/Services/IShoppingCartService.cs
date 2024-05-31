@@ -6,6 +6,6 @@ namespace Core.Services
     {
         void AddProduct(Buyer buyer, int productId);
         void UpdateQuantityProduct(Buyer buyer, int productId, int quantity);
-        void DeleteProduct(int id);
+        void DeleteProduct(Buyer buyer, int productId);
     }
 }

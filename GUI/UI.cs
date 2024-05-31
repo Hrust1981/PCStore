@@ -106,7 +106,8 @@ namespace TUI
                 message = $"""
                          1.Оплатить товар
                          2.Изменить количество в каждой позиции
-                         3.Для выхода 'q'
+                         3.Удалить товар из корзины
+                         4.Для выхода 'q'
 
                          Выбери действие: 
                          """;
@@ -126,6 +127,13 @@ namespace TUI
                     var quantityString = DataInput();
                     int.TryParse(quantityString, out int quantity);
                     _shoppingCartService.UpdateQuantityProduct(buyer, productId, quantity);
+                }
+                else if (positionNumber == 3)
+                {
+                    Display("Введи ID товара: ");
+                    var indexProduct = DataInput();
+                    int.TryParse(indexProduct, out int productId);
+                    _shoppingCartService.DeleteProduct(buyer, productId);
                 }
                 Clear(0);
             }
