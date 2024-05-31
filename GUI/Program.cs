@@ -30,7 +30,7 @@ namespace TUI
                                 ui.SelectProducts((Buyer)user);
                                 break;
                             case "2":
-                                ui.Payment();
+                                ui.Payment((Buyer)user);
                                 break;
                             case "3":
                                 ui.ShowCart((Buyer)user);

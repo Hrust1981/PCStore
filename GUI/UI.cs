@@ -68,9 +68,23 @@ namespace TUI
             return value;
         }
 
-        public void Payment()
+        public void Payment(Buyer buyer)
         {
-
+            while (true)
+            {
+                if (buyer.ShoppingCart.Any())
+                {
+                    Display("Оплата прошла успешно!");
+                    buyer.ShoppingCart.Clear();
+                    _shoppingCartService.GetQuantityInStock.Clear();
+                }
+                else
+                {
+                    Display("Корзина пуста!");
+                }
+                Clear(2500);
+                break;
+            }
         }
 
         public void SelectProducts(Buyer buyer)
@@ -116,7 +130,7 @@ namespace TUI
                 int.TryParse(enteredValue, out int positionNumber);
                 if (positionNumber == 1)
                 {
-                    Payment();
+                    Payment(buyer);
                 }
                 else if (positionNumber == 2)
                 {

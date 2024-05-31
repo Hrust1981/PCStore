@@ -9,6 +9,8 @@ namespace Core.Services
         private Dictionary<int, int> _quantityInStock;
         private int _oldQuantityValue;
 
+        public Dictionary<int, int> GetQuantityInStock { get { return _quantityInStock; } set { _quantityInStock = value; } }
+
         public ShoppingCartService(IProductRepository repository)
         {
             _repository = repository;
