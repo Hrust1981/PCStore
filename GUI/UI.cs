@@ -97,9 +97,7 @@ namespace TUI
                 {
                     Console.WriteLine(product);
                 }
-                Display("Выбери товар в корзину: ");
-                enteredValue = DataInput();
-                int.TryParse(enteredValue, out int valueId);
+                var valueId = NewMethod("Выбери товар в корзину: ", out enteredValue);
                 _shoppingCartService.AddProduct(buyer, valueId);
                 Clear(0);
             }
@@ -117,6 +115,12 @@ namespace TUI
                 {
                     Console.WriteLine(product);
                 }
+                if (products.Any())
+                {
+                    var sum = buyer.ShoppingCart.Sum(x => x.Price * x.Quantity);
+                    message = $"\t\tСумма к оплате: {sum} рублей";
+                    DisplayLine(message);
+                }
                 message = $"""
                          1.Оплатить товар
                          2.Изменить количество в каждой позиции
@@ -125,28 +129,20 @@ namespace TUI
 
                          Выбери действие: 
                          """;
-                Display(message);
-                enteredValue = DataInput();
-                int.TryParse(enteredValue, out int positionNumber);
+                var positionNumber = NewMethod(message, out enteredValue);
                 if (positionNumber == 1)
                 {
                     Payment(buyer);
                 }
                 else if (positionNumber == 2)
                 {
-                    Display("Введи ID товара: ");
-                    var indexProduct = DataInput();
-                    int.TryParse(indexProduct, out int productId);
-                    Display("Введи количество: ");
-                    var quantityString = DataInput();
-                    int.TryParse(quantityString, out int quantity);
+                    var productId = NewMethod("Введи ID товара: ", out string unusedInputValue);
+                    var quantity = NewMethod("Введи количество: ", out unusedInputValue);
                     _shoppingCartService.UpdateQuantityProduct(buyer, productId, quantity);
                 }
                 else if (positionNumber == 3)
                 {
-                    Display("Введи ID товара: ");
-                    var indexProduct = DataInput();
-                    int.TryParse(indexProduct, out int productId);
+                    var productId = NewMethod("Введи ID товара: ", out string unusedInputValue);
                     _shoppingCartService.DeleteProduct(buyer, productId);
                 }
                 Clear(0);
@@ -169,6 +165,14 @@ namespace TUI
 
         }
 
+        private int NewMethod(string message, out string enteredValue)
+        {
+            Display(message);
+            enteredValue = DataInput();
+            int.TryParse(enteredValue, out int valueId);
+            return valueId;
+        }
+
         private string DataInput()
         {
             string data = Console.ReadLine();
@@ -182,6 +186,11 @@ namespace TUI
         private void Display(string message)
         {
             Console.Write(message);
+        }
+
+        private void DisplayLine(string message)
+        {
+            Console.WriteLine(message);
         }
 
         private void Clear(int timeout)
