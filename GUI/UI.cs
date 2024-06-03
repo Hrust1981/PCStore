@@ -1,20 +1,26 @@
 ﻿using Core;
-using Core.Data;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
+using Microsoft.Extensions.Logging;
 
 namespace TUI
 {
     public class UI
     {
-        private readonly IProductRepository _repository;
+        private readonly IProductRepository _productRepository;
         private readonly IShoppingCartService _shoppingCartService;
+        private readonly IUserRepository _userRepository;
+        //private readonly ILogger _logger;
 
-        public UI(IProductRepository repository, IShoppingCartService shoppingCartService)
+        public UI(IProductRepository repository,
+                  IShoppingCartService shoppingCartService,
+                  IUserRepository userRepository)
         {
-            _repository = repository;
+            _productRepository = repository;
             _shoppingCartService = shoppingCartService;
+            _userRepository = userRepository;
+            //_logger = logger;
         }
 
         public User Authentication()
@@ -25,8 +31,9 @@ namespace TUI
             Display("Пароль: ");
             string password = HiddenPasswordInput();
 
+            var users = _userRepository.GetAll();
             Authentication authentication
-                = new Authentication(new SellerRepository(DB.users));
+                = new Authentication(new SellerRepository(users));
 
             var user = authentication.Authenticate(login, password);
             message = user.IsAuthenticated ?
@@ -46,9 +53,8 @@ namespace TUI
             {
                 message = """
                         1.Выбрать товар
-                        2.Оплата
-                        3.Корзина
-                        4.Разлогиниться
+                        2.Корзина
+                        3.Разлогиниться
 
                         """;
             }
@@ -70,21 +76,17 @@ namespace TUI
 
         public void Payment(Buyer buyer)
         {
-            while (true)
+            if (buyer.ShoppingCart.Any())
             {
-                if (buyer.ShoppingCart.Any())
-                {
-                    Display("Оплата прошла успешно!");
-                    buyer.ShoppingCart.Clear();
-                    _shoppingCartService.GetQuantityInStock.Clear();
-                }
-                else
-                {
-                    Display("Корзина пуста!");
-                }
-                Clear(2500);
-                break;
+                Display("Оплата прошла успешно!");
+                buyer.ShoppingCart.Clear();
+                _shoppingCartService.GetQuantityInStock.Clear();
             }
+            else
+            {
+                Display("Корзина пуста!");
+            }
+            Clear(2500);
         }
 
         public void SelectProducts(Buyer buyer)
@@ -92,12 +94,13 @@ namespace TUI
             var enteredValue = string.Empty;
             while (!string.Equals(enteredValue.ToLower(), "q"))
             {
-                var products = _repository.GetAll();
+                var products = _productRepository.GetAll();
                 foreach (var product in products)
                 {
                     Console.WriteLine(product);
                 }
-                var valueId = NewMethod("Выбери товар в корзину: ", out enteredValue);
+                DisplayLine("Для выхода нажите клавишу 'q'");
+                var valueId = GetEnteredNumericValue("Выбери товар в корзину: ", out enteredValue);
                 _shoppingCartService.AddProduct(buyer, valueId);
                 Clear(0);
             }
@@ -108,7 +111,7 @@ namespace TUI
         {
             var enteredValue = string.Empty;
             var message = string.Empty;
-            while (!string.Equals(enteredValue.ToLower(), "q"))
+            while (!string.Equals(enteredValue.ToLower(), "4"))
             {
                 var products = buyer.ShoppingCart;
                 foreach (var product in products)
@@ -118,31 +121,31 @@ namespace TUI
                 if (products.Any())
                 {
                     var sum = buyer.ShoppingCart.Sum(x => x.Price * x.Quantity);
-                    message = $"\t\tСумма к оплате: {sum} рублей";
+                    message = $"        Сумма к оплате: {sum} рублей";
                     DisplayLine(message);
                 }
                 message = $"""
                          1.Оплатить товар
                          2.Изменить количество в каждой позиции
                          3.Удалить товар из корзины
-                         4.Для выхода 'q'
+                         4.Выход
 
                          Выбери действие: 
                          """;
-                var positionNumber = NewMethod(message, out enteredValue);
+                var positionNumber = GetEnteredNumericValue(message, out enteredValue);
                 if (positionNumber == 1)
                 {
                     Payment(buyer);
                 }
                 else if (positionNumber == 2)
                 {
-                    var productId = NewMethod("Введи ID товара: ", out string unusedInputValue);
-                    var quantity = NewMethod("Введи количество: ", out unusedInputValue);
+                    var productId = GetEnteredNumericValue("Введи ID товара: ");
+                    var quantity = GetEnteredNumericValue("Введи количество: ");
                     _shoppingCartService.UpdateQuantityProduct(buyer, productId, quantity);
                 }
                 else if (positionNumber == 3)
                 {
-                    var productId = NewMethod("Введи ID товара: ", out string unusedInputValue);
+                    var productId = GetEnteredNumericValue("Введи ID товара: ");
                     _shoppingCartService.DeleteProduct(buyer, productId);
                 }
                 Clear(0);
@@ -152,23 +155,53 @@ namespace TUI
 
         public void AddProduct()
         {
-
+            var name = GetEnteredStringValue("Введи название товара");
+            var decription = GetEnteredStringValue("Введи описание товара");
+            var price = GetEnteredNumericValue("Введи цену товара: ");
+            var quantity = GetEnteredNumericValue("Введи количество товара: ");
+            _productRepository.Add(new Product(name, decription, price, quantity));
+            Clear(0);
         }
 
         public void RemoveProduct()
         {
-
+            var enteredValue = string.Empty;
+            while (!string.Equals(enteredValue.ToLower(), "q"))
+            {
+                var products = _productRepository.GetAll();
+                foreach (var product in products)
+                {
+                    DisplayLine(product.ToString());
+                }
+                DisplayLine("Для выхода нажите клавишу 'q'");
+                var productId = GetEnteredNumericValue("Для удаления введи ID товара: ", out enteredValue);
+                if (productId > 0)
+                {
+                    _productRepository.Delete(productId);
+                }
+                Clear(0);
+            }
+            Clear(0);
         }
 
-        public void SignOut()
+        private string GetEnteredStringValue(string message)
         {
-
+            DisplayLine(message);
+            return DataInput();
         }
 
-        private int NewMethod(string message, out string enteredValue)
+        private int GetEnteredNumericValue(string message, out string enteredValue)
         {
             Display(message);
             enteredValue = DataInput();
+            int.TryParse(enteredValue, out int valueId);
+            return valueId;
+        }
+
+        private int GetEnteredNumericValue(string message)
+        {
+            Display(message);
+            var enteredValue = DataInput();
             int.TryParse(enteredValue, out int valueId);
             return valueId;
         }

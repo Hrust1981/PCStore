@@ -1,19 +1,22 @@
 ﻿using Core.Entities;
 using Core.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace Core.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly IProductRepository _repository;
+        private readonly ILogger _logger;
         private Dictionary<int, int> _quantityInStock;
         private int _oldQuantityValue;
 
         public Dictionary<int, int> GetQuantityInStock { get { return _quantityInStock; } set { _quantityInStock = value; } }
 
-        public ShoppingCartService(IProductRepository repository)
+        public ShoppingCartService(IProductRepository repository, ILogger logger)
         {
             _repository = repository;
+            _logger = logger;
             _quantityInStock = new();
         }
 
@@ -25,6 +28,7 @@ namespace Core.Services
                 if (!_quantityInStock.Any(id => id.Key == productId))
                 {
                     _quantityInStock.Add(selectedProduct.Id, selectedProduct.Quantity);
+                    _logger.LogInformation($"Product with ID={selectedProduct.Id} has been added to shopping cart");
                 }
                 
                 if (selectedProduct.Quantity > 0)

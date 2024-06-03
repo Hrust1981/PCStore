@@ -3,11 +3,11 @@ using Core.Entities;
 
 namespace Core.Repositories
 {
-    public abstract class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly List<User> _users;
 
-        protected UserRepository(List<User> users)
+        public UserRepository(List<User> users)
         {
             _users = users;
         }
@@ -39,6 +39,11 @@ namespace Core.Repositories
                 throw new Exception($"{user.Role} with login '{login}' was not found");
             }
             return user;
+        }
+
+        public List<User> GetAll()
+        {
+            return _users;
         }
 
         public void Update(User user)

@@ -13,8 +13,9 @@ namespace TUI
             var serviceProvider = ServiceProviderOfDI.BuildServiceProvider();
             var productService = serviceProvider.GetService<IProductRepository>();
             var shoppingCartService = serviceProvider.GetService<IShoppingCartService>();
+            var userService= serviceProvider.GetService<IUserRepository>();
 
-            UI ui = new UI(productService, shoppingCartService);
+            UI ui = new UI(productService, shoppingCartService, userService);
             while (true)
             {
                 var user = ui.Authentication();
@@ -30,13 +31,10 @@ namespace TUI
                                 ui.SelectProducts((Buyer)user);
                                 break;
                             case "2":
-                                ui.Payment((Buyer)user);
-                                break;
-                            case "3":
                                 ui.ShowCart((Buyer)user);
                                 break;
-                            case "4":
-                                ui.SignOut();
+                            case "3":
+                                isAuthenticated = false;
                                 break;
                             default:
                                 break;
@@ -54,7 +52,7 @@ namespace TUI
                                 ui.RemoveProduct();
                                 break;
                             case "3":
-                                ui.SignOut();
+                                isAuthenticated = false;
                                 break;
                             default:
                                 break;

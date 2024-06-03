@@ -1,18 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\",
+  "WorkspaceRootPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\gui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|solutionrelative:gui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\customlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\customlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\repositories\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\repositories\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\serviceproviderofdi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\serviceproviderofdi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|solutionrelative:gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\gui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA47D422-E910-4451-8CC4-EC42A2FC51CB}|GUI\\TUI.csproj|solutionrelative:gui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +38,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IProductRepository.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Repositories\\IProductRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Repositories\\IProductRepository.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Repositories\\IProductRepository.cs",
+              "RelativeToolTip": "Core\\Repositories\\IProductRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T12:06:49.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Repositories\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Repositories\\ProductRepository.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Repositories\\ProductRepository.cs",
+              "RelativeToolTip": "Core\\Repositories\\ProductRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADUAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T11:36:22.664Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -31,38 +73,64 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ShoppingCartService.cs",
-              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Services\\ShoppingCartService.cs",
-              "RelativeDocumentMoniker": "Core\\Services\\ShoppingCartService.cs",
-              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Services\\ShoppingCartService.cs",
-              "RelativeToolTip": "Core\\Services\\ShoppingCartService.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Title": "ServiceProviderOfDI.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\ServiceProviderOfDI.cs",
+              "RelativeDocumentMoniker": "Core\\ServiceProviderOfDI.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\ServiceProviderOfDI.cs",
+              "RelativeToolTip": "Core\\ServiceProviderOfDI.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T05:21:20.533Z",
+              "WhenOpened": "2024-06-03T12:05:27.446Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "CustomLogger.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\CustomLogger.cs",
+              "RelativeDocumentMoniker": "Core\\CustomLogger.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\CustomLogger.cs",
+              "RelativeToolTip": "Core\\CustomLogger.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T09:32:51.008Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ShoppingCartService.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\ShoppingCartService.cs",
+              "RelativeDocumentMoniker": "Core\\Services\\ShoppingCartService.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\ShoppingCartService.cs",
+              "RelativeToolTip": "Core\\Services\\ShoppingCartService.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABQAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T09:17:26.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\GUI\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\Program.cs",
               "RelativeDocumentMoniker": "GUI\\Program.cs",
-              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\GUI\\Program.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\Program.cs",
               "RelativeToolTip": "GUI\\Program.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB0AAAAjAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAxwA0AAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-27T11:17:08.013Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "UI.cs",
-              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\GUI\\UI.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\UI.cs",
               "RelativeDocumentMoniker": "GUI\\UI.cs",
-              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\GUI\\UI.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\GUI\\UI.cs",
               "RelativeToolTip": "GUI\\UI.cs",
-              "ViewState": "AQIAAGIAAAAAAAAAAAAAwHkAAAApAAAA",
+              "ViewState": "AQIAABcAAAAAAAAAAAAmwI4AAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-23T18:28:26.912Z",
               "EditorCaption": ""

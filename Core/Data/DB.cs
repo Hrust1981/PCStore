@@ -5,7 +5,6 @@ namespace Core.Data
     public class DB
     {
         private static int counterProductId;
-        private static int counterProductDTOId;
 
         public static List<User> users = new List<User>()
         {
@@ -23,6 +22,5 @@ namespace Core.Data
         };
 
         public static int CounterProductId { get => ++counterProductId; }
-        public static int CounterProductDTOId { get => ++counterProductDTOId; }
     }
 }

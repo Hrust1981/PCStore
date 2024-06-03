@@ -20,7 +20,7 @@ namespace Core.Repositories
             {
                 throw new Exception($"Product with ID {product.Id} already exist");
             }
-            _products.Add(new Product(product.Name, product.Description, product.Price, product.Quantity));
+            _products.Add(product);
         }
 
         public Product Get(int id)
@@ -35,7 +35,7 @@ namespace Core.Repositories
 
         public List<Product> GetAll()
         {
-            return _products.Where(p => p.Quantity > 0).ToList();
+            return _products;
         }
 
         public void Update(Product product)
