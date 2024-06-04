@@ -3,7 +3,7 @@
     public class Buyer : User
     {
         private bool _isAuthenticated;
-        private static List<ProductDTO>? _shoppingCart;
+        private List<ProductDTO> _shoppingCart;
 
         public Buyer(string name, string login, string password, string email, Role role)
             : base(name, login, password, email, role)

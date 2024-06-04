@@ -1,4 +1,5 @@
 ﻿using Core.Data;
+using Core.Entities;
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,8 @@ namespace Core
         {
             var services = new ServiceCollection()
                 .AddTransient<IProductRepository>(_ => new ProductRepository(DB.products))
-                .AddTransient<IShoppingCartService>(_ => new ShoppingCartService(new ProductRepository(DB.products), new CustomLogger()))
+                .AddTransient<IShoppingCartService>(_ => new ShoppingCartService(new ProductRepository(DB.products),
+                                                                                 new CustomLogger()))
                 .AddTransient<IUserRepository>(_ => new UserRepository(DB.users));
 
             return services.BuildServiceProvider();

@@ -64,3 +64,5 @@ C:\Users\Hrust\source\repos\PCStore\GUI\bin\Debug\net8.0\xunit.core.dll
 C:\Users\Hrust\source\repos\PCStore\GUI\bin\Debug\net8.0\xunit.execution.dotnet.dll
 C:\Users\SharipovRR\source\repos\PCStore\GUI\bin\Debug\net8.0\Serilog.dll
 C:\Users\SharipovRR\source\repos\PCStore\GUI\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\Users\Hrust\source\repos\PCStore\GUI\bin\Debug\net8.0\Serilog.dll
+C:\Users\Hrust\source\repos\PCStore\GUI\bin\Debug\net8.0\Serilog.Sinks.File.dll
