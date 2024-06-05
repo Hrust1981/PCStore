@@ -1,18 +1,9 @@
 ﻿namespace Core.Entities
 {
-    public class DiscountCard
+    public abstract class DiscountCard
     {
-        public int PurchaseAmount { get; set; }
-        private readonly int _discount;
+        public abstract int TotalPurchaseAmount { get; set; }
 
-        public DiscountCard(int discount)
-        {
-            _discount = discount;
-        }
-
-        public void CalculationOfAccumulativePart(int purchaseAmount)
-        {
-            PurchaseAmount += purchaseAmount;
-        }
+        public abstract int Discount { get; }
     }
 }
