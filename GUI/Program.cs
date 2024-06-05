@@ -52,6 +52,9 @@ namespace TUI
                                 ui.RemoveProduct();
                                 break;
                             case "3":
+                                ui.UpdateProduct();
+                                break;
+                            case "4":
                                 isAuthenticated = false;
                                 break;
                             default:

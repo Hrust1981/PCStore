@@ -63,7 +63,8 @@ namespace TUI
                 message = """
                         1.Добавить товар
                         2.Удалить товар
-                        3.Разлогиниться
+                        3.Редактировать продукт
+                        4.Разлогиниться
 
                         """;
             }
@@ -179,6 +180,37 @@ namespace TUI
                 {
                     _productRepository.Delete(productId);
                 }
+                Clear(0);
+            }
+            Clear(0);
+        }
+
+        public void UpdateProduct()
+        {
+            var enteredValue = string.Empty;
+            while (!string.Equals(enteredValue.ToLower(), "q"))
+            {
+                var products = _productRepository.GetAll();
+                foreach (var product in products)
+                {
+                    DisplayLine(product.ToString());
+                }
+                DisplayLine("Для выхода нажите клавишу 'q'");
+                var productId = GetEnteredNumericValue("Для редактирования введи ID товара: ", out enteredValue);
+                var editableProduct = _productRepository.Get(productId);
+                if (editableProduct == null)
+                {
+                    return;
+                }
+                var enteredName = GetEnteredStringValue("Введи название товара");
+                var name = string.IsNullOrEmpty(enteredName) ? editableProduct.Name : enteredName;
+                var enteredDescription = GetEnteredStringValue("Введи описание товара");
+                var decription = string.IsNullOrEmpty(enteredDescription) ? editableProduct.Description : enteredDescription;
+                var enteredPrice = GetEnteredNumericValue("Введи цену товара: ");
+                var price = enteredPrice > 0 ? enteredPrice : editableProduct.Price;
+                var enteredQuantity = GetEnteredNumericValue("Введи количество товара: ");
+                var quantity = enteredQuantity > 0 ? enteredQuantity : editableProduct.Quantity;
+                _productRepository.Update(new Product(editableProduct.Id, name, decription, price, quantity));
                 Clear(0);
             }
             Clear(0);

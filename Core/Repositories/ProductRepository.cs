@@ -40,14 +40,14 @@ namespace Core.Repositories
 
         public void Update(Product product)
         {
-            var updateProduct = Get(product.Id);
-            if (updateProduct == null)
+            var updatableProduct = Get(product.Id);
+            if (updatableProduct == null)
             {
                 throw new Exception($"Product with ID {product.Id} was not found");
             }
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, Product>());
             var mapper = config.CreateMapper();
-            mapper.Map<Product, Product>(product, updateProduct);
+            mapper.Map<Product, Product>(product, updatableProduct);
         }
 
         public void Delete(int id)
