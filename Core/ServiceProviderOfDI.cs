@@ -15,7 +15,8 @@ namespace Core
                 .AddTransient<IProductRepository>(_ => new ProductRepository(DB.products))
                 .AddTransient<IShoppingCartService>(_ => new ShoppingCartService(new ProductRepository(DB.products),
                                                                                  new CustomLogger()))
-                .AddTransient<IUserRepository>(_ => new UserRepository(DB.users));
+                .AddTransient<IUserRepository>(_ => new UserRepository(DB.users))
+                .AddTransient<IDiscountCardService>(_ => new DiscountCardService());
 
             return services.BuildServiceProvider();
         }

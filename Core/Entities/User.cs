@@ -1,9 +1,12 @@
-﻿namespace Core.Entities
+﻿using Core.Data;
+
+namespace Core.Entities
 {
     public class User
     {
         public User(string name, string login, string password, string email, Role role)
         {
+            Id = DB.CounterUserId;
             Name = name;
             Login = login;
             Password = password;
@@ -11,6 +14,7 @@
             Role = role;
         }
 
+        public int Id { get; }
         public string Name { get; set; } = string.Empty;
         public string Login { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

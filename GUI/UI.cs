@@ -11,15 +11,18 @@ namespace TUI
         private readonly IProductRepository _productRepository;
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IUserRepository _userRepository;
+        private readonly IDiscountCardService _discountCardService;
         //private readonly ILogger _logger;
 
         public UI(IProductRepository repository,
                   IShoppingCartService shoppingCartService,
-                  IUserRepository userRepository)
+                  IUserRepository userRepository,
+                  IDiscountCardService discountCardService)
         {
             _productRepository = repository;
             _shoppingCartService = shoppingCartService;
             _userRepository = userRepository;
+            _discountCardService = discountCardService;
             //_logger = logger;
         }
 
@@ -79,6 +82,9 @@ namespace TUI
         {
             if (buyer.ShoppingCart.Any())
             {
+                buyer.TotalPurchaseAmount += _discountCardService.
+                    CalculateTotalAmount(buyer, out int totalAmountWithDiscount);
+                _discountCardService.AddDiscountCards(buyer);
                 Display("Оплата прошла успешно!");
                 buyer.ShoppingCart.Clear();
                 _shoppingCartService.GetQuantityInStock.Clear();
@@ -121,8 +127,9 @@ namespace TUI
                 }
                 if (products.Any())
                 {
-                    var sum = buyer.ShoppingCart.Sum(x => x.Price * x.Quantity);
-                    message = $"        Сумма к оплате: {sum} рублей";
+                    var sum = _discountCardService.CalculateTotalAmount(buyer, out int total);
+                    var value = total == 0 ? sum : total;
+                    message = $"        Сумма к оплате: {value} рублей";
                     DisplayLine(message);
                 }
                 message = $"""

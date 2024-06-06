@@ -4,7 +4,8 @@ namespace Core.Data
 {
     public class DB
     {
-        private static int counterProductId;
+        private static int _counterProductId;
+        private static int _counterUserId;
 
         public static List<User> users = new List<User>()
         {
@@ -21,6 +22,7 @@ namespace Core.Data
             new Product("Printer Brother HL-1210W", "A4, 2400x600 dpi, USB, Wi-Fi", 9099, 2)
         };
 
-        public static int CounterProductId { get => ++counterProductId; }
+        public static int CounterProductId { get => ++_counterProductId; } 
+        public static int CounterUserId { get => ++_counterUserId; }
     }
 }

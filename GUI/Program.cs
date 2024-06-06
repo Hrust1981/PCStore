@@ -13,9 +13,10 @@ namespace TUI
             var serviceProvider = ServiceProviderOfDI.BuildServiceProvider();
             var productService = serviceProvider.GetService<IProductRepository>();
             var shoppingCartService = serviceProvider.GetService<IShoppingCartService>();
-            var userService= serviceProvider.GetService<IUserRepository>();
+            var userService = serviceProvider.GetService<IUserRepository>();
+            var discountCardService = serviceProvider.GetService<IDiscountCardService>();
 
-            UI ui = new UI(productService, shoppingCartService, userService);
+            UI ui = new UI(productService, shoppingCartService, userService, discountCardService);
             while (true)
             {
                 var user = ui.Authentication();
