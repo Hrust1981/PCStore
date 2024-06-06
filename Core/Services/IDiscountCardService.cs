@@ -4,7 +4,7 @@ namespace Core.Services
 {
     public interface IDiscountCardService
     {
-        void AddDiscountCards(Buyer buyer);
+        void AddDiscountCard(Buyer buyer);
         int CalculateTotalAmount(Buyer buyer, out int totalAmountWithDiscount);
     }
 }

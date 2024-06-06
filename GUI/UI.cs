@@ -84,7 +84,7 @@ namespace TUI
             {
                 buyer.TotalPurchaseAmount += _discountCardService.
                     CalculateTotalAmount(buyer, out int totalAmountWithDiscount);
-                _discountCardService.AddDiscountCards(buyer);
+                _discountCardService.AddDiscountCard(buyer);
                 Display("Оплата прошла успешно!");
                 buyer.ShoppingCart.Clear();
                 _shoppingCartService.GetQuantityInStock.Clear();

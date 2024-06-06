@@ -16,7 +16,7 @@ namespace Core.Services
             return totalAmount;
         }
 
-        public void AddDiscountCards(Buyer buyer)
+        public void AddDiscountCard(Buyer buyer)
         {
             if (buyer.TotalPurchaseAmount >= 5000 && buyer.TotalPurchaseAmount < 12500)
             {
