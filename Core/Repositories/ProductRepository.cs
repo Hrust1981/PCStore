@@ -43,7 +43,7 @@ namespace Core.Repositories
             var updatableProduct = Get(product.Id);
             if (updatableProduct == null)
             {
-                throw new Exception($"Product with ID {product.Id} was not found");
+                throw new Exception($"Product with ID {product.Id} is not found");
             }
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, Product>());
             var mapper = config.CreateMapper();
@@ -55,7 +55,7 @@ namespace Core.Repositories
             var product = Get(id);
             if (product == null)
             {
-                return;
+                throw new Exception($"Product with ID:{id} is not found");
             }
             _products.Remove(product);
         }

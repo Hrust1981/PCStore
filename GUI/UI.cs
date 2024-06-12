@@ -12,18 +12,19 @@ namespace TUI
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IUserRepository _userRepository;
         private readonly IDiscountCardService _discountCardService;
-        //private readonly ILogger _logger;
+        private readonly ILogger _logger;
 
         public UI(IProductRepository repository,
                   IShoppingCartService shoppingCartService,
                   IUserRepository userRepository,
-                  IDiscountCardService discountCardService)
+                  IDiscountCardService discountCardService,
+                  ILogger logger)
         {
             _productRepository = repository;
             _shoppingCartService = shoppingCartService;
             _userRepository = userRepository;
             _discountCardService = discountCardService;
-            //_logger = logger;
+            _logger = logger;
         }
 
         public User Authentication()
@@ -39,9 +40,17 @@ namespace TUI
                 = new Authentication(new SellerRepository(users));
 
             var user = authentication.Authenticate(login, password);
-            message = user.IsAuthenticated ?
-                $"{Environment.NewLine}Здравствуйте {user.Name}, Вы авторизованы!{Environment.NewLine}" :
-                $"{Environment.NewLine}Вы не авторизовались!{Environment.NewLine}";
+
+            if (user.IsAuthenticated)
+            {
+                message = $"{Environment.NewLine}Здравствуйте {user.Name}, Вы авторизованы!{Environment.NewLine}";
+                _logger.LogInformation($"User with login:{user.Login} is authorized");
+            }
+            else
+            {
+                message = $"{Environment.NewLine}Вы не авторизовались!{Environment.NewLine}";
+                _logger.LogWarning($"User with login:{user.Login} is not authorized");
+            }
 
             Display(message);
             Clear(2000);
@@ -80,14 +89,21 @@ namespace TUI
 
         public void Payment(Buyer buyer)
         {
-            if (buyer.ShoppingCart.Any())
+            var shopingCart = buyer.ShoppingCart;
+            if (shopingCart.Any())
             {
-                buyer.TotalPurchaseAmount += _discountCardService.
+                buyer.TotalPurchaseAmount += _shoppingCartService.
                     CalculateTotalAmount(buyer, out int totalAmountWithDiscount);
+
+                var totalAmount = totalAmountWithDiscount == 0 ?
+                    shopingCart.Sum(p => p.Price) :
+                    totalAmountWithDiscount;
+
                 _discountCardService.AddDiscountCard(buyer);
                 Display("Оплата прошла успешно!");
-                buyer.ShoppingCart.Clear();
+                shopingCart.Clear();
                 _shoppingCartService.GetQuantityInStock.Clear();
+                _logger.LogInformation($"The goods were paid for in the amount of {totalAmount} RUB by the user {buyer.Login}");
             }
             else
             {
@@ -107,8 +123,8 @@ namespace TUI
                     Console.WriteLine(product);
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
-                var valueId = GetEnteredNumericValue("Выбери товар в корзину: ", out enteredValue);
-                _shoppingCartService.AddProduct(buyer, valueId);
+                var productId = GetEnteredNumericValue("Выбери товар в корзину: ", out enteredValue);
+                _shoppingCartService.AddProduct(buyer, productId);
                 Clear(0);
             }
             Clear(0);
@@ -127,9 +143,9 @@ namespace TUI
                 }
                 if (products.Any())
                 {
-                    var sum = _discountCardService.CalculateTotalAmount(buyer, out int total);
-                    var value = total == 0 ? sum : total;
-                    message = $"        Сумма к оплате: {value} рублей";
+                    var sum = _shoppingCartService.CalculateTotalAmount(buyer, out int total);
+                    var amountToBePaid = total == 0 ? sum : total;
+                    message = $"        Сумма к оплате: {amountToBePaid} рублей";
                     DisplayLine(message);
                 }
                 message = $"""
@@ -167,7 +183,10 @@ namespace TUI
             var decription = GetEnteredStringValue("Введи описание товара");
             var price = GetEnteredNumericValue("Введи цену товара: ");
             var quantity = GetEnteredNumericValue("Введи количество товара: ");
+
             _productRepository.Add(new Product(name, decription, price, quantity));
+            _logger.LogInformation($"The new product named '{name}' has been added to the product repository");
+
             Clear(0);
         }
 
@@ -183,10 +202,10 @@ namespace TUI
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
                 var productId = GetEnteredNumericValue("Для удаления введи ID товара: ", out enteredValue);
-                if (productId > 0)
-                {
-                    _productRepository.Delete(productId);
-                }
+
+                _productRepository.Delete(productId);
+                _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
+
                 Clear(0);
             }
             Clear(0);
@@ -203,24 +222,35 @@ namespace TUI
                     DisplayLine(product.ToString());
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
+
                 var productId = GetEnteredNumericValue("Для редактирования введи ID товара: ", out enteredValue);
-                var editableProduct = _productRepository.Get(productId);
-                if (editableProduct == null)
+                var updatableProduct = _productRepository.Get(productId);
+
+                if (updatableProduct == null)
                 {
-                    return;
+                    throw new Exception($"Product with ID:{productId} is not found");
                 }
                 var enteredName = GetEnteredStringValue("Введи название товара");
-                var name = string.IsNullOrEmpty(enteredName) ? editableProduct.Name : enteredName;
+                var name = string.IsNullOrEmpty(enteredName) ? updatableProduct.Name : enteredName;
                 var enteredDescription = GetEnteredStringValue("Введи описание товара");
-                var decription = string.IsNullOrEmpty(enteredDescription) ? editableProduct.Description : enteredDescription;
+                var decription = string.IsNullOrEmpty(enteredDescription) ? updatableProduct.Description : enteredDescription;
                 var enteredPrice = GetEnteredNumericValue("Введи цену товара: ");
-                var price = enteredPrice > 0 ? enteredPrice : editableProduct.Price;
+                var price = enteredPrice > 0 ? enteredPrice : updatableProduct.Price;
                 var enteredQuantity = GetEnteredNumericValue("Введи количество товара: ");
-                var quantity = enteredQuantity > 0 ? enteredQuantity : editableProduct.Quantity;
-                _productRepository.Update(new Product(editableProduct.Id, name, decription, price, quantity));
+                var quantity = enteredQuantity > 0 ? enteredQuantity : updatableProduct.Quantity;
+
+                _productRepository.Update(new Product(updatableProduct.Id, name, decription, price, quantity));
+                _logger.LogInformation($"Product with ID:{updatableProduct.Id} updated");
+
                 Clear(0);
             }
             Clear(0);
+        }
+
+        public bool SignOut(string login)
+        {
+            _logger.LogInformation($"User with login:{login} is logged out");
+            return false;
         }
 
         private string GetEnteredStringValue(string message)

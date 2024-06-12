@@ -1,7 +1,5 @@
 ﻿using Core;
 using Core.Entities;
-using Core.Repositories;
-using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TUI
@@ -10,13 +8,9 @@ namespace TUI
     {
         static void Main(string[] args)
         {
-            var serviceProvider = ServiceProviderOfDI.BuildServiceProvider();
-            var productService = serviceProvider.GetService<IProductRepository>();
-            var shoppingCartService = serviceProvider.GetService<IShoppingCartService>();
-            var userService = serviceProvider.GetService<IUserRepository>();
-            var discountCardService = serviceProvider.GetService<IDiscountCardService>();
+            var serviceProvider = CustomServiceProvider.BuildServiceProvider();
+            var ui = serviceProvider.GetRequiredService<UI>();
 
-            UI ui = new UI(productService, shoppingCartService, userService, discountCardService);
             while (true)
             {
                 var user = ui.Authentication();
@@ -35,7 +29,7 @@ namespace TUI
                                 ui.ShowCart((Buyer)user);
                                 break;
                             case "3":
-                                isAuthenticated = false;
+                                isAuthenticated = ui.SignOut(user.Login);
                                 break;
                             default:
                                 break;
@@ -56,7 +50,7 @@ namespace TUI
                                 ui.UpdateProduct();
                                 break;
                             case "4":
-                                isAuthenticated = false;
+                                isAuthenticated = ui.SignOut(user.Login);
                                 break;
                             default:
                                 break;

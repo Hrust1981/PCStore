@@ -9,7 +9,6 @@ namespace Core.Services
         private readonly IProductRepository _repository;
         private readonly ILogger _logger;
         private Dictionary<int, int> _quantityInStock;
-        private int _oldQuantityValue;
 
         public Dictionary<int, int> GetQuantityInStock { get { return _quantityInStock; } set { _quantityInStock = value; } }
 
@@ -28,7 +27,6 @@ namespace Core.Services
                 if (!_quantityInStock.Any(id => id.Key == productId))
                 {
                     _quantityInStock.Add(selectedProduct.Id, selectedProduct.Quantity);
-                    _logger.LogInformation($"Product with ID={selectedProduct.Id} has been added to shopping cart");
                 }
                 
                 if (selectedProduct.Quantity > 0)
@@ -45,39 +43,53 @@ namespace Core.Services
                     }
                     selectedProduct.Quantity--;
                 }
+                _logger.LogInformation($"Product with ID:{productId} has been added to shopping cart");
             }
         }
 
         public void UpdateQuantityProduct(Buyer buyer, int productId, int quantity)
         {
-            if (!buyer.ShoppingCart.Any(p => p.Id == productId))
+            var shoppingCart = buyer.ShoppingCart;
+            if (!shoppingCart.Any(p => p.Id == productId))
             {
-                throw new Exception($"Product with ID = {productId} was not found");
+                throw new Exception($"Product with ID:{productId} was not found");
             }
             var product = _repository.Get(productId);
-            if (quantity > 0 &&
-                _oldQuantityValue != quantity &&
-                quantity <= product.Quantity + 1)
+            var quantityProduct = _quantityInStock.FirstOrDefault(x => x.Key == productId).Value;
+            var oldQuantityValue = shoppingCart.FirstOrDefault(p => p.Id == productId).Quantity;
+            if (quantity > 0 && quantityProduct - quantity >= 0)
             {
-                buyer.ShoppingCart.FirstOrDefault(p => p.Id == productId).Quantity = quantity;
-                var quantityProduct = _quantityInStock.FirstOrDefault(x => x.Key == productId).Value;
+                shoppingCart.FirstOrDefault(p => p.Id == productId).Quantity = quantity;
                 _repository.Update(new Product(product.Id, product.Name, product.Description,
                                                product.Price, quantityProduct - quantity));
-                _oldQuantityValue = quantity;
             }
+            _logger.LogInformation($"The quantity of product with ID:{productId} has been updated from {oldQuantityValue} to {quantity} pieces to the shopping cart");
         }
 
         public void DeleteProduct(Buyer buyer, int productId)
         {
             if (!buyer.ShoppingCart.Any(p => p.Id == productId))
             {
-                throw new Exception($"Product with ID = {productId} was not found");
+                throw new Exception($"Product with ID:{productId} was not found");
             }
             var product = buyer.ShoppingCart.FirstOrDefault(p => p.Id == productId);
             var productFromDB = _repository.Get(productId);
             productFromDB.Quantity += product.Quantity;
             _repository.Update(productFromDB);
             buyer.ShoppingCart.Remove(product);
+            _logger.LogInformation($"Product with ID:{productId} has been removed from the shopping cart");
+        }
+
+        public int CalculateTotalAmount(Buyer buyer, out int totalAmountWithDiscount)
+        {
+            var discountCard = buyer.DiscountCards?.OrderByDescending(d => d.Discount).FirstOrDefault();
+            var totalAmount = buyer.ShoppingCart.Sum(s => s.Price);
+
+            totalAmountWithDiscount = discountCard == null ?
+                0 :
+                totalAmountWithDiscount = totalAmount - totalAmount * discountCard.Discount / 100;
+
+            return totalAmount;
         }
 
     }

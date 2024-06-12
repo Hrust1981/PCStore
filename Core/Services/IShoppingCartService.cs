@@ -8,5 +8,6 @@ namespace Core.Services
         void AddProduct(Buyer buyer, int productId);
         void UpdateQuantityProduct(Buyer buyer, int productId, int quantity);
         void DeleteProduct(Buyer buyer, int productId);
+        int CalculateTotalAmount(Buyer buyer, out int totalAmountWithDiscount);
     }
 }

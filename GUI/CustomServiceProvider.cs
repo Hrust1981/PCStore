@@ -1,23 +1,24 @@
 ﻿using Core.Data;
-using Core.Entities;
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TUI;
 
 namespace Core
 {
-    public class ServiceProviderOfDI
+    public class CustomServiceProvider
     {
         public static ServiceProvider BuildServiceProvider()
         {
             var services = new ServiceCollection()
+                .AddTransient<UI>()
+                .AddTransient<IFileLoggerService, FileLoggerService>()
+                .AddTransient<ILogger, CustomLogger>()
                 .AddTransient<IProductRepository>(_ => new ProductRepository(DB.products))
-                .AddTransient<IShoppingCartService>(_ => new ShoppingCartService(new ProductRepository(DB.products),
-                                                                                 new CustomLogger()))
+                .AddTransient<IShoppingCartService, ShoppingCartService>()
                 .AddTransient<IUserRepository>(_ => new UserRepository(DB.users))
-                .AddTransient<IDiscountCardService>(_ => new DiscountCardService());
-
+                .AddTransient<IDiscountCardService, DiscountCardService>();
             return services.BuildServiceProvider();
         }
     }

@@ -19,7 +19,7 @@ namespace Core.Entities
 
         public override string? ToString()
         {
-            return Id + "    " + Name + "|    " + Price + "|    " + Quantity;
+            return string.Format("{0,-7} {1,-45} {2,7} {3,6}", Id, Name, Price, Quantity);
         }
     }
 }

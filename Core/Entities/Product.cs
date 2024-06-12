@@ -29,7 +29,16 @@ namespace Core.Entities
 
         public override string? ToString()
         {
-            return Id + "    " + Name + "|    " + Description + "|    " + Price + "|    " + Quantity;
+            return string.Format("{0,-4} {1,-35} {2,-60} {3,7} {4,6}", Id,
+                                                                       CutText(Name, 30),
+                                                                       CutText(Description, 55),
+                                                                       Price,
+                                                                       Quantity);
+        }
+
+        private string CutText(string text, int length)
+        {
+            return text.Length > length ? text.Substring(0, length) : text;
         }
     }
 }
