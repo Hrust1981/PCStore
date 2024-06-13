@@ -2,7 +2,7 @@
 
 namespace Core.Entities
 {
-    public class User
+    public class User : Entity
     {
         public User(string name, string login, string password, string email, Role role)
         {
@@ -14,8 +14,8 @@ namespace Core.Entities
             Role = role;
         }
 
-        public int Id { get; }
-        public string Name { get; set; } = string.Empty;
+        public override int Id { get; }
+        public override string Name { get; set; } = string.Empty;
         public string Login { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

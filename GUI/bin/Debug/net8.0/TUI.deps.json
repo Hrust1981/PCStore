@@ -18,6 +18,14 @@
         },
         "runtime": {
           "TUI.dll": {}
+        },
+        "resources": {
+          "en/TUI.resources.dll": {
+            "locale": "en"
+          },
+          "ru/TUI.resources.dll": {
+            "locale": "ru"
+          }
         }
       },
       "AutoMapper/13.0.1": {
@@ -193,7 +201,6 @@
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
           "Microsoft.Extensions.Localization": "8.0.5",
           "Microsoft.Extensions.Logging": "8.0.0",
-          "Serilog.Sinks.File": "5.0.0",
           "xunit": "2.8.1"
         },
         "runtime": {

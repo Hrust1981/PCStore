@@ -6,13 +6,13 @@ namespace Core.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
-        private readonly IProductRepository _repository;
-        private readonly ILogger _logger;
+        private readonly ProductRepository _repository;
+        private readonly ILogger<ShoppingCartService> _logger;
         private Dictionary<int, int> _quantityInStock;
 
         public Dictionary<int, int> GetQuantityInStock { get { return _quantityInStock; } set { _quantityInStock = value; } }
 
-        public ShoppingCartService(IProductRepository repository, ILogger logger)
+        public ShoppingCartService(ProductRepository repository, ILogger<ShoppingCartService> logger)
         {
             _repository = repository;
             _logger = logger;
@@ -83,7 +83,7 @@ namespace Core.Services
         public int CalculateTotalAmount(Buyer buyer, out int totalAmountWithDiscount)
         {
             var discountCard = buyer.DiscountCards?.OrderByDescending(d => d.Discount).FirstOrDefault();
-            var totalAmount = buyer.ShoppingCart.Sum(s => s.Price);
+            var totalAmount = buyer.ShoppingCart.Sum(s => s.Price * s.Quantity);
 
             totalAmountWithDiscount = discountCard == null ?
                 0 :

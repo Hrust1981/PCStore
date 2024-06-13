@@ -2,7 +2,7 @@
 
 namespace Core.Entities
 {
-    public class Product
+    public class Product : Entity
     {
         public Product(string name, string description, int price, int quantity)
         {
@@ -21,8 +21,8 @@ namespace Core.Entities
             Quantity = quantity;
         }
 
-        public int Id { get; }
-        public string Name { get; set; } = string.Empty;
+        public override int Id { get; }
+        public override string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int Price { get; set; }
         public int Quantity { get; set; }

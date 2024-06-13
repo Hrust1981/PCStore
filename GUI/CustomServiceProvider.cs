@@ -2,6 +2,7 @@
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using TUI;
 
@@ -14,10 +15,11 @@ namespace Core
             var services = new ServiceCollection()
                 .AddTransient<UI>()
                 .AddTransient<IFileLoggerService, FileLoggerService>()
-                .AddTransient<ILogger, CustomLogger>()
-                .AddTransient<IProductRepository>(_ => new ProductRepository(DB.products))
+                .AddTransient<ILogger<ShoppingCartService>, CustomLogger<ShoppingCartService>>()
+                .AddTransient<ILogger<UI>, CustomLogger<UI>>()
+                .AddTransient(_ => new ProductRepository(DB.products))
                 .AddTransient<IShoppingCartService, ShoppingCartService>()
-                .AddTransient<IUserRepository>(_ => new UserRepository(DB.users))
+                .AddTransient(_ => new UserRepository(DB.users))
                 .AddTransient<IDiscountCardService, DiscountCardService>();
             return services.BuildServiceProvider();
         }

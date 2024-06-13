@@ -3,22 +3,23 @@ using Core.Entities;
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel;
+using System.Resources;
 
 namespace TUI
 {
     public class UI
     {
-        private readonly IProductRepository _productRepository;
+        private readonly ProductRepository _productRepository;
         private readonly IShoppingCartService _shoppingCartService;
-        private readonly IUserRepository _userRepository;
+        private readonly UserRepository _userRepository;
         private readonly IDiscountCardService _discountCardService;
-        private readonly ILogger _logger;
-
-        public UI(IProductRepository repository,
+        private readonly ILogger<UI> _logger;
+        public UI(ProductRepository repository,
                   IShoppingCartService shoppingCartService,
-                  IUserRepository userRepository,
+                  UserRepository userRepository,
                   IDiscountCardService discountCardService,
-                  ILogger logger)
+                  ILogger<UI> logger)
         {
             _productRepository = repository;
             _shoppingCartService = shoppingCartService;
@@ -37,7 +38,7 @@ namespace TUI
 
             var users = _userRepository.GetAll();
             Authentication authentication
-                = new Authentication(new SellerRepository(users));
+                = new Authentication(new UserRepository(users));
 
             var user = authentication.Authenticate(login, password);
 

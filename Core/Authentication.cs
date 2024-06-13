@@ -5,9 +5,9 @@ namespace Core
 {
     public class Authentication : IAuthentication
     {
-        private IUserRepository _userRepository;
+        private UserRepository _userRepository;
 
-        public Authentication(IUserRepository userRepository)
+        public Authentication(UserRepository userRepository)
         {
             _userRepository = userRepository;
         }
