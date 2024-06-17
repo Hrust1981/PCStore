@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.Data;
+using Core.Entities;
 
 namespace Core.Repositories
 {

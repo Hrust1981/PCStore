@@ -2,7 +2,6 @@
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using TUI;
 

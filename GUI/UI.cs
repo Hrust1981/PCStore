@@ -116,7 +116,7 @@ namespace TUI
         public void SelectProducts(Buyer buyer)
         {
             var enteredValue = string.Empty;
-            while (!string.Equals(enteredValue.ToLower(), "q"))
+            while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
                 foreach (var product in products)
@@ -135,7 +135,7 @@ namespace TUI
         {
             var enteredValue = string.Empty;
             var message = string.Empty;
-            while (!string.Equals(enteredValue.ToLower(), "4"))
+            while (!string.Equals(enteredValue, "4"))
             {
                 var products = buyer.ShoppingCart;
                 foreach (var product in products)
@@ -194,7 +194,7 @@ namespace TUI
         public void RemoveProduct()
         {
             var enteredValue = string.Empty;
-            while (!string.Equals(enteredValue.ToLower(), "q"))
+            while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
                 foreach (var product in products)
@@ -215,7 +215,7 @@ namespace TUI
         public void UpdateProduct()
         {
             var enteredValue = string.Empty;
-            while (!string.Equals(enteredValue.ToLower(), "q"))
+            while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
                 foreach (var product in products)

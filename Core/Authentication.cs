@@ -15,7 +15,7 @@ namespace Core
         public User Authenticate(string login, string password)
         {
             var user = _userRepository.Get(login);
-            user.IsAuthenticated = string.Equals(user.Password, password) ? user.IsAuthenticated = true : false;
+            user.IsAuthenticated = string.Equals(user.Password, password);
             return user;
         }
     }

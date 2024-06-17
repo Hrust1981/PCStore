@@ -75,3 +75,10 @@ C:\Users\Hrust\source\repos\PCStore\GUI\obj\Debug\net8.0\ru\TUI.resources.dll
 C:\Users\Hrust\source\repos\PCStore\GUI\bin\Debug\net8.0\en\TUI.resources.dll
 C:\Users\Hrust\source\repos\PCStore\GUI\obj\Debug\net8.0\TUI.Resources.UI.en.resources
 C:\Users\Hrust\source\repos\PCStore\GUI\obj\Debug\net8.0\en\TUI.resources.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\bin\Debug\net8.0\en\TUI.resources.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\bin\Debug\net8.0\ru\TUI.resources.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\TUI.Resources.TUI.UI.en.resources
+C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\TUI.Resources.TUI.UI.ru.resources
+C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\TUI.csproj.GenerateResource.cache
+C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\en\TUI.resources.dll
+C:\Users\SharipovRR\source\repos\PCStore\GUI\obj\Debug\net8.0\ru\TUI.resources.dll
