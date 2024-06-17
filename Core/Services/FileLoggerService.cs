@@ -1,7 +1,13 @@
-﻿namespace Core.Services
+﻿using Microsoft.Extensions.Logging;
+
+namespace Core.Services
 {
     public class FileLoggerService : IFileLoggerService
     {
+        public FileLoggerService()
+        {
+        }
+
         public void WriteToFile(string path, string message)
         {
             try

@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class User : Entity
     {
-        public User(string name, string login, string password, string email, Role role)
+        public User(string name, string login, string password, string email, Role role) : base(name)
         {
             Id = DB.CounterUserId;
             Name = name;
@@ -15,10 +15,9 @@ namespace Core.Entities
         }
 
         public override int Id { get; }
-        public override string Name { get; set; } = string.Empty;
-        public string Login { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
         public Role Role { get; set; }
         public bool IsAuthenticated { get; set; }
     }

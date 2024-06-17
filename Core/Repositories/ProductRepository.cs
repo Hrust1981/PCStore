@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.Data;
+using Core.Entities;
 
 namespace Core.Repositories
 {
@@ -10,7 +11,5 @@ namespace Core.Repositories
         {
             _products = products;
         }
-
-        public int Count { get => _products.Count; }
     }
 }

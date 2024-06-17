@@ -1,1 +1,0 @@
-[15.06.2024 19:23:27] [Information] [0] [TUI.UI] - User with login:Buyer1 is authorized
