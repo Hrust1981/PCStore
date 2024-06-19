@@ -4,10 +4,10 @@ namespace Core.Services
 {
     public interface IShoppingCartService
     {
-        public Dictionary<int, int> GetQuantityInStock { get;  set; }
-        void AddProduct(Buyer buyer, int productId);
-        void UpdateQuantityProduct(Buyer buyer, int productId, int quantity);
-        void DeleteProduct(Buyer buyer, int productId);
+        public Dictionary<Guid, int> GetQuantityInStock { get;  set; }
+        void AddProduct(Buyer buyer, Guid productId);
+        void UpdateQuantityProduct(Buyer buyer, Guid productId, int quantity);
+        void DeleteProduct(Buyer buyer, Guid productId);
         int CalculateTotalAmount(Buyer buyer, out int totalAmountWithDiscount);
     }
 }

@@ -6,13 +6,13 @@ namespace Core.Entities
     {
         public Product(string name, string description, int price, int quantity) : base(name)
         {
-            Id = DB.CounterProductId;
+            Id = Guid.NewGuid();
             Name = name;
             Description = description;
             Price = price;
             Quantity = quantity;
         }
-        public Product(int id, string name, string description, int price, int quantity) : base(name)
+        public Product(Guid id, string name, string description, int price, int quantity) : base(name)
         {
             Id = id;
             Name = name;
@@ -21,7 +21,7 @@ namespace Core.Entities
             Quantity = quantity;
         }
 
-        public override int Id { get; }
+        //public override int Id { get; }
         public string Description { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }

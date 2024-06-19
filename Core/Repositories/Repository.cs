@@ -21,7 +21,7 @@ namespace Core.Repositories
             _entities.Add(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             var entity = Get(id);
             if (entity == null)
@@ -31,7 +31,7 @@ namespace Core.Repositories
             _entities.Remove(entity);
         }
 
-        public T Get(int id)
+        public T Get(Guid id)
         {
             var entity = _entities.FirstOrDefault(s => s.Id == id);
             if (entity == null)

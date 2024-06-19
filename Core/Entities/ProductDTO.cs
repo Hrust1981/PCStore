@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class ProductDTO : Entity
     {
-        public ProductDTO(int id, string name, int price, int quantity) : base(name)
+        public ProductDTO(Guid id, string name, int price, int quantity) : base(name)
         {
             Id = id;
             Name = name;
@@ -12,7 +12,7 @@ namespace Core.Entities
             Quantity = quantity;
         }
 
-        public override int Id { get; }
+        //public override int Id { get; }
         public int Price { get; set; }
         public int Quantity { get; set; }
 

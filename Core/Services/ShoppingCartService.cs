@@ -8,9 +8,9 @@ namespace Core.Services
     {
         private readonly IRepository<Product> _productRepository;
         private readonly ILogger<ShoppingCartService> _logger;
-        private Dictionary<int, int> _quantityInStock;
+        private Dictionary<Guid, int> _quantityInStock;
 
-        public Dictionary<int, int> GetQuantityInStock { get { return _quantityInStock; } set { _quantityInStock = value; } }
+        public Dictionary<Guid, int> GetQuantityInStock { get { return _quantityInStock; } set { _quantityInStock = value; } }
 
         public ShoppingCartService(IRepository<Product> productRepository, ILogger<ShoppingCartService> logger)
         {
@@ -19,9 +19,9 @@ namespace Core.Services
             _quantityInStock = new();
         }
 
-        public void AddProduct(Buyer buyer, int productId)
+        public void AddProduct(Buyer buyer, Guid productId)
         {
-            if (productId < 0)
+            if (productId == null)
             {
                 return;
             }
@@ -48,7 +48,7 @@ namespace Core.Services
             _logger.LogInformation($"Product with ID:{productId} has been added to shopping cart");
         }
 
-        public void UpdateQuantityProduct(Buyer buyer, int productId, int quantity)
+        public void UpdateQuantityProduct(Buyer buyer, Guid productId, int quantity)
         {
             var shoppingCart = buyer.ShoppingCart;
             if (!shoppingCart.Any(p => p.Id == productId))
@@ -67,7 +67,7 @@ namespace Core.Services
             _logger.LogInformation($"The quantity of product with ID:{productId} has been updated from {oldQuantityValue} to {quantity} pieces to the shopping cart");
         }
 
-        public void DeleteProduct(Buyer buyer, int productId)
+        public void DeleteProduct(Buyer buyer, Guid productId)
         {
             if (!buyer.ShoppingCart.Any(p => p.Id == productId))
             {

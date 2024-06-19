@@ -124,6 +124,13 @@ namespace TUI
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
                 var productId = GetEnteredNumericValue("Выбери товар в корзину: ", out enteredValue);
+
+                if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+                {
+                    Clear(0);
+                    return;
+                }
+
                 _shoppingCartService.AddProduct(buyer, productId);
                 Clear(0);
             }
@@ -203,6 +210,12 @@ namespace TUI
                 DisplayLine("Для выхода нажите клавишу 'q'");
                 var productId = GetEnteredNumericValue("Для удаления введи ID товара: ", out enteredValue);
 
+                if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+                {
+                    Clear(0);
+                    return;
+                }
+
                 _productRepository.Delete(productId);
                 _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
 
@@ -224,6 +237,12 @@ namespace TUI
                 DisplayLine("Для выхода нажите клавишу 'q'");
 
                 var productId = GetEnteredNumericValue("Для редактирования введи ID товара: ", out enteredValue);
+
+                if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+                {
+                    Clear(0);
+                    return;
+                }
                 var updatableProduct = _productRepository.Get(productId);
 
                 if (updatableProduct == null)
