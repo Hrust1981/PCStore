@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\entities\\shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\entities\\shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\data\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\data\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -35,6 +39,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ShoppingCart.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Entities\\ShoppingCart.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\ShoppingCart.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Entities\\ShoppingCart.cs",
+              "RelativeToolTip": "Core\\Entities\\ShoppingCart.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-19T19:42:29.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "DB.cs",
               "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Data\\DB.cs",
               "RelativeDocumentMoniker": "Core\\Data\\DB.cs",
@@ -47,7 +64,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ShoppingCartService.cs",
               "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Services\\ShoppingCartService.cs",
               "RelativeDocumentMoniker": "Core\\Services\\ShoppingCartService.cs",
@@ -55,12 +72,11 @@
               "RelativeToolTip": "Core\\Services\\ShoppingCartService.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAAEkAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:11:23.914Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-18T17:11:23.914Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "IShoppingCartService.cs",
               "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Services\\IShoppingCartService.cs",
               "RelativeDocumentMoniker": "Core\\Services\\IShoppingCartService.cs",
@@ -68,12 +84,11 @@
               "RelativeToolTip": "Core\\Services\\IShoppingCartService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:10:48.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-18T17:10:48.039Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "UI.cs",
               "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\UI.cs",
               "RelativeDocumentMoniker": "TUI\\UI.cs",
@@ -81,8 +96,7 @@
               "RelativeToolTip": "TUI\\UI.cs",
               "ViewState": "AQIAAG4AAAAAAAAAAAAjwIUAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:03:22.258Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-18T17:03:22.258Z"
             }
           ]
         }
