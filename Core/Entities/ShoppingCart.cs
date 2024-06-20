@@ -2,12 +2,10 @@
 {
     public class ShoppingCart
     {
-        private readonly List<ProductDTO> _products;
-
         public ShoppingCart(List<ProductDTO> products, Guid userId)
         {
             Id = Guid.NewGuid();
-            _products = products;
+            Products = products;
             UserId = userId;
         }
 
