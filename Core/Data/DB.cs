@@ -22,7 +22,7 @@ namespace Core.Data
             new Product("Printer Brother HL-1210W", "A4, 2400x600 dpi, USB, Wi-Fi", 9099, 2)
         };
 
-        public static List<List<Product>> shoppingCarts = new List<List<Product>>();
+        public static List<ShoppingCart> shoppingCarts = new List<ShoppingCart>();
 
         public static int CounterProductId { get => ++_counterProductId; } 
         public static int CounterUserId { get => ++_counterUserId; }

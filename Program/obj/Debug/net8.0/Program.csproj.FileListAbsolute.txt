@@ -1,5 +1,0 @@
-C:\Users\Hrust\source\repos\PCStore\Program\obj\Debug\net8.0\Program.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Hrust\source\repos\PCStore\Program\obj\Debug\net8.0\Program.AssemblyInfoInputs.cache
-C:\Users\Hrust\source\repos\PCStore\Program\obj\Debug\net8.0\Program.AssemblyInfo.cs
-C:\Users\Hrust\source\repos\PCStore\Program\obj\Debug\net8.0\Program.csproj.CoreCompileInputs.cache
-C:\Users\Hrust\source\repos\PCStore\Program\obj\Debug\net8.0\Program.sourcelink.json

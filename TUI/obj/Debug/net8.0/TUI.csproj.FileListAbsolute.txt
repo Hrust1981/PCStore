@@ -37,3 +37,12 @@ C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\refint\TUI.dll
 C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.pdb
 C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.genruntimeconfig.cache
 C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\ref\TUI.dll
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.csproj.AssemblyReference.cache
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Resources.TUI.UI.en.resources
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Resources.TUI.UI.ru.resources
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.csproj.GenerateResource.cache
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.AssemblyInfoInputs.cache
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.AssemblyInfo.cs
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.csproj.CoreCompileInputs.cache
+C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.sourcelink.json
