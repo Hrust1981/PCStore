@@ -1,6 +1,6 @@
 ﻿namespace Core.Entities
 {
-    public class ShoppingCart
+    public class ShoppingCart : Entity
     {
         public ShoppingCart(List<ProductDTO> products, Guid userId)
         {
@@ -9,7 +9,6 @@
             UserId = userId;
         }
 
-        public Guid Id { get; }
         public Guid UserId { get; set; }
         public List<ProductDTO> Products { get; set; }
     }

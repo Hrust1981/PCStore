@@ -1,18 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\",
+  "WorkspaceRootPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\entities\\shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\entities\\shoppingcart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\repositories\\shoppingcartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\repositories\\shoppingcartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\repositories\\shoppingcartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\services\\shoppingcartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -31,40 +27,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ShoppingCartRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Repositories\\ShoppingCartRepository.cs",
-              "RelativeDocumentMoniker": "Core\\Repositories\\ShoppingCartRepository.cs",
-              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Repositories\\ShoppingCartRepository.cs",
-              "RelativeToolTip": "Core\\Repositories\\ShoppingCartRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T19:27:26.347Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "Core\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "Core\\Repositories\\UserRepository.cs",
+              "Title": "ShoppingCartService.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\ShoppingCartService.cs",
+              "RelativeDocumentMoniker": "Core\\Services\\ShoppingCartService.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\ShoppingCartService.cs",
+              "RelativeToolTip": "Core\\Services\\ShoppingCartService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T19:26:53.936Z",
+              "WhenOpened": "2024-06-21T07:35:48.717Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ShoppingCart.cs",
-              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Entities\\ShoppingCart.cs",
-              "RelativeDocumentMoniker": "Core\\Entities\\ShoppingCart.cs",
-              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Entities\\ShoppingCart.cs",
-              "RelativeToolTip": "Core\\Entities\\ShoppingCart.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Title": "ShoppingCartRepository.cs",
+              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Repositories\\ShoppingCartRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Repositories\\ShoppingCartRepository.cs",
+              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Repositories\\ShoppingCartRepository.cs",
+              "RelativeToolTip": "Core\\Repositories\\ShoppingCartRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T19:42:29.74Z",
+              "WhenOpened": "2024-06-20T19:27:26.347Z",
               "EditorCaption": ""
             }
           ]

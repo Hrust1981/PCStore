@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class Product : Entity
     {
-        public Product(string name, string description, int price, int quantity) : base(name)
+        public Product(string name, string description, int price, int quantity)/* : base(name)*/
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -12,7 +12,7 @@ namespace Core.Entities
             Price = price;
             Quantity = quantity;
         }
-        public Product(Guid id, string name, string description, int price, int quantity) : base(name)
+        public Product(Guid id, string name, string description, int price, int quantity) /*: base(name)*/
         {
             Id = id;
             Name = name;

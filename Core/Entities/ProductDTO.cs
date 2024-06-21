@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class ProductDTO : Entity
     {
-        public ProductDTO(Guid GuidId, string name, int price, int quantity) : base(name)
+        public ProductDTO(Guid GuidId, string name, int price, int quantity) /*: base(name)*/
         {
             Id = GuidId;
             IntId = DB.CounterProductId;

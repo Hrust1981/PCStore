@@ -2,7 +2,7 @@
 {
     public class User : Entity
     {
-        public User(string name, string login, string password, string email, Role role) : base(name)
+        public User(string name, string login, string password, string email, Role role)/* : base(name)*/
         {
             //Id = DB.CounterUserId;
             Id = Guid.NewGuid();
