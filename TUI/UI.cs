@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using AutoMapper;
+using Core;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
@@ -89,7 +90,7 @@ namespace TUI
 
         public void Payment(Buyer buyer)
         {
-            var shopingCart = buyer.ShoppingCart;
+            var shopingCart = buyer.ShoppingCart.Products;
             if (shopingCart.Any())
             {
                 buyer.TotalPurchaseAmount += _shoppingCartService.
@@ -117,10 +118,16 @@ namespace TUI
             var enteredValue = string.Empty;
             while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
+                buyer.ShoppingCart.UserId = buyer.Id;
+
                 var products = _productRepository.GetAll();
+                var productsDTO = new List<ProductDTO>();
+
                 foreach (var product in products)
                 {
-                    Console.WriteLine(product);
+                    var productDTO = ConvertProductToProductDTO(product);
+                    productsDTO.Add(productDTO);
+                    Console.WriteLine(productDTO);
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
                 var productId = GetEnteredNumericValue("Выбери товар в корзину: ", out enteredValue);
@@ -131,7 +138,8 @@ namespace TUI
                     return;
                 }
 
-                _shoppingCartService.AddProduct(buyer, productId);
+                var productGuid = productsDTO.FirstOrDefault(p => p.IntId == productId)?.Id;
+                _shoppingCartService.AddProduct(buyer, productGuid.Value);
                 Clear(0);
             }
             Clear(0);
@@ -143,7 +151,7 @@ namespace TUI
             var message = string.Empty;
             while (!string.Equals(enteredValue, "4"))
             {
-                var products = buyer.ShoppingCart;
+                var products = buyer.ShoppingCart.Products;
                 foreach (var product in products)
                 {
                     Console.WriteLine(product);
@@ -172,12 +180,14 @@ namespace TUI
                 {
                     var productId = GetEnteredNumericValue("Введи ID товара: ");
                     var quantity = GetEnteredNumericValue("Введи количество: ");
-                    _shoppingCartService.UpdateQuantityProduct(buyer, productId, quantity);
+                    var productGuid = products.FirstOrDefault(guid => guid.IntId == productId)?.Id;
+                    _shoppingCartService.UpdateQuantityProduct(buyer, productGuid.Value, quantity);
                 }
                 else if (positionNumber == 3)
                 {
                     var productId = GetEnteredNumericValue("Введи ID товара: ");
-                    _shoppingCartService.DeleteProduct(buyer, productId);
+                    var productGuid = products.FirstOrDefault(guid => guid.IntId == productId)?.Id;
+                    _shoppingCartService.DeleteProduct(buyer, productGuid.Value);
                 }
                 Clear(0);
             }
@@ -203,8 +213,12 @@ namespace TUI
             while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
+                var productsDTO = new List<ProductDTO>();
+
                 foreach (var product in products)
                 {
+                    var productDTO = ConvertProductToProductDTO(product);
+                    productsDTO.Add(productDTO);
                     DisplayLine(product.ToString());
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
@@ -216,7 +230,8 @@ namespace TUI
                     return;
                 }
 
-                _productRepository.Delete(productId);
+                var productGuid = productsDTO.FirstOrDefault(p => p.IntId == productId)?.Id;
+                _productRepository.Delete(productGuid.Value);
                 _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
 
                 Clear(0);
@@ -230,8 +245,12 @@ namespace TUI
             while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
+                var productsDTO = new List<ProductDTO>();
+
                 foreach (var product in products)
                 {
+                    var productDTO = ConvertProductToProductDTO(product);
+                    productsDTO.Add(productDTO);
                     DisplayLine(product.ToString());
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
@@ -243,7 +262,8 @@ namespace TUI
                     Clear(0);
                     return;
                 }
-                var updatableProduct = _productRepository.Get(productId);
+                var productGuid = productsDTO.FirstOrDefault(p => p.IntId == productId)?.Id;
+                var updatableProduct = _productRepository.Get(productGuid.Value);
 
                 if (updatableProduct == null)
                 {
@@ -270,6 +290,13 @@ namespace TUI
         {
             _logger.LogInformation($"User with login:{login} is logged out");
             return false;
+        }
+
+        private ProductDTO ConvertProductToProductDTO(Product product)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>());
+            var mapper = config.CreateMapper();
+            return mapper.Map<Product, ProductDTO>(product);
         }
 
         private string GetEnteredStringValue(string message)

@@ -2,10 +2,10 @@
 
 namespace Core.Repositories
 {
-    public class ShoppingCartRepository : Repository<ProductDTO>
+    public class ShoppingCartRepository : Repository<ShoppingCart>
     {
-        private readonly List<ProductDTO> _products;
-        public ShoppingCartRepository(List<ProductDTO> products) : base(products)
+        private readonly List<ShoppingCart> _products;
+        public ShoppingCartRepository(List<ShoppingCart> products) : base(products)
         {
             _products = products;
         }

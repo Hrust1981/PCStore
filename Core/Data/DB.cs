@@ -11,7 +11,7 @@ namespace Core.Data
         {
             new Seller("Seller1", "Seller1", "Seller1", "seller1@mailru", Role.Seller),
             new Seller("Seller2", "Seller2", "Seller2", "seller2@mailru", Role.Seller),
-            new Buyer("Buyer1", "Buyer1", "Buyer1", "buyer1@mail.ru", Role.Buyer)
+            new Buyer("Buyer1", "Buyer1", "Buyer1", "buyer1@mail.ru", Role.Buyer, new ShoppingCart(new List<ProductDTO>(), Guid.Empty))
         };
 
         public static List<Product> products = new List<Product>()
