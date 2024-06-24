@@ -11,7 +11,7 @@ namespace Core.Data
         {
             new Seller("Seller1", "Seller1", "Seller1", "seller1@mailru", Role.Seller),
             new Seller("Seller2", "Seller2", "Seller2", "seller2@mailru", Role.Seller),
-            new Buyer("Buyer1", "Buyer1", "Buyer1", "buyer1@mail.ru", Role.Buyer, new ShoppingCart(new List<ProductDTO>(), Guid.Empty))
+            new Buyer("Buyer1", "Buyer1", "Buyer1", "buyer1@mail.ru", Role.Buyer)
         };
 
         public static List<Product> products = new List<Product>()
@@ -23,6 +23,17 @@ namespace Core.Data
         };
 
         public static List<ShoppingCart> shoppingCarts = new List<ShoppingCart>();
+
+        static DB()
+        {
+            foreach (var user in users)
+            {
+                if (user is Buyer)
+                {
+                    shoppingCarts.Add(new ShoppingCart(new List<ProductDTO>(), user.Id));
+                }
+            }
+        }
 
         public static int CounterProductId { get => ++_counterProductId; } 
         public static int CounterUserId { get => ++_counterUserId; }

@@ -18,7 +18,7 @@ namespace Core
                 .AddTransient<ILogger<ShoppingCartService>, CustomLogger<ShoppingCartService>>()
                 .AddTransient<ILogger<UI>, CustomLogger<UI>>()
                 .AddTransient<IRepository<Product>, ProductRepository>(_ => new ProductRepository(DB.products))
-                .AddTransient<IRepository<ShoppingCart>, ShoppingCartRepository>(_ => new ShoppingCartRepository(DB.shoppingCarts))
+                //.AddTransient<Entity, ShoppingCart>(_ => new ShoppingCart(DB.shoppingCarts))
                 .AddTransient<IShoppingCartService, ShoppingCartService>()
                 .AddTransient(_ => new UserRepository(DB.users))
                 .AddTransient<IDiscountCardService, DiscountCardService>()

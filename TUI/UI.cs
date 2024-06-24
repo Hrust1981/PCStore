@@ -1,11 +1,8 @@
-﻿using AutoMapper;
-using Core;
+﻿using Core;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel;
-using System.Resources;
 
 namespace TUI
 {
@@ -13,13 +10,13 @@ namespace TUI
     {
         private readonly IRepository<Product> _productRepository;
         private readonly IShoppingCartService _shoppingCartService;
-        private readonly UserRepository _userRepository;
+        private readonly IRepository<User> _userRepository;
         private readonly IDiscountCardService _discountCardService;
         private readonly ILogger<UI> _logger;
         private readonly IAuthentication _authentication;
         public UI(IRepository<Product> repository,
                   IShoppingCartService shoppingCartService,
-                  UserRepository userRepository,
+                  IRepository<User> userRepository,
                   IDiscountCardService discountCardService,
                   ILogger<UI> logger,
                   IAuthentication authentication)
@@ -118,16 +115,11 @@ namespace TUI
             var enteredValue = string.Empty;
             while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
-                buyer.ShoppingCart.UserId = buyer.Id;
-
                 var products = _productRepository.GetAll();
-                var productsDTO = new List<ProductDTO>();
 
                 foreach (var product in products)
                 {
-                    var productDTO = ConvertProductToProductDTO(product);
-                    productsDTO.Add(productDTO);
-                    Console.WriteLine(productDTO);
+                    Console.WriteLine(product);
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
                 var productId = GetEnteredNumericValue("Выбери товар в корзину: ", out enteredValue);
@@ -138,7 +130,7 @@ namespace TUI
                     return;
                 }
 
-                var productGuid = productsDTO.FirstOrDefault(p => p.IntId == productId)?.Id;
+                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
                 _shoppingCartService.AddProduct(buyer, productGuid.Value);
                 Clear(0);
             }
@@ -213,12 +205,9 @@ namespace TUI
             while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
-                var productsDTO = new List<ProductDTO>();
 
                 foreach (var product in products)
                 {
-                    var productDTO = ConvertProductToProductDTO(product);
-                    productsDTO.Add(productDTO);
                     DisplayLine(product.ToString());
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
@@ -230,7 +219,7 @@ namespace TUI
                     return;
                 }
 
-                var productGuid = productsDTO.FirstOrDefault(p => p.IntId == productId)?.Id;
+                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
                 _productRepository.Delete(productGuid.Value);
                 _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
 
@@ -245,12 +234,9 @@ namespace TUI
             while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
-                var productsDTO = new List<ProductDTO>();
 
                 foreach (var product in products)
                 {
-                    var productDTO = ConvertProductToProductDTO(product);
-                    productsDTO.Add(productDTO);
                     DisplayLine(product.ToString());
                 }
                 DisplayLine("Для выхода нажите клавишу 'q'");
@@ -262,7 +248,7 @@ namespace TUI
                     Clear(0);
                     return;
                 }
-                var productGuid = productsDTO.FirstOrDefault(p => p.IntId == productId)?.Id;
+                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
                 var updatableProduct = _productRepository.Get(productGuid.Value);
 
                 if (updatableProduct == null)
@@ -290,13 +276,6 @@ namespace TUI
         {
             _logger.LogInformation($"User with login:{login} is logged out");
             return false;
-        }
-
-        private ProductDTO ConvertProductToProductDTO(Product product)
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>());
-            var mapper = config.CreateMapper();
-            return mapper.Map<Product, ProductDTO>(product);
         }
 
         private string GetEnteredStringValue(string message)
