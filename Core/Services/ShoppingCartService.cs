@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Repositories;
 using Microsoft.Extensions.Logging;
 
@@ -42,14 +41,14 @@ namespace Core.Services
 
             if (selectedProduct.Quantity > 0)
             {
-  
-                if (shoppingCart.Products.Any(p => p.Id == selectedProduct.Id))
+                var products = shoppingCart.Products;
+                if (products.Any(p => p.Id == selectedProduct.Id))
                 {
-                    shoppingCart.Products.FirstOrDefault(p => p.Id == selectedProduct.Id).Quantity++;
+                    products.FirstOrDefault(p => p.Id == selectedProduct.Id)!.Quantity++;
                 }
                 else
                 {
-                    shoppingCart.Products.Add(new ProductDTO(selectedProduct.Id, selectedProduct.Name,
+                    products.Add(new Product(selectedProduct.Id, selectedProduct.IntId, selectedProduct.Name,
                                                     selectedProduct.Description, selectedProduct.Price, 1));
                 }
                 selectedProduct.Quantity--;
@@ -60,20 +59,29 @@ namespace Core.Services
         public void UpdateQuantityProduct(Buyer buyer, int productId, int quantity)
         {
             var shoppingCart = _shoppingCartRepository.GetByUserId(buyer.Id);
-
-            if (!shoppingCart.Products.Any(p => p.IntId == productId))
+            var products = shoppingCart.Products;
+            if (products == null)
+            {
+                _logger.LogWarning($"There are no items in the cart of the user with ID:{buyer.Id}");
+                return;
+            }
+            if (!products.Any(p => p.IntId == productId))
             {
                 throw new Exception($"Product with ID:{productId} not found");
             }
 
             var product = _productRepository.GetAll().FirstOrDefault(p => p.IntId == productId);
-            var quantityProduct = _quantityInStock.FirstOrDefault(x => x.Key == product?.Id).Value;
-            var oldQuantityValue = shoppingCart.Products.FirstOrDefault(p => p.Id == product?.Id)?.Quantity;
+            if (product == null)
+            {
+                return;
+            }
+            var quantityProduct = _quantityInStock.FirstOrDefault(x => x.Key == product.Id).Value;
+            var oldQuantityValue = products.FirstOrDefault(p => p.Id == product.Id)?.Quantity;
 
             if (quantity > 0 && quantityProduct - quantity >= 0)
             {
-                shoppingCart.Products.FirstOrDefault(p => p.Id == product?.Id).Quantity = quantity;
-                _productRepository.Update(new Product(product.Id, product.Name, product.Description,
+                products.FirstOrDefault(p => p.Id == product.Id)!.Quantity = quantity;
+                _productRepository.Update(new Product(product.Id, product.IntId, product.Name, product.Description,
                                                product.Price, quantityProduct - quantity));
             }
             _logger.LogInformation($"The quantity of product with ID:{productId} has been updated from {oldQuantityValue} to {quantity} pieces to the shopping cart");
@@ -91,22 +99,24 @@ namespace Core.Services
             var product = shoppingCart.Products.FirstOrDefault(p => p.IntId == productId);
             var productFromDB = _productRepository.GetAll().FirstOrDefault(p => p.IntId == productId);
 
-            productFromDB.Quantity += product.Quantity;
-            _productRepository.Update(productFromDB);
-            shoppingCart.Products.Remove(product);
+            if (productFromDB != null && product != null)
+            {
+                productFromDB.Quantity += product.Quantity;
+                _productRepository.Update(productFromDB);
+                shoppingCart.Products.Remove(product);
+            }
             _logger.LogInformation($"Product with ID:{productId} has been removed from the shopping cart");
         }
 
-        public int CalculateTotalAmount(Buyer buyer, out int totalAmountWithDiscount)
+        public int CalculateTotalAmount(Buyer buyer)
         {
             var discountCard = buyer.DiscountCards?.OrderByDescending(d => d.Discount).FirstOrDefault();
             var totalAmount = _shoppingCartRepository.GetByUserId(buyer.Id).Products.Sum(s => s.Price * s.Quantity);
-
-            totalAmountWithDiscount = discountCard == null ?
+            var totalAmountWithDiscount = discountCard == null ?
                 0 :
-                totalAmountWithDiscount = totalAmount - totalAmount * discountCard.Discount / 100;
+                totalAmount - totalAmount * discountCard.Discount / 100;
 
-            return totalAmount;
+            return discountCard == null ? totalAmount : totalAmountWithDiscount;
         }
 
     }

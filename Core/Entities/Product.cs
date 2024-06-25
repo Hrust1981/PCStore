@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class Product : Entity
     {
-        public Product(string name, string description, int price, int quantity)/* : base(name)*/
+        public Product(string name, string description, int price, int quantity)
         {
             Id = Guid.NewGuid();
             IntId = DB.CounterProductId;
@@ -13,16 +13,16 @@ namespace Core.Entities
             Price = price;
             Quantity = quantity;
         }
-        public Product(Guid id, string name, string description, int price, int quantity) /*: base(name)*/
+        public Product(Guid id, int intId, string name, string description, int price, int quantity)
         {
             Id = id;
+            IntId = intId;
             Name = name;
             Description = description;
             Price = price;
             Quantity = quantity;
         }
 
-        //public override int Id { get; }
         public int IntId { get; }
         public string Description { get; set; }
         public int Price { get; set; }

@@ -28,9 +28,9 @@ namespace Core.Data
         {
             foreach (var user in users)
             {
-                if (user is Buyer)
+                if (user is Buyer && !shoppingCarts.Any(s => s.UserId == user.Id))
                 {
-                    shoppingCarts.Add(new ShoppingCart(new List<ProductDTO>(), user.Id));
+                    shoppingCarts.Add(new ShoppingCart(new List<Product>(), user.Id));
                 }
             }
         }

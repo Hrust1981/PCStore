@@ -10,12 +10,12 @@ namespace Core.Repositories
             _carts = carts;
         }
 
-        public ShoppingCart GetByUserId(Guid id)
+        public ShoppingCart GetByUserId(Guid userId)
         {
-            var cart = _carts.FirstOrDefault(c => c.UserId == id);
+            var cart = _carts.FirstOrDefault(c => c.UserId == userId);
             if (cart == null)
             {
-                throw new Exception($"Shopping cart with ID:{id} not found");
+                throw new Exception($"Shopping cart with ID:{userId} not found");
             }
             return cart;
         }

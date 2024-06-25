@@ -18,44 +18,46 @@ namespace TUI
                 while (isAuthenticated)
                 {
                     var menuItem = ui.Menu(user);
-                    if (user.Role == Role.Buyer)
+                    switch (user.Role)
                     {
-                        switch (menuItem)
-                        {
-                            case "1":
-                                ui.SelectProducts((Buyer)user);
-                                break;
-                            case "2":
-                                ui.ShowCart((Buyer)user);
-                                break;
-                            case "3":
-                                isAuthenticated = ui.SignOut(user.Login);
-                                break;
-                            default:
-                                break;
+                        case Role.Buyer:
+                            var buyer = (Buyer)user;
+                            switch (menuItem)
+                            {
+                                case "1":
+                                    ui.SelectProducts(buyer);
+                                    break;
+                                case "2":
+                                    ui.ShowCart(buyer);
+                                    break;
+                                case "3":
+                                    isAuthenticated = ui.SignOut(user.Login);
+                                    break;
+                                default:
+                                    break;
 
-                        }
-                    }
-                    else if (user.Role == Role.Seller)
-                    {
-                        switch (menuItem)
-                        {
-                            case "1":
-                                ui.AddProduct();
-                                break;
-                            case "2":
-                                ui.RemoveProduct();
-                                break;
-                            case "3":
-                                ui.UpdateProduct();
-                                break;
-                            case "4":
-                                isAuthenticated = ui.SignOut(user.Login);
-                                break;
-                            default:
-                                break;
+                            }
+                            break;
+                        case Role.Seller:
+                            switch (menuItem)
+                            {
+                                case "1":
+                                    ui.AddProduct();
+                                    break;
+                                case "2":
+                                    ui.RemoveProduct();
+                                    break;
+                                case "3":
+                                    ui.UpdateProduct();
+                                    break;
+                                case "4":
+                                    isAuthenticated = ui.SignOut(user.Login);
+                                    break;
+                                default:
+                                    break;
 
-                        }
+                            }
+                            break;
                     }
                 }
             }

@@ -10,20 +10,20 @@ namespace TUI
     {
         private readonly IRepository<Product> _productRepository;
         private readonly IShoppingCartService _shoppingCartService;
-        private readonly IRepository<User> _userRepository;
+        private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly IDiscountCardService _discountCardService;
         private readonly ILogger<UI> _logger;
         private readonly IAuthentication _authentication;
         public UI(IRepository<Product> repository,
                   IShoppingCartService shoppingCartService,
-                  IRepository<User> userRepository,
+                  IShoppingCartRepository shoppingCartRepository,
                   IDiscountCardService discountCardService,
                   ILogger<UI> logger,
                   IAuthentication authentication)
         {
             _productRepository = repository;
             _shoppingCartService = shoppingCartService;
-            _userRepository = userRepository;
+            _shoppingCartRepository = shoppingCartRepository;
             _discountCardService = discountCardService;
             _logger = logger;
             _authentication = authentication;
@@ -78,7 +78,6 @@ namespace TUI
 
                         """;
             }
-
             Display(message);
             string value = DataInput();
             Clear(0);
@@ -87,19 +86,17 @@ namespace TUI
 
         public void Payment(Buyer buyer)
         {
-            var shopingCart = buyer.ShoppingCart.Products;
-            if (shopingCart.Any())
+            var shoppingCart = _shoppingCartRepository.GetByUserId(buyer.Id).Products;
+            if (shoppingCart.Count != 0)
             {
                 buyer.TotalPurchaseAmount += _shoppingCartService.
-                    CalculateTotalAmount(buyer, out int totalAmountWithDiscount);
+                    CalculateTotalAmount(buyer);
 
-                var totalAmount = totalAmountWithDiscount == 0 ?
-                    shopingCart.Sum(p => p.Price) :
-                    totalAmountWithDiscount;
+                var totalAmount = shoppingCart.Sum(p => p.Price);
 
                 _discountCardService.AddDiscountCard(buyer);
                 Display("Оплата прошла успешно!");
-                shopingCart.Clear();
+                shoppingCart.Clear();
                 _shoppingCartService.GetQuantityInStock.Clear();
                 _logger.LogInformation($"The goods were paid for in the amount of {totalAmount} RUB by the user {buyer.Login}");
             }
@@ -116,13 +113,17 @@ namespace TUI
             while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
+                if (products.Count == 0)
+                {
+                    _logger.LogWarning("There are no products in the database");
+                }
 
                 foreach (var product in products)
                 {
                     Console.WriteLine(product);
                 }
-                DisplayLine("Для выхода нажите клавишу 'q'");
-                var productId = GetEnteredNumericValue("Выбери товар в корзину: ", out enteredValue);
+                DisplayLine("Для выхода нажмите клавишу 'q'");
+                var productId = GetEnteredNumericValue("Выберите товар в корзину: ", out enteredValue);
 
                 if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
                 {
@@ -130,8 +131,7 @@ namespace TUI
                     return;
                 }
 
-                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
-                _shoppingCartService.AddProduct(buyer, productGuid.Value);
+                _shoppingCartService.AddProduct(buyer, productId);
                 Clear(0);
             }
             Clear(0);
@@ -141,18 +141,19 @@ namespace TUI
         {
             var enteredValue = string.Empty;
             var message = string.Empty;
+
             while (!string.Equals(enteredValue, "4"))
             {
-                var products = buyer.ShoppingCart.Products;
+                var products = _shoppingCartRepository.GetByUserId(buyer.Id).Products;
                 foreach (var product in products)
                 {
                     Console.WriteLine(product);
                 }
-                if (products.Any())
+
+                if (products.Count != 0)
                 {
-                    var sum = _shoppingCartService.CalculateTotalAmount(buyer, out int total);
-                    var amountToBePaid = total == 0 ? sum : total;
-                    message = $"        Сумма к оплате: {amountToBePaid} рублей";
+                    var totalAmount = _shoppingCartService.CalculateTotalAmount(buyer);
+                    message = $"        Сумма к оплате: {totalAmount} рублей";
                     DisplayLine(message);
                 }
                 message = $"""
@@ -170,16 +171,14 @@ namespace TUI
                 }
                 else if (positionNumber == 2)
                 {
-                    var productId = GetEnteredNumericValue("Введи ID товара: ");
-                    var quantity = GetEnteredNumericValue("Введи количество: ");
-                    var productGuid = products.FirstOrDefault(guid => guid.IntId == productId)?.Id;
-                    _shoppingCartService.UpdateQuantityProduct(buyer, productGuid.Value, quantity);
+                    var productId = GetEnteredNumericValue("Введите ID товара: ");
+                    var quantity = GetEnteredNumericValue("Введите количество: ");
+                    _shoppingCartService.UpdateQuantityProduct(buyer, productId, quantity);
                 }
                 else if (positionNumber == 3)
                 {
-                    var productId = GetEnteredNumericValue("Введи ID товара: ");
-                    var productGuid = products.FirstOrDefault(guid => guid.IntId == productId)?.Id;
-                    _shoppingCartService.DeleteProduct(buyer, productGuid.Value);
+                    var productId = GetEnteredNumericValue("Введите ID товара: ");
+                    _shoppingCartService.DeleteProduct(buyer, productId);
                 }
                 Clear(0);
             }
@@ -188,12 +187,12 @@ namespace TUI
 
         public void AddProduct()
         {
-            var name = GetEnteredStringValue("Введи название товара");
-            var decription = GetEnteredStringValue("Введи описание товара");
-            var price = GetEnteredNumericValue("Введи цену товара: ");
-            var quantity = GetEnteredNumericValue("Введи количество товара: ");
+            var name = GetEnteredStringValue("Введите название товара");
+            var description = GetEnteredStringValue("Введите описание товара");
+            var price = GetEnteredNumericValue("Введите цену товара: ");
+            var quantity = GetEnteredNumericValue("Введите количество товара: ");
 
-            _productRepository.Add(new Product(name, decription, price, quantity));
+            _productRepository.Add(new Product(name, description, price, quantity));
             _logger.LogInformation($"The new product named '{name}' has been added to the product repository");
 
             Clear(0);
@@ -205,13 +204,18 @@ namespace TUI
             while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
             {
                 var products = _productRepository.GetAll();
+                if (products.Count == 0)
+                {
+                    _logger.LogWarning("There are no products in the database");
+                }
 
                 foreach (var product in products)
                 {
                     DisplayLine(product.ToString());
                 }
-                DisplayLine("Для выхода нажите клавишу 'q'");
-                var productId = GetEnteredNumericValue("Для удаления введи ID товара: ", out enteredValue);
+
+                DisplayLine("Для выхода нажмите клавишу 'q'");
+                var productId = GetEnteredNumericValue("Для удаления введите ID товара: ", out enteredValue);
 
                 if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
                 {
@@ -220,9 +224,11 @@ namespace TUI
                 }
 
                 var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
-                _productRepository.Delete(productGuid.Value);
-                _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
-
+                if (productGuid != null)
+                {
+                    _productRepository.Delete(productGuid.Value);
+                    _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
+                }
                 Clear(0);
             }
             Clear(0);
@@ -235,36 +241,47 @@ namespace TUI
             {
                 var products = _productRepository.GetAll();
 
+                if (products.Count == 0)
+                {
+                    _logger.LogWarning("There are no products in the database");
+                }
+
                 foreach (var product in products)
                 {
                     DisplayLine(product.ToString());
                 }
-                DisplayLine("Для выхода нажите клавишу 'q'");
 
-                var productId = GetEnteredNumericValue("Для редактирования введи ID товара: ", out enteredValue);
+                DisplayLine("Для выхода нажмите клавишу 'q'");
+
+                var productId = GetEnteredNumericValue("Для редактирования введите ID товара: ", out enteredValue);
+                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
 
                 if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
                 {
+                    if (productGuid == null)
+                    {
+                        _logger.LogWarning($"Product with ID:{productGuid} not found");
+                    }
                     Clear(0);
                     return;
                 }
-                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
+                
                 var updatableProduct = _productRepository.Get(productGuid.Value);
 
                 if (updatableProduct == null)
                 {
                     throw new Exception($"Product with ID:{productId} is not found");
                 }
-                var enteredName = GetEnteredStringValue("Введи название товара");
+                var enteredName = GetEnteredStringValue("Введите название товара");
                 var name = string.IsNullOrEmpty(enteredName) ? updatableProduct.Name : enteredName;
-                var enteredDescription = GetEnteredStringValue("Введи описание товара");
-                var decription = string.IsNullOrEmpty(enteredDescription) ? updatableProduct.Description : enteredDescription;
-                var enteredPrice = GetEnteredNumericValue("Введи цену товара: ");
+                var enteredDescription = GetEnteredStringValue("Введите описание товара");
+                var description = string.IsNullOrEmpty(enteredDescription) ? updatableProduct.Description : enteredDescription;
+                var enteredPrice = GetEnteredNumericValue("Введите цену товара: ");
                 var price = enteredPrice > 0 ? enteredPrice : updatableProduct.Price;
-                var enteredQuantity = GetEnteredNumericValue("Введи количество товара: ");
+                var enteredQuantity = GetEnteredNumericValue("Введите количество товара: ");
                 var quantity = enteredQuantity > 0 ? enteredQuantity : updatableProduct.Quantity;
 
-                _productRepository.Update(new Product(updatableProduct.Id, name, decription, price, quantity));
+                _productRepository.Update(new Product(updatableProduct.Id, productId, name, description, price, quantity));
                 _logger.LogInformation($"Product with ID:{updatableProduct.Id} updated");
 
                 Clear(0);
@@ -284,19 +301,18 @@ namespace TUI
             return DataInput();
         }
 
-        private int GetEnteredNumericValue(string message, out string enteredValue)
-        {
-            Display(message);
-            enteredValue = DataInput();
-            int.TryParse(enteredValue, out int valueId);
-            return valueId;
-        }
-
         private int GetEnteredNumericValue(string message)
         {
             Display(message);
             var enteredValue = DataInput();
-            int.TryParse(enteredValue, out int valueId);
+            if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+            {
+                return -1;
+            }
+            if (!int.TryParse(enteredValue, out int valueId))
+            {
+                _logger.LogWarning("");
+            }
             return valueId;
         }
 
