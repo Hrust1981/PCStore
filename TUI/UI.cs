@@ -123,9 +123,9 @@ namespace TUI
                     Console.WriteLine(product);
                 }
                 DisplayLine("Для выхода нажмите клавишу 'q'");
-                var productId = GetEnteredNumericValue("Выберите товар в корзину: ", out enteredValue);
+                var productId = GetEnteredNumericValue("Выберите товар в корзину: ");
 
-                if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+                if (productId == -1)
                 {
                     Clear(0);
                     return;
@@ -164,7 +164,7 @@ namespace TUI
 
                          Выбери действие: 
                          """;
-                var positionNumber = GetEnteredNumericValue(message, out enteredValue);
+                var positionNumber = GetEnteredNumericValue(message);
                 if (positionNumber == 1)
                 {
                     Payment(buyer);
@@ -215,14 +215,12 @@ namespace TUI
                 }
 
                 DisplayLine("Для выхода нажмите клавишу 'q'");
-                var productId = GetEnteredNumericValue("Для удаления введите ID товара: ", out enteredValue);
-
-                if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+                var productId = GetEnteredNumericValue("Для удаления введите ID товара: ");
+                if (productId == -1)
                 {
                     Clear(0);
                     return;
                 }
-
                 var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
                 if (productGuid != null)
                 {
@@ -253,19 +251,20 @@ namespace TUI
 
                 DisplayLine("Для выхода нажмите клавишу 'q'");
 
-                var productId = GetEnteredNumericValue("Для редактирования введите ID товара: ", out enteredValue);
-                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
-
-                if (string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+                var productId = GetEnteredNumericValue("Для редактирования введите ID товара: ");
+                if (productId == -1)
                 {
-                    if (productGuid == null)
-                    {
-                        _logger.LogWarning($"Product with ID:{productGuid} not found");
-                    }
                     Clear(0);
                     return;
                 }
-                
+                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
+                if (productGuid == null)
+                {
+                    _logger.LogWarning($"Product with ID:{productGuid} not found");
+
+                    Clear(0);
+                    return;
+                }
                 var updatableProduct = _productRepository.Get(productGuid.Value);
 
                 if (updatableProduct == null)
@@ -311,7 +310,7 @@ namespace TUI
             }
             if (!int.TryParse(enteredValue, out int valueId))
             {
-                _logger.LogWarning("");
+                _logger.LogWarning("Invalid data was entered");
             }
             return valueId;
         }
