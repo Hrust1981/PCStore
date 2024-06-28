@@ -1,4 +1,6 @@
-﻿using Core;
+﻿// Ignore Spelling: TUI
+
+using Core;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
@@ -11,20 +13,17 @@ namespace TUI
         private readonly IRepository<Product> _productRepository;
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IShoppingCartRepository _shoppingCartRepository;
-        private readonly IDiscountCardService _discountCardService;
         private readonly ILogger<UI> _logger;
         private readonly IAuthentication _authentication;
         public UI(IRepository<Product> repository,
                   IShoppingCartService shoppingCartService,
                   IShoppingCartRepository shoppingCartRepository,
-                  IDiscountCardService discountCardService,
                   ILogger<UI> logger,
                   IAuthentication authentication)
         {
             _productRepository = repository;
             _shoppingCartService = shoppingCartService;
             _shoppingCartRepository = shoppingCartRepository;
-            _discountCardService = discountCardService;
             _logger = logger;
             _authentication = authentication;
         }
@@ -89,16 +88,9 @@ namespace TUI
             var shoppingCart = _shoppingCartRepository.GetByUserId(buyer.Id).Products;
             if (shoppingCart.Count != 0)
             {
-                buyer.TotalPurchaseAmount += _shoppingCartService.
-                    CalculateTotalAmount(buyer);
-
-                var totalAmount = shoppingCart.Sum(p => p.Price);
-
-                _discountCardService.AddDiscountCard(buyer);
-                Display("Оплата прошла успешно!");
-                shoppingCart.Clear();
-                _shoppingCartService.GetQuantityInStock.Clear();
-                _logger.LogInformation($"The goods were paid for in the amount of {totalAmount} RUB by the user {buyer.Login}");
+                var hasPayment = _shoppingCartService.Payment(buyer, shoppingCart);
+                var messsage = hasPayment ? "Оплата прошла успешно!" : "К сожалению оплата не прошла!";
+                Display(messsage);
             }
             else
             {
@@ -139,10 +131,9 @@ namespace TUI
 
         public void ShowCart(Buyer buyer)
         {
-            var enteredValue = string.Empty;
-            var message = string.Empty;
+            var positionNumber = 0;
 
-            while (!string.Equals(enteredValue, "4"))
+            while (positionNumber != -1)
             {
                 var products = _shoppingCartRepository.GetByUserId(buyer.Id).Products;
                 foreach (var product in products)
@@ -150,6 +141,7 @@ namespace TUI
                     Console.WriteLine(product);
                 }
 
+                string? message;
                 if (products.Count != 0)
                 {
                     var totalAmount = _shoppingCartService.CalculateTotalAmount(buyer);
@@ -160,11 +152,12 @@ namespace TUI
                          1.Оплатить товар
                          2.Изменить количество в каждой позиции
                          3.Удалить товар из корзины
-                         4.Выход
+
+                         Для выхода нажмите клавишу 'q'
 
                          Выбери действие: 
                          """;
-                var positionNumber = GetEnteredNumericValue(message);
+                positionNumber = GetEnteredNumericValue(message);
                 if (positionNumber == 1)
                 {
                     Payment(buyer);

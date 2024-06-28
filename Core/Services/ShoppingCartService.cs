@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Repositories;
 using Microsoft.Extensions.Logging;
+using System.Transactions;
 
 namespace Core.Services
 {
@@ -8,6 +9,7 @@ namespace Core.Services
     {
         private readonly IRepository<Product> _productRepository;
         private readonly IShoppingCartRepository _shoppingCartRepository;
+        private readonly IDiscountCardService _discountCardService;
         private readonly ILogger<ShoppingCartService> _logger;
         private Dictionary<Guid, int> _quantityInStock;
 
@@ -15,10 +17,12 @@ namespace Core.Services
 
         public ShoppingCartService(IShoppingCartRepository shoppingCartRepository,
                                    IRepository<Product> productRepository,
-                                   ILogger<ShoppingCartService> logger)
+                                   IDiscountCardService discountCardService,
+        ILogger<ShoppingCartService> logger)
         {
             _productRepository = productRepository;
             _shoppingCartRepository = shoppingCartRepository;
+            _discountCardService = discountCardService;
             _logger = logger;
             _quantityInStock = new();
         }
@@ -119,5 +123,28 @@ namespace Core.Services
             return discountCard == null ? totalAmount : totalAmountWithDiscount;
         }
 
+        public bool Payment(Buyer buyer, List<Product> shoppingCart)
+        {
+            int totalAmount = 0;
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    totalAmount = CalculateTotalAmount(buyer);
+                    buyer.TotalPurchaseAmount += totalAmount;
+                    _discountCardService.AddDiscountCard(buyer);
+                    shoppingCart.Clear();
+                    GetQuantityInStock.Clear();
+                    scope.Complete();
+                    _logger.LogInformation($"The goods were paid for in the amount of {totalAmount} RUB by the user {buyer.Login}");
+                    return true;
+                }
+            }
+            catch (TransactionAbortedException ex)
+            {
+                _logger.LogWarning($"Payment in the amount of {totalAmount} RUB did not go through. Message {ex.Message}");
+                return false;
+            }
+        }
     }
 }

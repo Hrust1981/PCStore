@@ -9,5 +9,6 @@ namespace Core.Services
         void UpdateQuantityProduct(Buyer buyer, int productId, int quantity);
         void DeleteProduct(Buyer buyer, int productId);
         int CalculateTotalAmount(Buyer buyer);
+        public bool Payment(Buyer buyer, List<Product> shoppingCart);
     }
 }
