@@ -7,7 +7,7 @@ namespace Core.Entities
         public Product(string name, string description, int price, int quantity)
         {
             Id = Guid.NewGuid();
-            IntId = DB.CounterProductId;
+            //IntId = DB.CounterProductId;
             Name = name;
             Description = description;
             Price = price;
@@ -23,7 +23,7 @@ namespace Core.Entities
             Quantity = quantity;
         }
 
-        public int IntId { get; }
+        public int IntId { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }

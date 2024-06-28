@@ -1,5 +1,6 @@
 ﻿using Core.Services;
 using Microsoft.Extensions.Logging;
+using System.Configuration;
 
 namespace Core
 {
@@ -24,7 +25,7 @@ namespace Core
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
-            const string PATH = "C:\\Users\\Hrust\\source\\repos\\PCStore\\Logs.txt";
+            string? PATH = ConfigurationManager.AppSettings.Get("PathToLoggerFile");
             string message = $"[{DateTime.Now}] [{logLevel}] [{eventId}] [{typeof(T)}] - {formatter(state, exception)}";
             _loggerService.WriteToFile(PATH, message);
         }

@@ -1,6 +1,4 @@
-﻿// Ignore Spelling: TUI
-
-using Core;
+﻿using Core;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
@@ -101,8 +99,8 @@ namespace TUI
 
         public void SelectProducts(Buyer buyer)
         {
-            var enteredValue = string.Empty;
-            while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+            var productId = 0;
+            while (productId != -1)
             {
                 var products = _productRepository.GetAll();
                 if (products.Count == 0)
@@ -110,20 +108,19 @@ namespace TUI
                     _logger.LogWarning("There are no products in the database");
                 }
 
+                var count = 1;
                 foreach (var product in products)
                 {
+                    product.IntId = count++;
                     Console.WriteLine(product);
                 }
                 DisplayLine("Для выхода нажмите клавишу 'q'");
-                var productId = GetEnteredNumericValue("Выберите товар в корзину: ");
+                productId = GetEnteredNumericValue("Выберите товар в корзину: ");
 
-                if (productId == -1)
+                if (productId > 0)
                 {
-                    Clear(0);
-                    return;
+                    _shoppingCartService.AddProduct(buyer, productId);
                 }
-
-                _shoppingCartService.AddProduct(buyer, productId);
                 Clear(0);
             }
             Clear(0);
@@ -155,7 +152,7 @@ namespace TUI
 
                          Для выхода нажмите клавишу 'q'
 
-                         Выбери действие: 
+                         Выберите действие: 
                          """;
                 positionNumber = GetEnteredNumericValue(message);
                 if (positionNumber == 1)
@@ -193,8 +190,8 @@ namespace TUI
 
         public void RemoveProduct()
         {
-            var enteredValue = string.Empty;
-            while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+            var productId = 0;
+            while (productId != -1)
             {
                 var products = _productRepository.GetAll();
                 if (products.Count == 0)
@@ -208,17 +205,15 @@ namespace TUI
                 }
 
                 DisplayLine("Для выхода нажмите клавишу 'q'");
-                var productId = GetEnteredNumericValue("Для удаления введите ID товара: ");
-                if (productId == -1)
+                productId = GetEnteredNumericValue("Для удаления введите ID товара: ");
+                if (productId > 0)
                 {
-                    Clear(0);
-                    return;
-                }
-                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
-                if (productGuid != null)
-                {
-                    _productRepository.Delete(productGuid.Value);
-                    _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
+                    var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
+                    if (productGuid != null)
+                    {
+                        _productRepository.Delete(productGuid.Value);
+                        _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
+                    }
                 }
                 Clear(0);
             }
@@ -227,8 +222,8 @@ namespace TUI
 
         public void UpdateProduct()
         {
-            var enteredValue = string.Empty;
-            while (!string.Equals(enteredValue, "q", StringComparison.OrdinalIgnoreCase))
+            var productId = 0;
+            while (productId != -1)
             {
                 var products = _productRepository.GetAll();
 
@@ -244,38 +239,35 @@ namespace TUI
 
                 DisplayLine("Для выхода нажмите клавишу 'q'");
 
-                var productId = GetEnteredNumericValue("Для редактирования введите ID товара: ");
-                if (productId == -1)
+                productId = GetEnteredNumericValue("Для редактирования введите ID товара: ");
+                if (productId > 0)
                 {
-                    Clear(0);
-                    return;
+                    var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
+                    if (productGuid == null)
+                    {
+                        _logger.LogWarning($"Product with ID:{productGuid} not found");
+
+                        Clear(0);
+                        return;
+                    }
+                    var updatableProduct = _productRepository.Get(productGuid.Value);
+
+                    if (updatableProduct == null)
+                    {
+                        throw new Exception($"Product with ID:{productId} is not found");
+                    }
+                    var enteredName = GetEnteredStringValue("Введите название товара");
+                    var name = string.IsNullOrEmpty(enteredName) ? updatableProduct.Name : enteredName;
+                    var enteredDescription = GetEnteredStringValue("Введите описание товара");
+                    var description = string.IsNullOrEmpty(enteredDescription) ? updatableProduct.Description : enteredDescription;
+                    var enteredPrice = GetEnteredNumericValue("Введите цену товара: ");
+                    var price = enteredPrice > 0 ? enteredPrice : updatableProduct.Price;
+                    var enteredQuantity = GetEnteredNumericValue("Введите количество товара: ");
+                    var quantity = enteredQuantity > 0 ? enteredQuantity : updatableProduct.Quantity;
+
+                    _productRepository.Update(new Product(updatableProduct.Id, productId, name, description, price, quantity));
+                    _logger.LogInformation($"Product with ID:{updatableProduct.Id} updated");
                 }
-                var productGuid = products.FirstOrDefault(p => p.IntId == productId)?.Id;
-                if (productGuid == null)
-                {
-                    _logger.LogWarning($"Product with ID:{productGuid} not found");
-
-                    Clear(0);
-                    return;
-                }
-                var updatableProduct = _productRepository.Get(productGuid.Value);
-
-                if (updatableProduct == null)
-                {
-                    throw new Exception($"Product with ID:{productId} is not found");
-                }
-                var enteredName = GetEnteredStringValue("Введите название товара");
-                var name = string.IsNullOrEmpty(enteredName) ? updatableProduct.Name : enteredName;
-                var enteredDescription = GetEnteredStringValue("Введите описание товара");
-                var description = string.IsNullOrEmpty(enteredDescription) ? updatableProduct.Description : enteredDescription;
-                var enteredPrice = GetEnteredNumericValue("Введите цену товара: ");
-                var price = enteredPrice > 0 ? enteredPrice : updatableProduct.Price;
-                var enteredQuantity = GetEnteredNumericValue("Введите количество товара: ");
-                var quantity = enteredQuantity > 0 ? enteredQuantity : updatableProduct.Quantity;
-
-                _productRepository.Update(new Product(updatableProduct.Id, productId, name, description, price, quantity));
-                _logger.LogInformation($"Product with ID:{updatableProduct.Id} updated");
-
                 Clear(0);
             }
             Clear(0);
