@@ -22,7 +22,10 @@ namespace Core
                 .AddTransient<IShoppingCartService, ShoppingCartService>()
                 .AddTransient(_ => new UserRepository(DB.users))
                 .AddTransient<IDiscountCardService, DiscountCardService>()
-                .AddTransient<IAuthentication, Authentication>();
+                .AddTransient<IAuthentication, Authentication>()
+                .AddTransient<IStringLocalizer<UI>, StringLocalizer<UI>>()
+                .AddLocalization(options => options.ResourcesPath = "TUI.Properties")
+                .AddLogging();
             return services.BuildServiceProvider();
         }
     }

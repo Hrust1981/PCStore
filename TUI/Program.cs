@@ -2,7 +2,7 @@
 using Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Localization;
+using System.Globalization;
 
 namespace TUI
 {
@@ -10,19 +10,22 @@ namespace TUI
     {
         static void Main(string[] args)
         {
-            HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
-            builder.Services.AddLocalization(options =>
-            {
-                options.ResourcesPath = "Resources";
-            });
-
             var serviceProvider = CustomServiceProvider.BuildServiceProvider();
             var ui = serviceProvider.GetRequiredService<UI>();
 
+            HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+            builder.Services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "TUI.Properties";
+            });
+
             while (true)
             {
+                ui.SelectCulture();
+
                 var user = ui.Authentication();
                 bool isAuthenticated = user.IsAuthenticated;
+                
                 while (isAuthenticated)
                 {
                     var menuItem = ui.Menu(user);

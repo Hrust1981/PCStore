@@ -17,11 +17,8 @@
           "TUI.dll": {}
         },
         "resources": {
-          "en/TUI.resources.dll": {
-            "locale": "en"
-          },
-          "ru/TUI.resources.dll": {
-            "locale": "ru"
+          "en-US/TUI.resources.dll": {
+            "locale": "en-US"
           }
         }
       },
