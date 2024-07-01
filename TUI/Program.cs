@@ -1,6 +1,8 @@
 ﻿using Core;
 using Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
 
 namespace TUI
 {
@@ -8,6 +10,12 @@ namespace TUI
     {
         static void Main(string[] args)
         {
+            HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+            builder.Services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            });
+
             var serviceProvider = CustomServiceProvider.BuildServiceProvider();
             var ui = serviceProvider.GetRequiredService<UI>();
 
@@ -24,38 +32,36 @@ namespace TUI
                             var buyer = (Buyer)user;
                             switch (menuItem)
                             {
-                                case "1":
+                                case Constants.SelectProducts:
                                     ui.SelectProducts(buyer);
                                     break;
-                                case "2":
+                                case Constants.ShowCart:
                                     ui.ShowCart(buyer);
                                     break;
-                                case "3":
+                                case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
                                     break;
                                 default:
                                     break;
-
                             }
                             break;
                         case Role.Seller:
                             switch (menuItem)
                             {
-                                case "1":
+                                case Constants.AddProduct:
                                     ui.AddProduct();
                                     break;
-                                case "2":
+                                case Constants.RemoveProduct:
                                     ui.RemoveProduct();
                                     break;
-                                case "3":
+                                case Constants.UpdateProduct:
                                     ui.UpdateProduct();
                                     break;
-                                case "4":
+                                case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
                                     break;
                                 default:
                                     break;
-
                             }
                             break;
                     }

@@ -5,10 +5,14 @@ namespace Core.Repositories
     public class ShoppingCartRepository : IShoppingCartRepository
     {
         private readonly List<ShoppingCart> _carts;
+
         public ShoppingCartRepository(List<ShoppingCart> carts)
         {
             _carts = carts;
+            QuantityInStock = new();
         }
+
+        public Dictionary<Guid, int> QuantityInStock { get; set; }
 
         public ShoppingCart GetByUserId(Guid userId)
         {

@@ -6,5 +6,6 @@ namespace Core.Repositories
     {
         ShoppingCart GetByUserId(Guid id);
         List<ShoppingCart> GetAll();
+        public Dictionary<Guid, int> QuantityInStock { get; set; }
     }
 }

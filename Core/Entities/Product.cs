@@ -1,36 +1,31 @@
-﻿using Core.Data;
-
-namespace Core.Entities
+﻿namespace Core.Entities
 {
     public class Product : Entity
     {
         public Product(string name, string description, int price, int quantity)
         {
             Id = Guid.NewGuid();
-            //IntId = DB.CounterProductId;
             Name = name;
             Description = description;
             Price = price;
             Quantity = quantity;
         }
-        public Product(Guid id, int intId, string name, string description, int price, int quantity)
+        public Product(Guid id, string name, string description, int price, int quantity)
         {
             Id = id;
-            IntId = intId;
             Name = name;
             Description = description;
             Price = price;
             Quantity = quantity;
         }
 
-        public int IntId { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }
 
         public override string? ToString()
         {
-            return string.Format("{0,-4} {1,-35} {2,-60} {3,7} {4,6}", IntId,
+            return string.Format("{0,-4} {1,-35} {2,-60} {3,7} {4,6}", string.Empty,
                                                                        CutText(Name, 30),
                                                                        CutText(Description, 55),
                                                                        Price,
