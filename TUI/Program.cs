@@ -1,8 +1,6 @@
 ﻿using Core;
 using Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Globalization;
 
 namespace TUI
 {
@@ -12,12 +10,6 @@ namespace TUI
         {
             var serviceProvider = CustomServiceProvider.BuildServiceProvider();
             var ui = serviceProvider.GetRequiredService<UI>();
-
-            HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
-            builder.Services.AddLocalization(options =>
-            {
-                options.ResourcesPath = "TUI.Properties";
-            });
 
             while (true)
             {

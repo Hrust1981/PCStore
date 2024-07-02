@@ -3,7 +3,6 @@ using Core.Entities;
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using TUI;
 
@@ -22,10 +21,7 @@ namespace Core
                 .AddTransient<IShoppingCartService, ShoppingCartService>()
                 .AddTransient(_ => new UserRepository(DB.users))
                 .AddTransient<IDiscountCardService, DiscountCardService>()
-                .AddTransient<IAuthentication, Authentication>()
-                .AddTransient<IStringLocalizer<UI>, StringLocalizer<UI>>()
-                .AddLocalization(options => options.ResourcesPath = "TUI.Properties")
-                .AddLogging();
+                .AddTransient<IAuthentication, Authentication>();
             return services.BuildServiceProvider();
         }
     }

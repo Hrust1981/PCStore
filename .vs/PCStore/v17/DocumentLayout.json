@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\",
+  "WorkspaceRootPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\tui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\tui\\properties\\strings.en-us.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\properties\\strings.en-us.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,25 +27,24 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\Program.cs",
-              "RelativeDocumentMoniker": "TUI\\Program.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\Program.cs",
-              "RelativeToolTip": "TUI\\Program.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAqwBIAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T05:47:07.713Z",
+              "Title": "Strings.en-US.resx",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\Properties\\Strings.en-US.resx",
+              "RelativeDocumentMoniker": "TUI\\Properties\\Strings.en-US.resx",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\Properties\\Strings.en-US.resx",
+              "RelativeToolTip": "TUI\\Properties\\Strings.en-US.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2024-07-01T17:25:33.581Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "UI.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\UI.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\UI.cs",
               "RelativeDocumentMoniker": "TUI\\UI.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\UI.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\UI.cs",
               "RelativeToolTip": "TUI\\UI.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAWwEEAAAAMAAAA",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAADkAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-30T08:03:46.133Z",
               "EditorCaption": ""

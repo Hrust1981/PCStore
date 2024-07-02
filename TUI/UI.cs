@@ -3,11 +3,7 @@ using Core.Entities;
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Localization;
 using System.Globalization;
-using System.Resources;
-
-//[assembly: RootNamespace("Localization.TUI")]
 
 namespace TUI
 {
@@ -18,21 +14,18 @@ namespace TUI
         private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly ILogger<UI> _logger;
         private readonly IAuthentication _authentication;
-        private readonly IStringLocalizer<UI> _localizer;
 
         public UI(IRepository<Product> repository,
                   IShoppingCartService shoppingCartService,
                   IShoppingCartRepository shoppingCartRepository,
                   ILogger<UI> logger,
-                  IAuthentication authentication,
-                  IStringLocalizer<UI> localizer)
+                  IAuthentication authentication)
         {
             _productRepository = repository;
             _shoppingCartService = shoppingCartService;
             _shoppingCartRepository = shoppingCartRepository;
             _logger = logger;
             _authentication = authentication;
-            _localizer = localizer;
         }
 
         public void SelectCulture()
@@ -62,8 +55,7 @@ namespace TUI
 
         public User Authentication()
         {
-            ResourceManager rm = new ResourceManager("Strings",typeof(UI).Assembly);
-            string message = rm.GetString("Login"); /*$"Авторизуйтесь{Environment.NewLine}Логин: ";*/
+            var message = Properties.Strings.Login;
             Display(message);
             string login = DataInput();
             Display("Пароль: ");
