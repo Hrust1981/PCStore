@@ -350,20 +350,11 @@ namespace TUI
             return valueId;
         }
 
-        private string DataInput()
-        {
-            return Console.ReadLine();
-        }
+        private string DataInput() => Console.ReadLine();
 
-        private void Display(string message)
-        {
-            Console.Write(message);
-        }
+        private void Display(string message) => Console.Write(message);
 
-        private void DisplayLine(string message)
-        {
-            Console.WriteLine(message);
-        }
+        private void DisplayLine(string message) => Console.WriteLine(message);
 
         private void Clear(int timeout)
         {
