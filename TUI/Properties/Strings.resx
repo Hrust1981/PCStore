@@ -117,7 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddItemToCart" xml:space="preserve">
+    <value>Выберите товар в корзину:</value>
+  </data>
+  <data name="AmountToPay" xml:space="preserve">
+    <value>Сумма к оплате: </value>
+  </data>
+  <data name="CartIsEmpty" xml:space="preserve">
+    <value>Корзина пуста!</value>
+  </data>
+  <data name="EnterPriceProduct" xml:space="preserve">
+    <value>Введите цену товара: </value>
+  </data>
+  <data name="EnterProductDescription" xml:space="preserve">
+    <value>Введите описание товара</value>
+  </data>
+  <data name="EnterProductID" xml:space="preserve">
+    <value>Введите ID товара: </value>
+  </data>
+  <data name="EnterProductName" xml:space="preserve">
+    <value>Введите название товара</value>
+  </data>
+  <data name="EnterQuantity" xml:space="preserve">
+    <value>Введите количество: </value>
+  </data>
+  <data name="EnterQuantityProduct" xml:space="preserve">
+    <value>Введите количество товара: </value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Для выхода нажмите клавишу 'q'</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Здравствуйте </value>
+  </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Вы авторизованы</value>
+  </data>
   <data name="Login" xml:space="preserve">
-    <value>$"Авторизуйтесь{Environment.NewLine}Логин: "</value>
+    <value>Авторизуйтесь
+Логин: </value>
+  </data>
+  <data name="MenuForBuyer" xml:space="preserve">
+    <value>1. Выбрать товар
+2. Корзина
+
+Нажмите клавишу 'q', чтобы разлогиниться
+</value>
+  </data>
+  <data name="MenuForSeller" xml:space="preserve">
+    <value>1. Добавить товар
+2. Удалить товар
+3. Редактировать продукт
+
+Нажмите клавишу 'q', чтобы разлогиниться</value>
+  </data>
+  <data name="MenuShowCart" xml:space="preserve">
+    <value>1. Оплатить товар
+2. Изменить количество в каждой позиции
+3. Удалить товар из корзины
+
+Для выхода нажмите клавишу 'q'
+
+Выберите действие:</value>
+  </data>
+  <data name="NotLoggedIn" xml:space="preserve">
+    <value>Вы не авторизовались!</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль: </value>
+  </data>
+  <data name="RUB" xml:space="preserve">
+    <value> рублей</value>
+  </data>
+  <data name="SuccessfulNotPayment" xml:space="preserve">
+    <value>К сожалению, оплата не прошла!</value>
+  </data>
+  <data name="SuccessfulPayment" xml:space="preserve">
+    <value>Оплата прошла успешно!</value>
+  </data>
+  <data name="ToDeleteEnterProductID" xml:space="preserve">
+    <value>Для удаления введите ID товара: </value>
+  </data>
+  <data name="ToEditEnterProductID" xml:space="preserve">
+    <value>Для редактирования введите ID товара: </value>
   </data>
 </root>

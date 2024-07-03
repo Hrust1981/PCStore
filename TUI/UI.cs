@@ -55,26 +55,28 @@ namespace TUI
 
         public User Authentication()
         {
-            var message = Properties.Strings.Login;
+            string message = Properties.Strings.Login;
             Display(message);
             string login = DataInput();
-            Display("Пароль: ");
+
+            message = Properties.Strings.Password;
+            DisplayLine(message);
             string password = HiddenPasswordInput();
 
             var user = _authentication.Authenticate(login, password);
 
             if (user.IsAuthenticated)
             {
-                message = $"{Environment.NewLine}Здравствуйте {user.Name}, Вы авторизованы!{Environment.NewLine}";
+                message = Properties.Strings.Hello + user.Name + ", " + Properties.Strings.LoggedIn;
                 _logger.LogInformation($"User with login:{user.Login} is authorized");
             }
             else
             {
-                message = $"{Environment.NewLine}Вы не авторизовались!{Environment.NewLine}";
+                message = Properties.Strings.NotLoggedIn;
                 _logger.LogWarning($"User with login:{user.Login} is not authorized");
             }
 
-            Display(message);
+            DisplayLine(message);
             Clear(2000);
             return user;
         }
@@ -85,22 +87,11 @@ namespace TUI
 
             if (user.Role == Role.Buyer)
             {
-                message = """
-                        1.Выбрать товар
-                        2.Корзина
-                        q.Разлогиниться
-
-                        """;
+                message = Properties.Strings.MenuForBuyer;
             }
             else if (user.Role == Role.Seller)
             {
-                message = """
-                        1.Добавить товар
-                        2.Удалить товар
-                        3.Редактировать продукт
-                        q.Разлогиниться
-
-                        """;
+                message = Properties.Strings.MenuForSeller;
             }
             Display(message);
             string value = DataInput();
@@ -111,15 +102,18 @@ namespace TUI
         public void Payment(Buyer buyer)
         {
             var shoppingCart = _shoppingCartRepository.GetByUserId(buyer.Id).Products;
+            var messsage = string.Empty;
+
             if (shoppingCart.Count != 0)
             {
                 var hasPayment = _shoppingCartService.Payment(buyer, shoppingCart);
-                var messsage = hasPayment ? "Оплата прошла успешно!" : "К сожалению оплата не прошла!";
+                messsage = hasPayment ? Properties.Strings.SuccessfulPayment : Properties.Strings.SuccessfulNotPayment;
                 Display(messsage);
             }
             else
             {
-                Display("Корзина пуста!");
+                messsage = Properties.Strings.CartIsEmpty;
+                Display(messsage);
             }
             Clear(2500);
         }
@@ -134,14 +128,18 @@ namespace TUI
                 {
                     _logger.LogWarning("There are no products in the database");
                 }
+
                 var idCounter = 0;
                 foreach (var product in products)
                 {
                     DisplayLine(++idCounter + product.ToString());
                 }
 
-                DisplayLine("Для выхода нажмите клавишу 'q'");
-                productId = GetEnteredNumericValue("Выберите товар в корзину: ");
+                var message = Properties.Strings.Exit;
+                DisplayLine(message);
+
+                message = Properties.Strings.AddItemToCart;
+                productId = GetEnteredNumericValue(message);
 
                 if (productId > 0)
                 {
@@ -169,19 +167,15 @@ namespace TUI
                 if (products.Count != 0)
                 {
                     var totalAmount = _shoppingCartService.CalculateTotalAmount(buyer);
-                    message = $"        Сумма к оплате: {totalAmount} рублей";
+
+                    message = Properties.Strings.AmountToPay + totalAmount + Properties.Strings.RUB;
                     DisplayLine(message);
                 }
-                message = $"""
-                         1.Оплатить товар
-                         2.Изменить количество в каждой позиции
-                         3.Удалить товар из корзины
 
-                         Для выхода нажмите клавишу 'q'
-
-                         Выберите действие: 
-                         """;
+                message = Properties.Strings.MenuShowCart;
                 positionNumber = GetEnteredNumericValue(message);
+
+                message = Properties.Strings.EnterProductID;
                 switch (positionNumber)
                 {
                     case Constants.PayGoods:
@@ -189,14 +183,17 @@ namespace TUI
                         break;
                     case Constants.ChangeProductQuantity:
                         {
-                            var productId = GetEnteredNumericValue("Введите ID товара: ");
-                            var quantity = GetEnteredNumericValue("Введите количество: ");
+                            var productId = GetEnteredNumericValue(message);
+
+                            message = Properties.Strings.EnterQuantity;
+                            var quantity = GetEnteredNumericValue(message);
+
                             _shoppingCartService.UpdateQuantityProduct(buyer, products[productId - 1], quantity);
                             break;
                         }
                     case Constants.RemoveItemFromCart:
                         {
-                            var productId = GetEnteredNumericValue("Введите ID товара: ");
+                            var productId = GetEnteredNumericValue(message);
                             _shoppingCartService.DeleteProduct(buyer, products[productId - 1]);
                             break;
                         }
@@ -208,10 +205,17 @@ namespace TUI
 
         public void AddProduct()
         {
-            var name = GetEnteredStringValue("Введите название товара");
-            var description = GetEnteredStringValue("Введите описание товара");
-            var price = GetEnteredNumericValue("Введите цену товара: ");
-            var quantity = GetEnteredNumericValue("Введите количество товара: ");
+            var message = Properties.Strings.EnterProductName;
+            var name = GetEnteredStringValue(message);
+
+            message = Properties.Strings.EnterProductDescription;
+            var description = GetEnteredStringValue(message);
+
+            message = Properties.Strings.EnterPriceProduct;
+            var price = GetEnteredNumericValue(message);
+
+            message = Properties.Strings.EnterQuantityProduct;
+            var quantity = GetEnteredNumericValue(message);
 
             _productRepository.Add(new Product(name, description, price, quantity));
             _logger.LogInformation($"The new product named '{name}' has been added to the product repository");
@@ -236,8 +240,12 @@ namespace TUI
                     DisplayLine(++idCounter + product.ToString());
                 }
 
-                DisplayLine("Для выхода нажмите клавишу 'q'");
-                productId = GetEnteredNumericValue("Для удаления введите ID товара: ");
+                var message = Properties.Strings.Exit;
+                DisplayLine(message);
+
+                message = Properties.Strings.ToDeleteEnterProductID;
+                productId = GetEnteredNumericValue(message);
+                
                 if (productId > 0)
                 {
                     var deletetableProduct = products[productId - 1];
@@ -274,21 +282,31 @@ namespace TUI
                     DisplayLine(++idCounter + product.ToString());
                 }
 
-                DisplayLine("Для выхода нажмите клавишу 'q'");
-                productId = GetEnteredNumericValue("Для редактирования введите ID товара: ");
+                var message = Properties.Strings.Exit;
+                DisplayLine(message);
+
+                message = Properties.Strings.ToEditEnterProductID;
+                productId = GetEnteredNumericValue(message);
 
                 if (productId > 0)
                 {
                     var updatableProduct = products[productId - 1];
                     if (updatableProduct != null)
                     {
-                        var enteredName = GetEnteredStringValue("Введите название товара");
+                        message = Properties.Strings.EnterProductName;
+                        var enteredName = GetEnteredStringValue(message);
                         var name = string.IsNullOrEmpty(enteredName) ? updatableProduct.Name : enteredName;
-                        var enteredDescription = GetEnteredStringValue("Введите описание товара");
+
+                        message = Properties.Strings.EnterProductDescription;
+                        var enteredDescription = GetEnteredStringValue(message);
                         var description = string.IsNullOrEmpty(enteredDescription) ? updatableProduct.Description : enteredDescription;
-                        var enteredPrice = GetEnteredNumericValue("Введите цену товара: ");
+
+                        message = Properties.Strings.EnterPriceProduct;
+                        var enteredPrice = GetEnteredNumericValue(message);
                         var price = enteredPrice > 0 ? enteredPrice : updatableProduct.Price;
-                        var enteredQuantity = GetEnteredNumericValue("Введите количество товара: ");
+
+                        message = Properties.Strings.EnterQuantityProduct;
+                        var enteredQuantity = GetEnteredNumericValue(message);
                         var quantity = enteredQuantity > 0 ? enteredQuantity : updatableProduct.Quantity;
 
                         _productRepository.Update(new Product(updatableProduct.Id, name, description, price, quantity));

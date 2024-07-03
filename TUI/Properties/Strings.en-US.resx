@@ -117,7 +117,87 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddItemToCart" xml:space="preserve">
+    <value>Select item to add to cart: </value>
+  </data>
+  <data name="AmountToPay" xml:space="preserve">
+    <value>Amount to pay: </value>
+  </data>
+  <data name="CartIsEmpty" xml:space="preserve">
+    <value>Cart is empty!</value>
+  </data>
+  <data name="EnterPriceProduct" xml:space="preserve">
+    <value>Enter the price of the product: </value>
+  </data>
+  <data name="EnterProductDescription" xml:space="preserve">
+    <value>Enter product description</value>
+  </data>
+  <data name="EnterProductID" xml:space="preserve">
+    <value>Enter product ID: </value>
+  </data>
+  <data name="EnterProductName" xml:space="preserve">
+    <value>Enter product name</value>
+  </data>
+  <data name="EnterQuantity" xml:space="preserve">
+    <value>Enter quantity: </value>
+  </data>
+  <data name="EnterQuantityProduct" xml:space="preserve">
+    <value>Enter the quantity of the product: </value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>To exit press 'q' key</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello </value>
+  </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>you authorized</value>
+  </data>
   <data name="Login" xml:space="preserve">
-    <value>Log in\\nLogin: </value>
+    <value>Log in
+Login: </value>
+  </data>
+  <data name="MenuForBuyer" xml:space="preserve">
+    <value>1. Select product
+2. Cart
+
+Press 'q' key to log out</value>
+  </data>
+  <data name="MenuForSeller" xml:space="preserve">
+    <value>1. Add product
+2. Remove product
+3. Edit product
+
+Press 'q' key to log out</value>
+  </data>
+  <data name="MenuShowCart" xml:space="preserve">
+    <value>1. Pay for goods
+2. Change quantity
+3. Remove item from cart
+
+Press 'q' key to log out
+
+Choose an action:</value>
+  </data>
+  <data name="NotLoggedIn" xml:space="preserve">
+    <value>You are not logged in!</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password: </value>
+  </data>
+  <data name="RUB" xml:space="preserve">
+    <value> rubles</value>
+  </data>
+  <data name="SuccessfulNotPayment" xml:space="preserve">
+    <value>Unfortunately, the payment failed!</value>
+  </data>
+  <data name="SuccessfulPayment" xml:space="preserve">
+    <value>The payment was successful!</value>
+  </data>
+  <data name="ToDeleteEnterProductID" xml:space="preserve">
+    <value>To delete, enter the product ID: </value>
+  </data>
+  <data name="ToEditEnterProductID" xml:space="preserve">
+    <value>To edit, enter the product ID: </value>
   </data>
 </root>
