@@ -16,7 +16,7 @@ namespace Core.Repositories
         {
             if (_entities.Any(s => s.Id == entity.Id))
             {
-                throw new Exception($"User with ID:{entity.Id} already exists");
+                throw new Exception($"Entity with ID:{entity.Id} already exists");
             }
             _entities.Add(entity);
         }
@@ -26,7 +26,7 @@ namespace Core.Repositories
             var entity = Get(id);
             if (entity == null)
             {
-                throw new Exception($"User with ID:{id} not found");
+                throw new Exception($"Entity with ID:{id} not found");
             }
             _entities.Remove(entity);
         }
@@ -36,7 +36,7 @@ namespace Core.Repositories
             var entity = _entities.FirstOrDefault(s => s.Id == id);
             if (entity == null)
             {
-                throw new Exception($"User with ID:{id} not found");
+                throw new Exception($"Entity with ID:{id} not found");
             }
             return entity;
         }
@@ -51,7 +51,7 @@ namespace Core.Repositories
             var updateEntity = Get(entity.Id);
             if (updateEntity == null)
             {
-                throw new Exception($"User with ID:{entity.Id} not found");
+                throw new Exception($"Entity with ID:{entity.Id} not found");
             }
             var config = new MapperConfiguration(cfg => cfg.CreateMap<T, T>());
             var mapper = config.CreateMapper();
