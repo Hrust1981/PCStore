@@ -4,20 +4,48 @@ namespace Core.Services
 {
     public class DiscountCardService : IDiscountCardService
     {
+        private readonly static Random _random;
+
+        static DiscountCardService()
+        {
+            _random = new Random();
+        }
+
         public void AddDiscountCard(Buyer buyer)
         {
-            if (buyer.TotalPurchaseAmount >= 5000 && buyer.TotalPurchaseAmount < 12500)
+            var discountCards = buyer.DiscountCards;
+            var totalPurchaseAmount = buyer.TotalPurchaseAmount;
+
+            if (discountCards.Any(dc => dc.Name == "QuantumDiscountCard"))
             {
-                buyer.DiscountCards.Add(new TubeDiscountCard());
+                return;
             }
-            else if (buyer.TotalPurchaseAmount >= 12500 && buyer.TotalPurchaseAmount < 25000)
+
+            if (DateTime.Now.Date == DateTime.Parse("05.07.2024") && GetRandomBooleanValue())
             {
-                buyer.DiscountCards.Add(new TransistorDiscountCard());
+                if (discountCards.Any())
+                {
+                    discountCards.Clear();
+                }
+                discountCards.Add(new QuantumDiscountCard());
             }
-            else if (buyer.TotalPurchaseAmount >= 25000)
+            else if (totalPurchaseAmount >= 5000 && totalPurchaseAmount < 12500)
             {
-                buyer.DiscountCards.Add(new IntegratedDiscountCard());
+                discountCards.Add(new TubeDiscountCard());
             }
+            else if (totalPurchaseAmount >= 12500 && totalPurchaseAmount < 25000)
+            {
+                discountCards.Add(new TransistorDiscountCard());
+            }
+            else if (totalPurchaseAmount >= 25000)
+            {
+                discountCards.Add(new IntegratedDiscountCard());
+            }
+        }
+
+        private bool GetRandomBooleanValue()
+        {
+            return _random.Next(2) == 1;
         }
     }
 }

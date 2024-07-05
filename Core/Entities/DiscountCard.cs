@@ -1,6 +1,6 @@
 ﻿namespace Core.Entities
 {
-    public abstract class DiscountCard
+    public abstract class DiscountCard : Entity
     {
         public abstract int Discount { get; }
     }
