@@ -126,6 +126,15 @@
   <data name="CartIsEmpty" xml:space="preserve">
     <value>Cart is empty!</value>
   </data>
+  <data name="DiscountCardSettingsMenu" xml:space="preserve">
+    <value>1. Generating a special day on which the Quantum discount card will be issued
+
+2. Validity period of the Quantum discount card
+
+Press 'q' key to log out
+
+Choose an action: </value>
+  </data>
   <data name="EnterPriceProduct" xml:space="preserve">
     <value>Enter the price of the product: </value>
   </data>
@@ -157,18 +166,30 @@
     <value>Log in
 Login: </value>
   </data>
+  <data name="MenuForAdmin" xml:space="preserve">
+    <value>1. Path for the logging file
+2. Settings for discount cards
+
+Press 'q' key to log out
+
+Choose an action: </value>
+  </data>
   <data name="MenuForBuyer" xml:space="preserve">
     <value>1. Select product
 2. Cart
 
-Press 'q' key to log out</value>
+Press 'q' key to log out
+
+Choose an action: </value>
   </data>
   <data name="MenuForSeller" xml:space="preserve">
     <value>1. Add product
 2. Remove product
 3. Edit product
 
-Press 'q' key to log out</value>
+Press 'q' key to log out
+
+Choose an action: </value>
   </data>
   <data name="MenuShowCart" xml:space="preserve">
     <value>1. Pay for goods
@@ -177,7 +198,7 @@ Press 'q' key to log out</value>
 
 Press 'q' key to log out
 
-Choose an action:</value>
+Choose an action: </value>
   </data>
   <data name="NotLoggedIn" xml:space="preserve">
     <value>You are not logged in!</value>
@@ -185,8 +206,14 @@ Choose an action:</value>
   <data name="Password" xml:space="preserve">
     <value>Password: </value>
   </data>
+  <data name="PathToLogFile" xml:space="preserve">
+    <value>Enter the full path to the logging file</value>
+  </data>
   <data name="RUB" xml:space="preserve">
     <value> rubles</value>
+  </data>
+  <data name="SpecialDayForQuantumDiscountCard" xml:space="preserve">
+    <value>Generating a special day on which a Quantum discount card will be issued</value>
   </data>
   <data name="SuccessfulNotPayment" xml:space="preserve">
     <value>Unfortunately, the payment failed!</value>

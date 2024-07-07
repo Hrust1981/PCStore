@@ -14,5 +14,8 @@
         public const string AddProduct = "1";
         public const string RemoveProduct = "2";
         public const string UpdateProduct = "3";
+
+        public const string PathLoggingFile = "1";
+        public const string SettingsDiscountCards = "2";
     }
 }

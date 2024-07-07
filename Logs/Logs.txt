@@ -1,0 +1,6 @@
+[07.07.2024 12:25:06] [Information] [0] [TUI.UI] - User with login:Admin is logged out
+[07.07.2024 12:25:44] [Information] [0] [TUI.UI] - User with login:Admin is authorized
+[07.07.2024 12:25:49] [Information] [0] [TUI.UI] - User with login:Admin is logged out
+[07.07.2024 12:42:01] [Information] [0] [TUI.UI] - User with login:Admin is authorized
+[07.07.2024 12:42:12] [Information] [0] [TUI.UI] - User with login:Admin is logged out
+[07.07.2024 12:49:19] [Information] [0] [TUI.UI] - User with login:Admin is authorized

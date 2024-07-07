@@ -126,6 +126,14 @@
   <data name="CartIsEmpty" xml:space="preserve">
     <value>Корзина пуста!</value>
   </data>
+  <data name="DiscountCardSettingsMenu" xml:space="preserve">
+    <value>1. Генерация специального дня в который будет выдаваться Квантовая скидочная карта
+2. Срок действия Квантовой скидочной карты
+
+Для выхода нажмите клавишу 'q'
+
+Выберите действие: </value>
+  </data>
   <data name="EnterPriceProduct" xml:space="preserve">
     <value>Введите цену товара: </value>
   </data>
@@ -157,19 +165,30 @@
     <value>Авторизуйтесь
 Логин: </value>
   </data>
+  <data name="MenuForAdmin" xml:space="preserve">
+    <value>1. Путь для файла логирования
+2. Настройки для дисконтных карт
+
+Нажмите клавишу 'q', чтобы разлогиниться
+
+Выберите действие:  </value>
+  </data>
   <data name="MenuForBuyer" xml:space="preserve">
     <value>1. Выбрать товар
 2. Корзина
 
 Нажмите клавишу 'q', чтобы разлогиниться
-</value>
+
+Выберите действие: </value>
   </data>
   <data name="MenuForSeller" xml:space="preserve">
     <value>1. Добавить товар
 2. Удалить товар
 3. Редактировать продукт
 
-Нажмите клавишу 'q', чтобы разлогиниться</value>
+Нажмите клавишу 'q', чтобы разлогиниться
+
+Выберите действие: </value>
   </data>
   <data name="MenuShowCart" xml:space="preserve">
     <value>1. Оплатить товар
@@ -178,7 +197,7 @@
 
 Для выхода нажмите клавишу 'q'
 
-Выберите действие:</value>
+Выберите действие: </value>
   </data>
   <data name="NotLoggedIn" xml:space="preserve">
     <value>Вы не авторизовались!</value>
@@ -186,8 +205,14 @@
   <data name="Password" xml:space="preserve">
     <value>Пароль: </value>
   </data>
+  <data name="PathToLogFile" xml:space="preserve">
+    <value>Введите полный путь до файла логирования</value>
+  </data>
   <data name="RUB" xml:space="preserve">
     <value> рублей</value>
+  </data>
+  <data name="SpecialDayForQuantumDiscountCard" xml:space="preserve">
+    <value>Генерация специального дня в который будет выдаваться Квантовая скидочная карта</value>
   </data>
   <data name="SuccessfulNotPayment" xml:space="preserve">
     <value>К сожалению, оплата не прошла!</value>

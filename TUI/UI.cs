@@ -3,6 +3,7 @@ using Core.Entities;
 using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.Logging;
+using System.Configuration;
 using System.Globalization;
 
 namespace TUI
@@ -14,18 +15,21 @@ namespace TUI
         private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly ILogger<UI> _logger;
         private readonly IAuthentication _authentication;
+        private readonly IDiscountCardService _discountCardService;
 
         public UI(IRepository<Product> repository,
                   IShoppingCartService shoppingCartService,
                   IShoppingCartRepository shoppingCartRepository,
                   ILogger<UI> logger,
-                  IAuthentication authentication)
+                  IAuthentication authentication,
+                  IDiscountCardService discountCardService)
         {
             _productRepository = repository;
             _shoppingCartService = shoppingCartService;
             _shoppingCartRepository = shoppingCartRepository;
             _logger = logger;
             _authentication = authentication;
+            _discountCardService = discountCardService;
         }
 
         public void SelectCulture()
@@ -85,7 +89,11 @@ namespace TUI
         {
             string message = string.Empty;
 
-            if (user.Role == Role.Buyer)
+            if (user.Role == Role.Admin)
+            {
+                message = Properties.Strings.MenuForAdmin;
+            }
+            else if (user.Role == Role.Buyer)
             {
                 message = Properties.Strings.MenuForBuyer;
             }
@@ -97,6 +105,33 @@ namespace TUI
             string value = DataInput();
             Clear(0);
             return value;
+        }
+
+        public void SetPathForLoggingFile()
+        {
+            DisplayLine(Properties.Strings.PathToLogFile);
+            var path = DataInput();
+
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["PathToLoggerFile"].Value = path;
+            config.Save();
+            ConfigurationManager.RefreshSection("appSettings");
+
+            Clear(100);
+        }
+
+        public void SettingsForDiscountCards()
+        {
+            var productId = 0;
+            while (productId != Constants.Exit)
+            {
+                var message = Properties.Strings.DiscountCardSettingsMenu;
+                productId = GetEnteredNumericValue(message);
+
+                Clear(0);
+            }
+            DisplayLine(Properties.Strings.SpecialDayForQuantumDiscountCard);
+            _discountCardService.GenerateDate();
         }
 
         public void Payment(Buyer buyer)

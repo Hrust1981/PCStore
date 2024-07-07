@@ -23,6 +23,20 @@ namespace TUI
                     var menuItem = ui.Menu(user);
                     switch (user.Role)
                     {
+                        case Role.Admin:
+                            switch (menuItem)
+                            {
+                                case Constants.PathLoggingFile:
+                                    ui.SetPathForLoggingFile();
+                                    break;
+                                case Constants.SettingsDiscountCards:
+                                    ui.SettingsForDiscountCards();
+                                    break;
+                                case Constants.SignOut:
+                                    isAuthenticated = ui.SignOut(user.Login);
+                                    break;
+                            }
+                            break;
                         case Role.Buyer:
                             var buyer = (Buyer)user;
                             switch (menuItem)
@@ -35,8 +49,6 @@ namespace TUI
                                     break;
                                 case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
-                                    break;
-                                default:
                                     break;
                             }
                             break;
@@ -54,8 +66,6 @@ namespace TUI
                                     break;
                                 case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
-                                    break;
-                                default:
                                     break;
                             }
                             break;
