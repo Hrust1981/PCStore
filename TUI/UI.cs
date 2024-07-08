@@ -2,9 +2,11 @@
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System.Configuration;
 using System.Globalization;
+using System.Text;
+using System.Text.Json;
 
 namespace TUI
 {
@@ -112,26 +114,56 @@ namespace TUI
             DisplayLine(Properties.Strings.PathToLogFile);
             var path = DataInput();
 
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["PathToLoggerFile"].Value = path;
-            config.Save();
-            ConfigurationManager.RefreshSection("appSettings");
-
+            if (string.Equals("q", path, StringComparison.OrdinalIgnoreCase))
+            {
+                Clear(100);
+                return;
+            }
+            CustomConfigurationManager.SetValueByKey("PathToLoggerFile", path);
             Clear(100);
         }
 
         public void SettingsForDiscountCards()
         {
-            var productId = 0;
-            while (productId != Constants.Exit)
+            var positionNumber = 0;
+            while (positionNumber != Constants.Exit)
             {
                 var message = Properties.Strings.DiscountCardSettingsMenu;
-                productId = GetEnteredNumericValue(message);
+                positionNumber = GetEnteredNumericValue(message);
+                
+                if (positionNumber == 1)
+                {
+                    Clear(100);
+                    DisplayLine(Properties.Strings.SpecialDayForQuantumDiscountCard);
+
+                    var date = _discountCardService.GenerateDate();
+                    var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
+                    //var dateIssue = (key:"DateIssueForQuantumDiscountCard", value:date.ToString());
+                    DateIssue dateIssue = new DateIssue("DateIssueForQuantumDiscountCard", date);
+
+                    using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+                    {
+                        var json = JsonSerializer.Serialize(dateIssue);
+                        byte[] bytes = new UTF8Encoding(true).GetBytes(json);
+                        fs.Write(bytes, 0, bytes.Length);
+                    }
+                    Clear(2500);
+                }
 
                 Clear(0);
             }
-            DisplayLine(Properties.Strings.SpecialDayForQuantumDiscountCard);
-            _discountCardService.GenerateDate();
+        }
+
+        class DateIssue
+        {
+            public DateIssue(string key, DateOnly value)
+            {
+                Key = key;
+                Value = value;
+            }
+
+            public string Key { get; }
+            public DateOnly Value { get; set; }
         }
 
         public void Payment(Buyer buyer)

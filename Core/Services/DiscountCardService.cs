@@ -77,7 +77,7 @@ namespace Core.Services
             var dayTimeNow = DateTime.Now;
 
             Random random = new Random();
-            day = random.Next(1, DateTime.DaysInMonth(dayTimeNow.Year, dayTimeNow.Month));
+            day = random.Next(dayTimeNow.Day + 1, DateTime.DaysInMonth(dayTimeNow.Year, dayTimeNow.Month));
 
             return DateOnly.Parse($"{day}.{dayTimeNow.Month}.{dayTimeNow.Year}");
         }

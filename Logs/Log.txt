@@ -1,0 +1,2 @@
+[08.07.2024 15:05:29] [Information] [0] [TUI.UI] - User with login:Admin is logged out
+[08.07.2024 15:05:39] [Warning] [0] [TUI.UI] - User with login:Buyer1 is not authorized

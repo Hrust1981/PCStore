@@ -206,13 +206,16 @@
     <value>Пароль: </value>
   </data>
   <data name="PathToLogFile" xml:space="preserve">
-    <value>Введите полный путь до файла логирования</value>
+    <value>Введите полный путь до файла логирования
+
+Для выхода нажмите клавишу 'q'
+</value>
   </data>
   <data name="RUB" xml:space="preserve">
     <value> рублей</value>
   </data>
   <data name="SpecialDayForQuantumDiscountCard" xml:space="preserve">
-    <value>Генерация специального дня в который будет выдаваться Квантовая скидочная карта</value>
+    <value>Генерация даты для выдачи Квантовой скидочной карты</value>
   </data>
   <data name="SuccessfulNotPayment" xml:space="preserve">
     <value>К сожалению, оплата не прошла!</value>

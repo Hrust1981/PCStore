@@ -207,13 +207,16 @@ Choose an action: </value>
     <value>Password: </value>
   </data>
   <data name="PathToLogFile" xml:space="preserve">
-    <value>Enter the full path to the logging file</value>
+    <value>Enter the full path to the logging file
+
+Press 'q' key to log out
+</value>
   </data>
   <data name="RUB" xml:space="preserve">
     <value> rubles</value>
   </data>
   <data name="SpecialDayForQuantumDiscountCard" xml:space="preserve">
-    <value>Generating a special day on which a Quantum discount card will be issued</value>
+    <value>Generating a date for issuing a Quantum discount card</value>
   </data>
   <data name="SuccessfulNotPayment" xml:space="preserve">
     <value>Unfortunately, the payment failed!</value>
