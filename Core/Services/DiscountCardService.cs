@@ -1,9 +1,5 @@
 ﻿using Core.Entities;
-using System.Configuration;
 using System.Globalization;
-using System.IO;
-using System.Text.Json;
-using System.Transactions;
 
 namespace Core.Services
 {
@@ -87,27 +83,44 @@ namespace Core.Services
                 DateOnly.Parse($"{dayTimeNow.Year}.{dayTimeNow.Month}.{day}");
         }
 
-        public void SetDayForIssueQuantumDiscountCard(string date)
+        public void SetDayForIssueQuantumDiscountCard(int amountDays)
         {
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["DayIssueForQuantumDiscountCard"].Value = date;
-            config.Save();
-            ConfigurationManager.RefreshSection("appSettings");
+            ChangeValuesInJson(amountDays, "AmountDays");
         }
 
         public DateOnly GenerateDateIssueQuantumDiscountCard()
         {
             var date = GenerateDate();
-            var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
-
-            DateIssueQuantumDiscountCard dateIssue =
-                new DateIssueQuantumDiscountCard("DateIssueForQuantumDiscountCard", date);
-
-            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-            {
-                JsonSerializer.Serialize(fs, dateIssue);
-            }
+            ChangeValuesInJson(date, "DateIssue");
             return date;
+        }
+
+        private void ChangeValuesInJson(System.Object item, string nameReplacableElement)
+        {
+            var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
+            string stream = string.Empty;
+            using (StreamReader reader = new StreamReader(path))
+            {
+                stream = reader.ReadToEnd();
+            }
+
+            var index = stream.IndexOf(nameReplacableElement) + nameReplacableElement.Length + 3;
+
+            var count = 0;
+            var indexString = index;
+            while (stream[indexString] != '"' && stream[indexString] != ',' && stream[indexString] != '}')
+            {
+                indexString++;
+                count++;
+            }
+
+            var substring = stream.Substring(index, count);
+            var newDate = stream.Replace(substring, item.ToString());
+
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                writer.Write(newDate);
+            }
         }
     }
 }

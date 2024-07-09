@@ -124,19 +124,27 @@ namespace TUI
                 var message = Properties.Strings.DiscountCardSettingsMenu;
                 positionNumber = GetEnteredNumericValue(message);
                 
-                if (positionNumber == 1)
+                if (positionNumber == Constants.DateIssueQuantumDiscountCard)
                 {
                     Clear(100);
-                    DisplayLine(Properties.Strings.SpecialDayForQuantumDiscountCard);
+                    message = Properties.Strings.SpecialDayForQuantumDiscountCard;
+                    DisplayLine(message);
 
                     var date = _discountCardService.GenerateDateIssueQuantumDiscountCard();
                     
                     Display(date.ToString());
+                    _logger.LogInformation($"The day for issuing a quantum discount card has been determined - {date}");
                     Clear(2500);
                 }
-                else if (positionNumber == 2)
+                else if (positionNumber == Constants.ValidityPeriodQuantumDiscountCard)
                 {
+                    Clear(100);
+                    message = Properties.Strings.ValidityPeriodQuantumDiscountCard;
+                    var numberDays = GetEnteredNumericValue(message);
 
+                    _discountCardService.SetDayForIssueQuantumDiscountCard(numberDays);
+                    _logger.LogInformation($"The validity period of the Quantum discount card is {numberDays} days");
+                    Clear(2500);
                 }
 
                 Clear(0);

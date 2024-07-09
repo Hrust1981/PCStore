@@ -226,4 +226,7 @@
   <data name="ToEditEnterProductID" xml:space="preserve">
     <value>Для редактирования введите ID товара: </value>
   </data>
+  <data name="ValidityPeriodQuantumDiscountCard" xml:space="preserve">
+    <value>Пожалуйста, введите срок действия Квантовой дисконтной карты в днях: </value>
+  </data>
 </root>

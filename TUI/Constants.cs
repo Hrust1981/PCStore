@@ -17,5 +17,8 @@
 
         public const string PathLoggingFile = "1";
         public const string SettingsDiscountCards = "2";
+
+        public const int DateIssueQuantumDiscountCard = 1;
+        public const int ValidityPeriodQuantumDiscountCard = 2;
     }
 }

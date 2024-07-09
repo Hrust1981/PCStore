@@ -226,4 +226,7 @@ Choose an action: </value>
   <data name="ToEditEnterProductID" xml:space="preserve">
     <value>To edit, enter the product ID: </value>
   </data>
+  <data name="ValidityPeriodQuantumDiscountCard" xml:space="preserve">
+    <value>Please enter the validity period of the Quantum discount card in days: </value>
+  </data>
 </root>
