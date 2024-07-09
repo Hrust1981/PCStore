@@ -2,7 +2,6 @@
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
 using System.Text;
@@ -112,15 +111,9 @@ namespace TUI
         public void SetPathForLoggingFile()
         {
             DisplayLine(Properties.Strings.PathToLogFile);
-            var path = DataInput();
-
-            if (string.Equals("q", path, StringComparison.OrdinalIgnoreCase))
-            {
-                Clear(100);
-                return;
-            }
-            CustomConfigurationManager.SetValueByKey("PathToLoggerFile", path);
-            Clear(100);
+            var path = CustomConfigurationManager.GetValueByKey("PathToLoggerFile");
+            Display(path);
+            Clear(2500);
         }
 
         public void SettingsForDiscountCards()
@@ -136,34 +129,18 @@ namespace TUI
                     Clear(100);
                     DisplayLine(Properties.Strings.SpecialDayForQuantumDiscountCard);
 
-                    var date = _discountCardService.GenerateDate();
-                    var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
-                    //var dateIssue = (key:"DateIssueForQuantumDiscountCard", value:date.ToString());
-                    DateIssue dateIssue = new DateIssue("DateIssueForQuantumDiscountCard", date);
-
-                    using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-                    {
-                        var json = JsonSerializer.Serialize(dateIssue);
-                        byte[] bytes = new UTF8Encoding(true).GetBytes(json);
-                        fs.Write(bytes, 0, bytes.Length);
-                    }
+                    var date = _discountCardService.GenerateDateIssueQuantumDiscountCard();
+                    
+                    Display(date.ToString());
                     Clear(2500);
+                }
+                else if (positionNumber == 2)
+                {
+
                 }
 
                 Clear(0);
             }
-        }
-
-        class DateIssue
-        {
-            public DateIssue(string key, DateOnly value)
-            {
-                Key = key;
-                Value = value;
-            }
-
-            public string Key { get; }
-            public DateOnly Value { get; set; }
         }
 
         public void Payment(Buyer buyer)

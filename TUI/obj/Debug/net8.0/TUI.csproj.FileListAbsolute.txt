@@ -127,3 +127,4 @@ C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Properties.Strings.
 C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Properties.Strings.en-US.resources
 C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\en-US\TUI.resources.dll
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\App.config
+C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\App.config

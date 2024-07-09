@@ -1,6 +1,9 @@
 ﻿using Core.Entities;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
+using System.Text.Json;
+using System.Transactions;
 
 namespace Core.Services
 {
@@ -79,7 +82,9 @@ namespace Core.Services
             Random random = new Random();
             day = random.Next(dayTimeNow.Day + 1, DateTime.DaysInMonth(dayTimeNow.Year, dayTimeNow.Month));
 
-            return DateOnly.Parse($"{day}.{dayTimeNow.Month}.{dayTimeNow.Year}");
+            return string.Equals(CultureInfo.CurrentCulture.Name, "ru-RU") ? 
+                DateOnly.Parse($"{day}.{dayTimeNow.Month}.{dayTimeNow.Year}") :
+                DateOnly.Parse($"{dayTimeNow.Year}.{dayTimeNow.Month}.{day}");
         }
 
         public void SetDayForIssueQuantumDiscountCard(string date)
@@ -88,6 +93,21 @@ namespace Core.Services
             config.AppSettings.Settings["DayIssueForQuantumDiscountCard"].Value = date;
             config.Save();
             ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        public DateOnly GenerateDateIssueQuantumDiscountCard()
+        {
+            var date = GenerateDate();
+            var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
+
+            DateIssueQuantumDiscountCard dateIssue =
+                new DateIssueQuantumDiscountCard("DateIssueForQuantumDiscountCard", date);
+
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                JsonSerializer.Serialize(fs, dateIssue);
+            }
+            return date;
         }
     }
 }

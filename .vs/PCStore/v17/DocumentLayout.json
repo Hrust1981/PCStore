@@ -1,22 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\",
+  "WorkspaceRootPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|C:\\Users\\SharipovRR\\source\\repos\\PCStore\\tui\\properties\\strings.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
-      "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\properties\\strings.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\tui\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\services\\discountcardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\services\\discountcardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\services\\discountcardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|C:\\Users\\SharipovRR\\source\\repos\\PCStore\\tui\\properties\\strings.en-us.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
-      "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\properties\\strings.en-us.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,13 +30,26 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Constants.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\Constants.cs",
+              "RelativeDocumentMoniker": "TUI\\Constants.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\Constants.cs",
+              "RelativeToolTip": "TUI\\Constants.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T18:45:11.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "UI.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\UI.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\UI.cs",
               "RelativeDocumentMoniker": "TUI\\UI.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\UI.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\UI.cs",
               "RelativeToolTip": "TUI\\UI.cs",
-              "ViewState": "AQIAAGIAAAAAAAAAAAAcwH0AAAAsAAAA",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAIwIUAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-06T17:04:50.011Z",
               "EditorCaption": ""
@@ -49,37 +58,13 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "DiscountCardService.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\DiscountCardService.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Services\\DiscountCardService.cs",
               "RelativeDocumentMoniker": "Core\\Services\\DiscountCardService.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\DiscountCardService.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Services\\DiscountCardService.cs",
               "RelativeToolTip": "Core\\Services\\DiscountCardService.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAAwFEAAAAAAAAA",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAAwFMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-05T17:33:28.886Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Strings.en-US.resx",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\Properties\\Strings.en-US.resx",
-              "RelativeDocumentMoniker": "TUI\\Properties\\Strings.en-US.resx",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\Properties\\Strings.en-US.resx",
-              "RelativeToolTip": "TUI\\Properties\\Strings.en-US.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2024-07-07T07:15:35.584Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Strings.resx",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\Properties\\Strings.resx",
-              "RelativeDocumentMoniker": "TUI\\Properties\\Strings.resx",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\Properties\\Strings.resx",
-              "RelativeToolTip": "TUI\\Properties\\Strings.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2024-07-07T07:15:34.489Z",
               "EditorCaption": ""
             }
           ]

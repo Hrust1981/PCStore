@@ -128,7 +128,6 @@
   </data>
   <data name="DiscountCardSettingsMenu" xml:space="preserve">
     <value>1. Generating a special day on which the Quantum discount card will be issued
-
 2. Validity period of the Quantum discount card
 
 Press 'q' key to log out
@@ -167,7 +166,7 @@ Choose an action: </value>
 Login: </value>
   </data>
   <data name="MenuForAdmin" xml:space="preserve">
-    <value>1. Path for the logging file
+    <value>1. Path to the logging file
 2. Settings for discount cards
 
 Press 'q' key to log out
@@ -207,10 +206,7 @@ Choose an action: </value>
     <value>Password: </value>
   </data>
   <data name="PathToLogFile" xml:space="preserve">
-    <value>Enter the full path to the logging file
-
-Press 'q' key to log out
-</value>
+    <value>Path to the logging file</value>
   </data>
   <data name="RUB" xml:space="preserve">
     <value> rubles</value>

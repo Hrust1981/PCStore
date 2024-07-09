@@ -166,7 +166,7 @@
 Логин: </value>
   </data>
   <data name="MenuForAdmin" xml:space="preserve">
-    <value>1. Путь для файла логирования
+    <value>1. Путь до файла логирования
 2. Настройки для дисконтных карт
 
 Нажмите клавишу 'q', чтобы разлогиниться
@@ -206,10 +206,7 @@
     <value>Пароль: </value>
   </data>
   <data name="PathToLogFile" xml:space="preserve">
-    <value>Введите полный путь до файла логирования
-
-Для выхода нажмите клавишу 'q'
-</value>
+    <value>Путь до файла логирования</value>
   </data>
   <data name="RUB" xml:space="preserve">
     <value> рублей</value>
