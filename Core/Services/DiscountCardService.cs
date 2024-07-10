@@ -16,11 +16,12 @@ namespace Core.Services
         {
             var discountCards = buyer.DiscountCards;
             var totalPurchaseAmount = buyer.TotalPurchaseAmount;
-            var dateIssueQuantumDiscountCard = DateTime.Parse("01.07.2024");
+            var dateIssueQuantumDiscountCard = DateTime.Parse(GetValueFromJson("DateIssue"));
+            var numberDaysUntilCloseQuantumDiscountCard = int.Parse(GetValueFromJson("AmountDays"));
 
             if (discountCards.Any(dc => dc.Name == "QuantumDiscountCard"))
             {
-                if (DateTime.Now.Date >= dateIssueQuantumDiscountCard.AddDays(1))
+                if (DateTime.Now.Date >= dateIssueQuantumDiscountCard.AddDays(numberDaysUntilCloseQuantumDiscountCard))
                 {
                     discountCards.Clear();
                     discountCards.Add(new CyclicDiscountCard(5, 5000));
@@ -85,25 +86,33 @@ namespace Core.Services
 
         public void SetDayForIssueQuantumDiscountCard(int amountDays)
         {
-            ChangeValuesInJson(amountDays, "AmountDays");
+            ChangeValueInJson(amountDays, "AmountDays");
         }
 
         public DateOnly GenerateDateIssueQuantumDiscountCard()
         {
             var date = GenerateDate();
-            ChangeValuesInJson(date, "DateIssue");
+            ChangeValueInJson(date, "DateIssue");
             return date;
         }
 
-        private void ChangeValuesInJson(System.Object item, string nameReplacableElement)
+        private void ChangeValueInJson(System.Object item, string nameReplacableElement)
         {
+            var valueJson = GetValueFromJson(nameReplacableElement);
             var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
-            string stream = string.Empty;
-            using (StreamReader reader = new StreamReader(path))
-            {
-                stream = reader.ReadToEnd();
-            }
+            
+            var stream = GetStream();
+            var newDate = stream.Replace(valueJson, item.ToString());
 
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                writer.Write(newDate);
+            }
+        }
+
+        private string GetValueFromJson(string nameReplacableElement)
+        {
+            var stream = GetStream();
             var index = stream.IndexOf(nameReplacableElement) + nameReplacableElement.Length + 3;
 
             var count = 0;
@@ -114,12 +123,15 @@ namespace Core.Services
                 count++;
             }
 
-            var substring = stream.Substring(index, count);
-            var newDate = stream.Replace(substring, item.ToString());
+            return stream.Substring(index, count);
+        }
 
-            using (StreamWriter writer = new StreamWriter(path, false))
+        private string GetStream()
+        {
+            var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
+            using (StreamReader reader = new StreamReader(path))
             {
-                writer.Write(newDate);
+                return reader.ReadToEnd();
             }
         }
     }
