@@ -9,6 +9,7 @@
 
         public const string SelectProducts = "1";
         public const string ShowCart = "2";
+        public const string BuyCheerfulDiscountCard = "3";
         public const string SignOut = "q";
 
         public const string AddProduct = "1";

@@ -176,6 +176,7 @@ Choose an action: </value>
   <data name="MenuForBuyer" xml:space="preserve">
     <value>1. Select product
 2. Cart
+3. Buy a free discount card “Veselaya”
 
 Press 'q' key to log out
 
@@ -210,6 +211,12 @@ Choose an action: </value>
   </data>
   <data name="RUB" xml:space="preserve">
     <value> rubles</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Choose language:
+1. Русский
+2. English
+</value>
   </data>
   <data name="SpecialDayForQuantumDiscountCard" xml:space="preserve">
     <value>Generating a date for issuing a Quantum discount card</value>

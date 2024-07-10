@@ -4,8 +4,6 @@ using Core.Repositories;
 using Core.Services;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
-using System.Text;
-using System.Text.Json;
 
 namespace TUI
 {
@@ -35,13 +33,9 @@ namespace TUI
 
         public void SelectCulture()
         {
-            var message = """
-                            Выберите язык:
-                            1. Русский
-                            2. English
-
-                            """;
+            var message = Properties.Strings.SelectLanguage;
             var positionNumber = GetEnteredNumericValue(message);
+
             CultureInfo culture;
             if (positionNumber == 2)
             {
@@ -108,7 +102,13 @@ namespace TUI
             return value;
         }
 
-        public void SetPathForLoggingFile()
+        public void BuyCheerfulDiscountCard()
+        {
+            
+            Clear(1000);
+        }
+
+        public void ShowPathForLoggingFile()
         {
             DisplayLine(Properties.Strings.PathToLogFile);
             var path = CustomConfigurationManager.GetValueByKey("PathToLoggerFile");
@@ -143,7 +143,7 @@ namespace TUI
                     var numberDays = GetEnteredNumericValue(message);
 
                     _discountCardService.SetDayForIssueQuantumDiscountCard(numberDays);
-                    _logger.LogInformation($"The validity period of the Quantum discount card is {numberDays} days");
+                    _logger.LogInformation($"The validity period of the Quantum discount card has been changed to {numberDays} days");
                     Clear(2500);
                 }
 

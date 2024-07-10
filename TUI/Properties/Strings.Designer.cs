@@ -61,7 +61,7 @@ namespace TUI.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выберите товар в корзину:.
+        ///   Ищет локализованную строку, похожую на Выберите товар в корзину: .
         /// </summary>
         internal static string AddItemToCart {
             get {
@@ -209,6 +209,7 @@ namespace TUI.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на 1. Выбрать товар
         ///2. Корзина
+        ///3. Приобрести бесплатно скидочную карту «Веселая»
         ///
         ///Нажмите клавишу &apos;q&apos;, чтобы разлогиниться
         ///
@@ -283,6 +284,18 @@ namespace TUI.Properties {
         internal static string RUB {
             get {
                 return ResourceManager.GetString("RUB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выберите язык:
+        ///1. Русский
+        ///2. English
+        ///.
+        /// </summary>
+        internal static string SelectLanguage {
+            get {
+                return ResourceManager.GetString("SelectLanguage", resourceCulture);
             }
         }
         

@@ -27,7 +27,7 @@ namespace TUI
                             switch (menuItem)
                             {
                                 case Constants.PathLoggingFile:
-                                    ui.SetPathForLoggingFile();
+                                    ui.ShowPathForLoggingFile();
                                     break;
                                 case Constants.SettingsDiscountCards:
                                     ui.SettingsForDiscountCards();
@@ -46,6 +46,9 @@ namespace TUI
                                     break;
                                 case Constants.ShowCart:
                                     ui.ShowCart(buyer);
+                                    break;
+                                case Constants.BuyCheerfulDiscountCard:
+                                    ui.BuyCheerfulDiscountCard();
                                     break;
                                 case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddItemToCart" xml:space="preserve">
-    <value>Выберите товар в корзину:</value>
+    <value>Выберите товар в корзину: </value>
   </data>
   <data name="AmountToPay" xml:space="preserve">
     <value>Сумма к оплате: </value>
@@ -176,6 +176,7 @@
   <data name="MenuForBuyer" xml:space="preserve">
     <value>1. Выбрать товар
 2. Корзина
+3. Приобрести бесплатно скидочную карту «Веселая»
 
 Нажмите клавишу 'q', чтобы разлогиниться
 
@@ -210,6 +211,12 @@
   </data>
   <data name="RUB" xml:space="preserve">
     <value> рублей</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Выберите язык:
+1. Русский
+2. English
+</value>
   </data>
   <data name="SpecialDayForQuantumDiscountCard" xml:space="preserve">
     <value>Генерация даты для выдачи Квантовой скидочной карты</value>
