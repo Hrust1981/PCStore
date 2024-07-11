@@ -142,24 +142,33 @@ namespace TUI
                     message = Properties.Strings.SpecialDayForQuantumDiscountCard;
                     DisplayLine(message);
 
-                    var date = _discountCardService.GenerateDateIssueQuantumDiscountCard();
+                    var date = _discountCardService.GenerateDateIssueOrWorkDiscountCard("DateIssue");
                     
                     Display(date.ToString());
                     _logger.LogInformation($"The day for issuing a quantum discount card has been determined - {date}");
-                    Clear(2500);
                 }
                 else if (positionNumber == Constants.ValidityPeriodQuantumDiscountCard)
                 {
                     Clear(100);
                     message = Properties.Strings.ValidityPeriodQuantumDiscountCard;
+
                     var numberDays = GetEnteredNumericValue(message);
 
                     _discountCardService.SetDayForIssueQuantumDiscountCard(numberDays);
                     _logger.LogInformation($"The validity period of the Quantum discount card has been changed to {numberDays} days");
-                    Clear(2500);
                 }
+                else if (positionNumber == Constants.WorkDatesCheerfulDiscountCard)
+                {
+                    Clear(100);
+                    message = Properties.Strings.WorkDatesCheerfulDiscountCard;
+                    DisplayLine(message);
 
-                Clear(0);
+                    var date = _discountCardService.GenerateDateIssueOrWorkDiscountCard("WorkDatesCheerfulDiscountCard", 10);
+                    
+                    Display(date.ToString());
+                    _logger.LogInformation($"The range {date}-{date.AddDays(9)} in days when the Cheerful discount card works is determined");
+                }
+                Clear(2500);
             }
         }
 
@@ -184,32 +193,39 @@ namespace TUI
 
         public void SelectProducts(Buyer buyer)
         {
-            var productId = 0;
-            while (productId != Constants.Exit)
+            try
             {
-                var products = _productRepository.GetAll();
-                if (products.Count == 0)
+                var productId = 0;
+                while (productId != Constants.Exit)
                 {
-                    _logger.LogWarning("There are no products in the database");
+                    var products = _productRepository.GetAll();
+                    if (products.Count == 0)
+                    {
+                        _logger.LogWarning("There are no products in the database");
+                    }
+
+                    var idCounter = 0;
+                    foreach (var product in products)
+                    {
+                        DisplayLine(++idCounter + product.ToString());
+                    }
+
+                    var message = Properties.Strings.Exit;
+                    DisplayLine(message);
+
+                    message = Properties.Strings.AddItemToCart;
+                    productId = GetEnteredNumericValue(message);
+
+                    if (productId > 0)
+                    {
+                        _shoppingCartService.AddProduct(buyer, products[productId - 1]);
+                    }
+                    Clear(0);
                 }
-
-                var idCounter = 0;
-                foreach (var product in products)
-                {
-                    DisplayLine(++idCounter + product.ToString());
-                }
-
-                var message = Properties.Strings.Exit;
-                DisplayLine(message);
-
-                message = Properties.Strings.AddItemToCart;
-                productId = GetEnteredNumericValue(message);
-
-                if (productId > 0)
-                {
-                    _shoppingCartService.AddProduct(buyer, products[productId - 1]);
-                }
-                Clear(0);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Exception in the SelectProducts method. Message - {ex.Message}");
             }
             Clear(0);
         }

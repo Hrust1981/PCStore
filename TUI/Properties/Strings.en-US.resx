@@ -135,6 +135,7 @@
   <data name="DiscountCardSettingsMenu" xml:space="preserve">
     <value>1. Generating a special day on which the Quantum discount card will be issued
 2. Validity period of the Quantum discount card
+3. Generating a date for the Veselaya discount card (works 10 days in each month)
 
 Press 'q' key to log out
 
@@ -241,5 +242,8 @@ Choose an action: </value>
   </data>
   <data name="ValidityPeriodQuantumDiscountCard" xml:space="preserve">
     <value>Please enter the validity period of the Quantum discount card in days: </value>
+  </data>
+  <data name="WorkDatesCheerfulDiscountCard" xml:space="preserve">
+    <value>The date has been determined from which the Fun discount card will work for the next 10 days</value>
   </data>
 </root>

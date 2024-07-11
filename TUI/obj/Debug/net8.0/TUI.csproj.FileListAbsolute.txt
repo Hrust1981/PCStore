@@ -128,3 +128,5 @@ C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\en-US\TUI.resources.dll
 C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\App.config
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\App.config
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\TUI.dll.config
+C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll

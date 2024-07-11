@@ -71,13 +71,13 @@ namespace Core.Services
             }
         }
 
-        public DateOnly GenerateDate()
+        private DateOnly GenerateDate(int upperRangeLimitInDays = 0)
         {
             int day;
             var dayTimeNow = DateTime.Now;
 
             Random random = new Random();
-            day = random.Next(dayTimeNow.Day + 1, DateTime.DaysInMonth(dayTimeNow.Year, dayTimeNow.Month));
+            day = random.Next(dayTimeNow.Day + 1, DateTime.DaysInMonth(dayTimeNow.Year, dayTimeNow.Month) - upperRangeLimitInDays);
 
             return string.Equals(CultureInfo.CurrentCulture.Name, "ru-RU") ? 
                 DateOnly.Parse($"{day}.{dayTimeNow.Month}.{dayTimeNow.Year}") :
@@ -89,10 +89,10 @@ namespace Core.Services
             ChangeValueInJson(amountDays, "AmountDays");
         }
 
-        public DateOnly GenerateDateIssueQuantumDiscountCard()
+        public DateOnly GenerateDateIssueOrWorkDiscountCard(string nameReplacableElement, int upperRangeLimitInDays = 0)
         {
-            var date = GenerateDate();
-            ChangeValueInJson(date, "DateIssue");
+            var date = GenerateDate(upperRangeLimitInDays);
+            ChangeValueInJson(date, nameReplacableElement);
             return date;
         }
 
@@ -110,7 +110,7 @@ namespace Core.Services
             }
         }
 
-        private string GetValueFromJson(string nameReplacableElement)
+        public string GetValueFromJson(string nameReplacableElement)
         {
             var stream = GetStream();
             var index = stream.IndexOf(nameReplacableElement) + nameReplacableElement.Length + 3;

@@ -21,5 +21,6 @@
 
         public const int DateIssueQuantumDiscountCard = 1;
         public const int ValidityPeriodQuantumDiscountCard = 2;
+        public const int WorkDatesCheerfulDiscountCard = 3;
     }
 }

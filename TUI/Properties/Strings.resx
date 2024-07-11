@@ -135,6 +135,7 @@
   <data name="DiscountCardSettingsMenu" xml:space="preserve">
     <value>1. Генерация специального дня в который будет выдаваться Квантовая скидочная карта
 2. Срок действия Квантовой скидочной карты
+3. Генерация даты для скидочной карты Веселая (работает 10 дней в каждом месяце) 
 
 Для выхода нажмите клавишу 'q'
 
@@ -241,5 +242,8 @@
   </data>
   <data name="ValidityPeriodQuantumDiscountCard" xml:space="preserve">
     <value>Пожалуйста, введите срок действия Квантовой дисконтной карты в днях: </value>
+  </data>
+  <data name="WorkDatesCheerfulDiscountCard" xml:space="preserve">
+    <value>Определена дата с которой следующие 10 дней будет работать Веселая дисконтная карта</value>
   </data>
 </root>
