@@ -102,10 +102,22 @@ namespace TUI
             return value;
         }
 
-        public void BuyCheerfulDiscountCard()
+        public void BuyCheerfulDiscountCard(Buyer buyer)
         {
-            
-            Clear(1000);
+            var message = string.Empty;
+            var discountCards = buyer.DiscountCards;
+
+            if (!discountCards.Any(dc => string.Equals(dc.Name, "CheerfulDiscountCard")))
+            {
+                discountCards.Add(new CheerfulDiscountCard());
+                message = Properties.Strings.CheerfulDiscountCardPurchased;
+            }
+            else
+            {
+                message = Properties.Strings.CheerfulDiscountCardAlreadyPurchased;
+            }
+            Display(message);
+            Clear(2500);
         }
 
         public void ShowPathForLoggingFile()

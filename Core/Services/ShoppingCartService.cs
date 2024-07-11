@@ -89,7 +89,10 @@ namespace Core.Services
         public int CalculateTotalAmount(Buyer buyer)
         {
             var discountCard = buyer.DiscountCards?.MaxBy(d => d.Discount);
-            var totalAmount = _shoppingCartRepository.GetByUserId(buyer.Id).Products.Sum(s => s.Price * s.Quantity);
+            var totalAmount = _shoppingCartRepository
+                .GetByUserId(buyer.Id)
+                .Products
+                .Sum(s => s.Price * s.Quantity);
             var totalAmountWithDiscount = discountCard == null ?
                 0 :
                 totalAmount - totalAmount * discountCard.Discount / 100;
@@ -104,8 +107,13 @@ namespace Core.Services
             {
                 using (TransactionScope scope = new TransactionScope())
                 {
+                    var totalAmountWithoutDiscount = _shoppingCartRepository
+                        .GetByUserId(buyer.Id)
+                        .Products
+                        .Sum(s => s.Price * s.Quantity);
+
                     totalAmount = CalculateTotalAmount(buyer);
-                    buyer.TotalPurchaseAmount += totalAmount;
+                    buyer.TotalPurchaseAmount += totalAmountWithoutDiscount;
                     _discountCardService.AddDiscountCard(buyer);
                     shoppingCart.Clear();
                     _shoppingCartRepository.QuantityInStock.Clear();

@@ -48,7 +48,7 @@ namespace TUI
                                     ui.ShowCart(buyer);
                                     break;
                                 case Constants.BuyCheerfulDiscountCard:
-                                    ui.BuyCheerfulDiscountCard();
+                                    ui.BuyCheerfulDiscountCard(buyer);
                                     break;
                                 case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);

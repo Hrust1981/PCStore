@@ -126,6 +126,12 @@
   <data name="CartIsEmpty" xml:space="preserve">
     <value>Cart is empty!</value>
   </data>
+  <data name="CheerfulDiscountCardAlreadyPurchased" xml:space="preserve">
+    <value>Discount card 'Veselaya' has already been purchased</value>
+  </data>
+  <data name="CheerfulDiscountCardPurchased" xml:space="preserve">
+    <value>Discount card 'Veselaya' purchased</value>
+  </data>
   <data name="DiscountCardSettingsMenu" xml:space="preserve">
     <value>1. Generating a special day on which the Quantum discount card will be issued
 2. Validity period of the Quantum discount card

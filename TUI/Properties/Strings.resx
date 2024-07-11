@@ -126,6 +126,12 @@
   <data name="CartIsEmpty" xml:space="preserve">
     <value>Корзина пуста!</value>
   </data>
+  <data name="CheerfulDiscountCardAlreadyPurchased" xml:space="preserve">
+    <value>Дисконтная карта 'Веселая' уже приобретена</value>
+  </data>
+  <data name="CheerfulDiscountCardPurchased" xml:space="preserve">
+    <value>Дисконтная карта 'Веселая' приобретена</value>
+  </data>
   <data name="DiscountCardSettingsMenu" xml:space="preserve">
     <value>1. Генерация специального дня в который будет выдаваться Квантовая скидочная карта
 2. Срок действия Квантовой скидочной карты
