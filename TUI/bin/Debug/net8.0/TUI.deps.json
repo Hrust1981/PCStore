@@ -20,6 +20,9 @@
         "resources": {
           "en-US/TUI.resources.dll": {
             "locale": "en-US"
+          },
+          "ru-RU/TUI.resources.dll": {
+            "locale": "ru-RU"
           }
         }
       },

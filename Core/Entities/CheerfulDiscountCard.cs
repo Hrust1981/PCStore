@@ -4,24 +4,31 @@ namespace Core.Entities
 {
     public class CheerfulDiscountCard : DiscountCard
     {
-        private readonly int _discount;
+        private readonly IDiscountCardService _discountCardService;
+        private static int _discount;
 
-        public CheerfulDiscountCard()
+        private CheerfulDiscountCard()
         {
             Name = "CheerfulDiscountCard";
-            _discount = GetDiscount();
+            _discountCardService = new DiscountCardService();
         }
 
         public override int Discount => _discount;
 
-        private static int GetDiscount()
+        public static async Task<CheerfulDiscountCard> CreateAsync()
         {
-            IDiscountCardService discountCardService = new DiscountCardService();
+            var instance = new CheerfulDiscountCard();
+            _discount = await instance.GetDiscountAsync();
+            return instance;
+        }
 
-            var stringRepresentationDate = discountCardService.GetValueFromJson("WorkDatesCheerfulDiscountCard");
+
+        private async Task<int> GetDiscountAsync()
+        {
+            var stringRepresentationDate = await _discountCardService.GetValueFromJsonAsync("WorkDatesCheerfulDiscountCard");
             var date = DateTime.Parse(stringRepresentationDate);
-
-            return DateTime.Today >= date && DateTime.Today <= date.AddDays(10) ? 10 : 0;
+            var numberDays = await _discountCardService.GetValueFromJsonAsync("NumberDaysCheerfulDiscountCardActive");
+            return DateTime.Today >= date && DateTime.Today <= date.AddDays(int.Parse(numberDays)) ? 10 : 0;
         }
     }
 }

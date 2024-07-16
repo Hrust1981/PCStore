@@ -12,12 +12,12 @@ namespace Core.Services
             _random = new Random();
         }
 
-        public void AddDiscountCard(Buyer buyer, int totalAmount = 0)
+        public async Task AddDiscountCardAsync(Buyer buyer, int totalAmount = 0)
         {
             var discountCards = buyer.DiscountCards;
             var totalPurchaseAmount = buyer.TotalPurchaseAmount;
-            var dateIssueQuantumDiscountCard = DateTime.Parse(GetValueFromJson("DateIssue"));
-            var numberDaysUntilCloseQuantumDiscountCard = int.Parse(GetValueFromJson("AmountDays"));
+            var dateIssueQuantumDiscountCard = DateTime.Parse(await GetValueFromJsonAsync("DateIssue"));
+            var numberDaysUntilCloseQuantumDiscountCard = int.Parse(await GetValueFromJsonAsync("AmountDays"));
 
             if (discountCards.Any(dc => dc.Name == "QuantumDiscountCard"))
             {
@@ -51,7 +51,7 @@ namespace Core.Services
             }
             else if (DateTime.Now.Date == dateIssueQuantumDiscountCard && _random.Next(2) == 1)
             {
-                if (discountCards.Any())
+                if (discountCards.Count != 0)
                 {
                     discountCards.Clear();
                 }
@@ -77,42 +77,41 @@ namespace Core.Services
             var dayTimeNow = DateTime.Now;
 
             Random random = new Random();
-            day = random.Next(dayTimeNow.Day + 1, DateTime.DaysInMonth(dayTimeNow.Year, dayTimeNow.Month) - upperRangeLimitInDays);
+            day = random.Next(dayTimeNow.Day + 1, DateTime.DaysInMonth(dayTimeNow.Year, dayTimeNow.Month) -
+                upperRangeLimitInDays);
 
-            return string.Equals(CultureInfo.CurrentCulture.Name, "ru-RU") ? 
+            return string.Equals(CultureInfo.CurrentCulture.Name, "ru-RU", StringComparison.InvariantCultureIgnoreCase) ? 
                 DateOnly.Parse($"{day}.{dayTimeNow.Month}.{dayTimeNow.Year}") :
                 DateOnly.Parse($"{dayTimeNow.Year}.{dayTimeNow.Month}.{day}");
         }
 
-        public void SetDayForIssueQuantumDiscountCard(int amountDays)
+        public async Task SetDayForIssueQuantumDiscountCardAsync(int amountDays)
         {
-            ChangeValueInJson(amountDays, "AmountDays");
+            await ChangeValueInJsonAsync(amountDays, "AmountDays");
         }
 
-        public DateOnly GenerateDateIssueOrWorkDiscountCard(string nameReplacableElement, int upperRangeLimitInDays = 0)
+        public async Task<DateOnly> GenerateDateIssueOrWorkDiscountCardAsync(string nameReplacableElement, int upperRangeLimitInDays = 0)
         {
             var date = GenerateDate(upperRangeLimitInDays);
-            ChangeValueInJson(date, nameReplacableElement);
+            await ChangeValueInJsonAsync(date, nameReplacableElement);
             return date;
         }
 
-        private void ChangeValueInJson(System.Object item, string nameReplacableElement)
+        private async Task ChangeValueInJsonAsync(System.Object item, string nameReplacableElement)
         {
-            var valueJson = GetValueFromJson(nameReplacableElement);
+            var valueJson = await GetValueFromJsonAsync(nameReplacableElement);
             var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
             
-            var stream = GetStream();
+            var stream = await GetStreamAsync();
             var newDate = stream.Replace(valueJson, item.ToString());
 
-            using (StreamWriter writer = new StreamWriter(path, false))
-            {
-                writer.Write(newDate);
-            }
+            using StreamWriter writer = new StreamWriter(path, false);
+            await writer.WriteAsync(newDate);
         }
 
-        public string GetValueFromJson(string nameReplacableElement)
+        public async Task<string> GetValueFromJsonAsync(string nameReplacableElement)
         {
-            var stream = GetStream();
+            var stream = await GetStreamAsync();
             var index = stream.IndexOf(nameReplacableElement) + nameReplacableElement.Length + 3;
 
             var count = 0;
@@ -126,13 +125,11 @@ namespace Core.Services
             return stream.Substring(index, count);
         }
 
-        private string GetStream()
+        private async Task<string> GetStreamAsync()
         {
             var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
-            using (StreamReader reader = new StreamReader(path))
-            {
-                return reader.ReadToEnd();
-            }
+            using StreamReader reader = new StreamReader(path);
+            return await reader.ReadToEndAsync();
         }
     }
 }

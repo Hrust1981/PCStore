@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddItemToCart" xml:space="preserve">
+    <value>Выберите товар в корзину: </value>
+  </data>
+  <data name="AmountToPay" xml:space="preserve">
+    <value>Сумма к оплате: </value>
+  </data>
+  <data name="CartIsEmpty" xml:space="preserve">
+    <value>Корзина пуста!</value>
+  </data>
+  <data name="CheerfulDiscountCardAlreadyPurchased" xml:space="preserve">
+    <value>Дисконтная карта 'Веселая' уже приобретена</value>
+  </data>
+  <data name="CheerfulDiscountCardPurchased" xml:space="preserve">
+    <value>Дисконтная карта 'Веселая' приобретена</value>
+  </data>
+  <data name="DiscountCardSettingsMenu" xml:space="preserve">
+    <value>1. Генерация специального дня в который будет выдаваться Квантовая скидочная карта
+2. Срок действия Квантовой скидочной карты
+3. Генерация даты для скидочной карты Веселая (работает 10 дней в каждом месяце) 
+
+Для выхода нажмите клавишу 'q'
+
+Выберите действие: </value>
+  </data>
+  <data name="EnterPriceProduct" xml:space="preserve">
+    <value>Введите цену товара: </value>
+  </data>
+  <data name="EnterProductDescription" xml:space="preserve">
+    <value>Введите описание товара</value>
+  </data>
+  <data name="EnterProductID" xml:space="preserve">
+    <value>Введите ID товара: </value>
+  </data>
+  <data name="EnterProductName" xml:space="preserve">
+    <value>Введите название товара</value>
+  </data>
+  <data name="EnterQuantity" xml:space="preserve">
+    <value>Введите количество: </value>
+  </data>
+  <data name="EnterQuantityProduct" xml:space="preserve">
+    <value>Введите количество товара: </value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Для выхода нажмите клавишу 'q'</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Здравствуйте </value>
+  </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Вы авторизованы</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Авторизуйтесь
+Логин: </value>
+  </data>
+  <data name="MenuForAdmin" xml:space="preserve">
+    <value>1. Путь до файла логирования
+2. Настройки для дисконтных карт
+
+Нажмите клавишу 'q', чтобы разлогиниться
+
+Выберите действие:  </value>
+  </data>
+  <data name="MenuForBuyer" xml:space="preserve">
+    <value>1. Выбрать товар
+2. Корзина
+3. Приобрести бесплатно скидочную карту «Веселая»
+
+Нажмите клавишу 'q', чтобы разлогиниться
+
+Выберите действие: </value>
+  </data>
+  <data name="MenuForSeller" xml:space="preserve">
+    <value>1. Добавить товар
+2. Удалить товар
+3. Редактировать продукт
+
+Нажмите клавишу 'q', чтобы разлогиниться
+
+Выберите действие: </value>
+  </data>
+  <data name="MenuShowCart" xml:space="preserve">
+    <value>1. Оплатить товар
+2. Изменить количество в каждой позиции
+3. Удалить товар из корзины
+
+Для выхода нажмите клавишу 'q'
+
+Выберите действие: </value>
+  </data>
+  <data name="NotLoggedIn" xml:space="preserve">
+    <value>Вы не авторизовались!</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль: </value>
+  </data>
+  <data name="PathToLogFile" xml:space="preserve">
+    <value>Путь до файла логирования</value>
+  </data>
+  <data name="RUB" xml:space="preserve">
+    <value> рублей</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Выберите язык:
+1. Русский
+2. English
+</value>
+  </data>
+  <data name="SpecialDayForQuantumDiscountCard" xml:space="preserve">
+    <value>Генерация даты для выдачи Квантовой скидочной карты</value>
+  </data>
+  <data name="SuccessfulNotPayment" xml:space="preserve">
+    <value>К сожалению, оплата не прошла!</value>
+  </data>
+  <data name="SuccessfulPayment" xml:space="preserve">
+    <value>Оплата прошла успешно!</value>
+  </data>
+  <data name="ToDeleteEnterProductID" xml:space="preserve">
+    <value>Для удаления введите ID товара: </value>
+  </data>
+  <data name="ToEditEnterProductID" xml:space="preserve">
+    <value>Для редактирования введите ID товара: </value>
+  </data>
+  <data name="ValidityPeriodQuantumDiscountCard" xml:space="preserve">
+    <value>Пожалуйста, введите срок действия Квантовой дисконтной карты в днях: </value>
+  </data>
+  <data name="WorkDatesCheerfulDiscountCard" xml:space="preserve">
+    <value>Определена дата с которой следующие 10 дней будет работать Веселая дисконтная карта</value>
+  </data>
+</root>

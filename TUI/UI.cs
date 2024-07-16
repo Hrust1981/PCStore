@@ -12,16 +12,16 @@ namespace TUI
         private readonly IRepository<Product> _productRepository;
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IShoppingCartRepository _shoppingCartRepository;
-        private readonly ILogger<UI> _logger;
         private readonly IAuthentication _authentication;
         private readonly IDiscountCardService _discountCardService;
+        private readonly ILogger<UI> _logger;
 
         public UI(IRepository<Product> repository,
                   IShoppingCartService shoppingCartService,
                   IShoppingCartRepository shoppingCartRepository,
-                  ILogger<UI> logger,
                   IAuthentication authentication,
-                  IDiscountCardService discountCardService)
+                  IDiscountCardService discountCardService,
+                  ILogger<UI> logger)
         {
             _productRepository = repository;
             _shoppingCartService = shoppingCartService;
@@ -36,25 +36,24 @@ namespace TUI
             try
             {
                 var message = Properties.Strings.SelectLanguage;
-                var positionNumber = GetEnteredNumericValue(message);
+                var positionNumber = (Culture)GetEnteredNumericValue(message);
 
-                CultureInfo culture;
-                if (positionNumber == Constants.EnglishCulture)
+                if (positionNumber == Culture.Russian)
                 {
-                    culture = CultureInfo.CreateSpecificCulture("en-US");
-                    Thread.CurrentThread.CurrentCulture = culture;
-                    Thread.CurrentThread.CurrentUICulture = culture;
+                    SetCulture("ru-RU");
+                }
+                else if (positionNumber == Culture.English)
+                {
+                    SetCulture("en-US");
                 }
                 else
                 {
-                    culture = CultureInfo.CreateSpecificCulture("ru-RU");
-                    Thread.CurrentThread.CurrentCulture = culture;
-                    Thread.CurrentThread.CurrentUICulture = culture;
+                    SetCulture("ru-RU");
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the SelectCulture method. Message - {ex.Message}");
+                _logger.LogError(ex, $"Exception in the SelectCulture method. Message - {ex.Message}");
             }
             Clear(1500);
         }
@@ -127,7 +126,7 @@ namespace TUI
             }
         }
 
-        public void BuyCheerfulDiscountCard(Buyer buyer)
+        public async Task BuyCheerfulDiscountCard(Buyer buyer)
         {
             try
             {
@@ -136,7 +135,7 @@ namespace TUI
 
                 if (!discountCards.Any(dc => string.Equals(dc.Name, "CheerfulDiscountCard")))
                 {
-                    discountCards.Add(new CheerfulDiscountCard());
+                    discountCards.Add(await CheerfulDiscountCard.CreateAsync());
                     message = Properties.Strings.CheerfulDiscountCardPurchased;
                 }
                 else
@@ -169,7 +168,7 @@ namespace TUI
             Clear(100);
         }
 
-        public void SettingsForDiscountCards()
+        public async Task SettingsForDiscountCards()
         {
             try
             {
@@ -185,7 +184,7 @@ namespace TUI
                         message = Properties.Strings.SpecialDayForQuantumDiscountCard;
                         DisplayLine(message);
 
-                        var date = _discountCardService.GenerateDateIssueOrWorkDiscountCard("DateIssue");
+                        var date = await _discountCardService.GenerateDateIssueOrWorkDiscountCardAsync("DateIssue");
 
                         Display(date.ToString());
                         _logger.LogInformation($"The day for issuing a quantum discount card has been determined - {date}");
@@ -197,7 +196,7 @@ namespace TUI
 
                         var numberDays = GetEnteredNumericValue(message);
 
-                        _discountCardService.SetDayForIssueQuantumDiscountCard(numberDays);
+                        await _discountCardService.SetDayForIssueQuantumDiscountCardAsync(numberDays);
                         _logger.LogInformation($"The validity period of the Quantum discount card has been changed to {numberDays} days");
                     }
                     else if (positionNumber == Constants.WorkDatesCheerfulDiscountCard)
@@ -206,7 +205,7 @@ namespace TUI
                         message = Properties.Strings.WorkDatesCheerfulDiscountCard;
                         DisplayLine(message);
 
-                        var date = _discountCardService.GenerateDateIssueOrWorkDiscountCard("WorkDatesCheerfulDiscountCard", 10);
+                        var date = await _discountCardService.GenerateDateIssueOrWorkDiscountCardAsync("WorkDatesCheerfulDiscountCard", 10);
 
                         Display(date.ToString());
                         _logger.LogInformation($"The range {date}-{date.AddDays(9)} in days when the Cheerful discount card works is determined");
@@ -221,7 +220,7 @@ namespace TUI
             Clear(100);
         }
 
-        private void Payment(Buyer buyer)
+        private async Task Payment(Buyer buyer)
         {
             try
             {
@@ -229,7 +228,7 @@ namespace TUI
                 string messsage;
                 if (shoppingCart.Count != 0)
                 {
-                    var hasPayment = _shoppingCartService.Payment(buyer, shoppingCart);
+                    var hasPayment = await _shoppingCartService.PaymentAsync(buyer, shoppingCart);
                     messsage = hasPayment ? Properties.Strings.SuccessfulPayment : Properties.Strings.SuccessfulNotPayment;
                     Display(messsage);
                 }
@@ -488,6 +487,13 @@ namespace TUI
         {
             _logger.LogInformation($"User with login:{login} is logged out");
             return false;
+        }
+
+        private void SetCulture(string culture)
+        {
+            var specificCulture = CultureInfo.CreateSpecificCulture(culture);
+            Thread.CurrentThread.CurrentCulture = specificCulture;
+            Thread.CurrentThread.CurrentUICulture = specificCulture;
         }
 
         private string GetEnteredStringValue(string message)
