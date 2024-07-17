@@ -1,7 +1,6 @@
 ﻿using Core;
 using Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Win32;
 
 namespace TUI
 {

@@ -1,15 +1,18 @@
 ﻿using Core.Entities;
+using Microsoft.Extensions.Options;
 using System.Globalization;
 
 namespace Core.Services
 {
     public class DiscountCardService : IDiscountCardService
     {
-        private readonly static Random _random;
+        private readonly Random _random;
+        private readonly IOptionsMonitor<DiscountCardService> _optionsMonitor;
 
-        static DiscountCardService()
+        public DiscountCardService(IOptionsMonitor<DiscountCardService> optionsMonitor)
         {
             _random = new Random();
+            _optionsMonitor = optionsMonitor;
         }
 
         public async Task AddDiscountCardAsync(Buyer buyer, int totalAmount = 0)
@@ -127,7 +130,8 @@ namespace Core.Services
 
         private async Task<string> GetStreamAsync()
         {
-            var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
+            //var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
+            var path = _optionsMonitor.Get("PathToSettingsForIssueDiscountCards").;
             using StreamReader reader = new StreamReader(path);
             return await reader.ReadToEndAsync();
         }
