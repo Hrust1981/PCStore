@@ -5,19 +5,19 @@ namespace Core.Entities
     public class CheerfulDiscountCard : DiscountCard
     {
         private readonly IDiscountCardService _discountCardService;
-        private static int _discount;
+        private int _discount;
 
-        private CheerfulDiscountCard()
+        public CheerfulDiscountCard(IDiscountCardService discountCardService)
         {
             Name = "CheerfulDiscountCard";
-            _discountCardService = new DiscountCardService();
+            _discountCardService = discountCardService;
         }
 
         public override int Discount => _discount;
 
-        public static async Task<CheerfulDiscountCard> CreateAsync()
+        public async Task<CheerfulDiscountCard> CreateAsync()
         {
-            var instance = new CheerfulDiscountCard();
+            var instance = new CheerfulDiscountCard(_discountCardService);
             _discount = await instance.GetDiscountAsync();
             return instance;
         }

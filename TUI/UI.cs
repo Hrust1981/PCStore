@@ -126,7 +126,7 @@ namespace TUI
             }
         }
 
-        public async Task BuyCheerfulDiscountCard(Buyer buyer)
+        public async Task BuyCheerfulDiscountCardAsync(Buyer buyer)
         {
             try
             {
@@ -168,7 +168,7 @@ namespace TUI
             Clear(100);
         }
 
-        public async Task SettingsForDiscountCards()
+        public async Task SettingsForDiscountCardsAsync()
         {
             try
             {

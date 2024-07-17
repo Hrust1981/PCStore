@@ -7,9 +7,9 @@ namespace Core.Services
     public class DiscountCardService : IDiscountCardService
     {
         private readonly Random _random;
-        private readonly IOptionsMonitor<DiscountCardService> _optionsMonitor;
+        private readonly IOptionsMonitor<LoggerOptions> _optionsMonitor;
 
-        public DiscountCardService(IOptionsMonitor<DiscountCardService> optionsMonitor)
+        public DiscountCardService(IOptionsMonitor<LoggerOptions> optionsMonitor)
         {
             _random = new Random();
             _optionsMonitor = optionsMonitor;
@@ -131,8 +131,8 @@ namespace Core.Services
         private async Task<string> GetStreamAsync()
         {
             //var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
-            var path = _optionsMonitor.Get("PathToSettingsForIssueDiscountCards").;
-            using StreamReader reader = new StreamReader(path);
+            var path = _optionsMonitor.Get("PathToSettingsForIssueDiscountCards");
+            using StreamReader reader = new StreamReader(path.PathToLoggerFile);
             return await reader.ReadToEndAsync();
         }
     }

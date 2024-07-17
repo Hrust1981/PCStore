@@ -6,7 +6,7 @@ namespace TUI
 {
     public class Program
     {
-        static void Main(string[] args)
+        async static Task Main(string[] args)
         {
             var serviceProvider = CustomServiceProvider.BuildServiceProvider();
             var ui = serviceProvider.GetRequiredService<UI>();
@@ -30,7 +30,7 @@ namespace TUI
                                     ui.ShowPathForLoggingFile();
                                     break;
                                 case Constants.SettingsDiscountCards:
-                                    ui.SettingsForDiscountCards();
+                                    await ui.SettingsForDiscountCardsAsync();
                                     break;
                                 case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
@@ -48,7 +48,7 @@ namespace TUI
                                     ui.ShowCart(buyer);
                                     break;
                                 case Constants.BuyCheerfulDiscountCard:
-                                    ui.BuyCheerfulDiscountCard(buyer);
+                                    await ui.BuyCheerfulDiscountCardAsync(buyer);
                                     break;
                                 case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
