@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Globalization;
 
@@ -7,20 +8,20 @@ namespace Core.Services
     public class DiscountCardService : IDiscountCardService
     {
         private readonly Random _random;
-        private readonly DiscountCardsOptions _setupOptions;
+        private readonly IOptionsMonitor<DiscountCardsOptions> _setupOptions;
 
         public DiscountCardService(IOptionsMonitor<DiscountCardsOptions> setupOptions)
         {
             _random = new Random();
-            _setupOptions = setupOptions.CurrentValue;
+            _setupOptions = setupOptions;
         }
 
-        public async Task AddDiscountCardAsync(Buyer buyer, int totalAmount = 0)
+        public void AddDiscountCard(Buyer buyer, int totalAmount = 0)
         {
             var discountCards = buyer.DiscountCards;
             var totalPurchaseAmount = buyer.TotalPurchaseAmount;
-            var dateIssueQuantumDiscountCard = DateTime.Parse(_setupOptions.DateIssue);
-            var numberDaysUntilCloseQuantumDiscountCard = _setupOptions.AmountDays;
+            var dateIssueQuantumDiscountCard = DateTime.Parse(_setupOptions.CurrentValue.DateIssue);
+            var numberDaysUntilCloseQuantumDiscountCard = _setupOptions.CurrentValue.AmountDays;
 
             if (discountCards.Any(dc => dc.Name == "QuantumDiscountCard"))
             {
@@ -74,7 +75,16 @@ namespace Core.Services
             }
         }
 
-        private DateOnly GenerateDate(int upperRangeLimitInDays = 0)
+        public void AddCheerfulDiscountCard(Buyer buyer)
+        {
+            var stringRepresentationDate = _setupOptions.CurrentValue.WorkDates;
+            var date = DateTime.Parse(stringRepresentationDate);
+            var numberDays = _setupOptions.CurrentValue.NumberDays;
+            var discountValue =  DateTime.Today >= date && DateTime.Today <= date.AddDays(numberDays) ? 10 : 0;
+            buyer.DiscountCards.Add(new CheerfulDiscountCard(discountValue));
+        }
+
+        private string GenerateDate(int upperRangeLimitInDays = 0)
         {
             int day;
             var dayTimeNow = DateTime.Now;
@@ -84,56 +94,28 @@ namespace Core.Services
                 upperRangeLimitInDays);
 
             return string.Equals(CultureInfo.CurrentCulture.Name, "ru-RU", StringComparison.InvariantCultureIgnoreCase) ? 
-                DateOnly.Parse($"{day}.{dayTimeNow.Month}.{dayTimeNow.Year}") :
-                DateOnly.Parse($"{dayTimeNow.Year}.{dayTimeNow.Month}.{day}");
+                $"{day}.{dayTimeNow.Month}.{dayTimeNow.Year}" :
+                $"{dayTimeNow.Year}.{dayTimeNow.Month}.{day}";
         }
 
-        public async Task SetDayForIssueQuantumDiscountCardAsync(int amountDays)
+        public void SetDayForIssueQuantumDiscountCard(int amountDays)
         {
-            await ChangeValueInJsonAsync(amountDays, "AmountDays");
+            _setupOptions.CurrentValue.AmountDays = amountDays;
         }
 
-        public async Task<DateOnly> GenerateDateIssueOrWorkDiscountCardAsync(string nameReplacableElement, int upperRangeLimitInDays = 0)
+        public string SetDateIssueForQuantumDiscountCard(IServiceCollection services)
         {
-            var date = GenerateDate(upperRangeLimitInDays);
-            await ChangeValueInJsonAsync(date, nameReplacableElement);
+            var date = GenerateDate();
+            _setupOptions.CurrentValue.DateIssue = date;
+            services.Configure<DiscountCardsOptions>(x => x.DateIssue = date);
             return date;
         }
 
-        private async Task ChangeValueInJsonAsync(System.Object item, string nameReplacableElement)
+        public string SetWorkDatesForCheerfulDiscountCard(int upperRangeLimitInDays)
         {
-            var valueJson = await GetValueFromJsonAsync(nameReplacableElement);
-            var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
-            
-            var stream = await GetStreamAsync();
-            var newDate = stream.Replace(valueJson, item.ToString());
-
-            using StreamWriter writer = new StreamWriter(path, false);
-            await writer.WriteAsync(newDate);
-        }
-
-        public async Task<string> GetValueFromJsonAsync(string nameReplacableElement)
-        {
-            var stream = await GetStreamAsync();
-            var index = stream.IndexOf(nameReplacableElement) + nameReplacableElement.Length + 3;
-
-            var count = 0;
-            var indexString = index;
-            while (stream[indexString] != '"' && stream[indexString] != ',' && stream[indexString] != '}')
-            {
-                indexString++;
-                count++;
-            }
-
-            return stream.Substring(index, count);
-        }
-
-        private async Task<string> GetStreamAsync()
-        {
-            //var path = CustomConfigurationManager.GetValueByKey("PathToSettingsForIssueDiscountCards");
-            var path = _optionsMonitor.Get("PathToSettingsForIssueDiscountCards");
-            using StreamReader reader = new StreamReader(path.PathToLoggerFile);
-            return await reader.ReadToEndAsync();
+            var date = GenerateDate();
+            _setupOptions.CurrentValue.WorkDates = date;
+            return date;
         }
     }
 }

@@ -11,11 +11,10 @@ namespace Core
 {
     public class CustomServiceProvider
     {
-        public static ServiceProvider BuildServiceProvider(IConfiguration configuration)
+        public static IServiceCollection BuildServiceProvider()
         {
             var services = new ServiceCollection();
-            services.AddOptions<LoggerOptions>().Bind(configuration.GetSection(LoggerOptions.ConfigKey));
-            services.AddOptions<DiscountCardsOptions>().Bind(configuration.GetSection(DiscountCardsOptions.ConfigKey));
+            
             services.AddTransient<DiscountCardService>();
             services.AddTransient<UI>();
             services.AddTransient<IFileLoggerService, FileLoggerService>();
@@ -26,8 +25,10 @@ namespace Core
             services.AddTransient(_ => new UserRepository(DB.users));
             services.AddTransient<IDiscountCardService, DiscountCardService>();
             services.AddTransient<IAuthentication, Authentication>();
+            services.AddTransient<IServiceCollection, ServiceCollection>();
 
-            return services.BuildServiceProvider();
+            //return services.BuildServiceProvider();
+            return services;
         }
     }
 }

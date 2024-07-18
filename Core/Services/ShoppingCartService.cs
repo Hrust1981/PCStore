@@ -100,7 +100,7 @@ namespace Core.Services
             return discountCard == null ? totalAmount : totalAmountWithDiscount;
         }
 
-        public async Task<bool> PaymentAsync(Buyer buyer, List<Product> shoppingCart)
+        public bool Payment(Buyer buyer, List<Product> shoppingCart)
         {
             int totalAmount = 0;
             try
@@ -114,7 +114,7 @@ namespace Core.Services
 
                     totalAmount = CalculateTotalAmount(buyer);
                     buyer.TotalPurchaseAmount += totalAmountWithoutDiscount;
-                    await _discountCardService.AddDiscountCardAsync(buyer);
+                    _discountCardService.AddDiscountCard(buyer);
                     shoppingCart.Clear();
                     _shoppingCartRepository.QuantityInStock.Clear();
                     scope.Complete();

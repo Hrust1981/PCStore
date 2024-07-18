@@ -2,7 +2,9 @@
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Globalization;
 
 namespace TUI
@@ -14,6 +16,8 @@ namespace TUI
         private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly IAuthentication _authentication;
         private readonly IDiscountCardService _discountCardService;
+        private readonly LoggerOptions _setupOptions;
+        private readonly IServiceCollection _services;
         private readonly ILogger<UI> _logger;
 
         public UI(IRepository<Product> repository,
@@ -21,6 +25,7 @@ namespace TUI
                   IShoppingCartRepository shoppingCartRepository,
                   IAuthentication authentication,
                   IDiscountCardService discountCardService,
+                  IOptionsMonitor<LoggerOptions> setupOptions,
                   ILogger<UI> logger)
         {
             _productRepository = repository;
@@ -29,6 +34,8 @@ namespace TUI
             _logger = logger;
             _authentication = authentication;
             _discountCardService = discountCardService;
+            _setupOptions = setupOptions.CurrentValue;
+            _services = CustomServiceProvider.BuildServiceProvider();
         }
 
         public void SelectCulture()
@@ -126,7 +133,7 @@ namespace TUI
             }
         }
 
-        public async Task BuyCheerfulDiscountCardAsync(Buyer buyer)
+        public void BuyCheerfulDiscountCardAsync(Buyer buyer)
         {
             try
             {
@@ -135,7 +142,7 @@ namespace TUI
 
                 if (!discountCards.Any(dc => string.Equals(dc.Name, "CheerfulDiscountCard")))
                 {
-                    discountCards.Add(await CheerfulDiscountCard.CreateAsync());
+                    _discountCardService.AddCheerfulDiscountCard(buyer);
                     message = Properties.Strings.CheerfulDiscountCardPurchased;
                 }
                 else
@@ -157,7 +164,7 @@ namespace TUI
             try
             {
                 DisplayLine(Properties.Strings.PathToLogFile);
-                var path = CustomConfigurationManager.GetValueByKey("PathToLoggerFile");
+                var path = _setupOptions.PathToLoggerFile;
                 Display(path);
                 Clear(2500);
             }
@@ -168,7 +175,7 @@ namespace TUI
             Clear(100);
         }
 
-        public async Task SettingsForDiscountCardsAsync()
+        public void SettingsForDiscountCardsAsync()
         {
             try
             {
@@ -184,7 +191,7 @@ namespace TUI
                         message = Properties.Strings.SpecialDayForQuantumDiscountCard;
                         DisplayLine(message);
 
-                        var date = await _discountCardService.GenerateDateIssueOrWorkDiscountCardAsync("DateIssue");
+                        var date = _discountCardService.SetDateIssueForQuantumDiscountCard(_services);
 
                         Display(date.ToString());
                         _logger.LogInformation($"The day for issuing a quantum discount card has been determined - {date}");
@@ -196,7 +203,7 @@ namespace TUI
 
                         var numberDays = GetEnteredNumericValue(message);
 
-                        await _discountCardService.SetDayForIssueQuantumDiscountCardAsync(numberDays);
+                        _discountCardService.SetDayForIssueQuantumDiscountCard(numberDays);
                         _logger.LogInformation($"The validity period of the Quantum discount card has been changed to {numberDays} days");
                     }
                     else if (positionNumber == Constants.WorkDatesCheerfulDiscountCard)
@@ -205,10 +212,10 @@ namespace TUI
                         message = Properties.Strings.WorkDatesCheerfulDiscountCard;
                         DisplayLine(message);
 
-                        var date = await _discountCardService.GenerateDateIssueOrWorkDiscountCardAsync("WorkDatesCheerfulDiscountCard", 10);
+                        var date = _discountCardService.SetWorkDatesForCheerfulDiscountCard(10);
 
                         Display(date.ToString());
-                        _logger.LogInformation($"The range {date}-{date.AddDays(9)} in days when the Cheerful discount card works is determined");
+                        _logger.LogInformation($"{date}- date of issue of the Fun discount card");
                     }
                     Clear(2500);
                 }
@@ -220,7 +227,7 @@ namespace TUI
             Clear(100);
         }
 
-        private async Task Payment(Buyer buyer)
+        private void Payment(Buyer buyer)
         {
             try
             {
@@ -228,7 +235,7 @@ namespace TUI
                 string messsage;
                 if (shoppingCart.Count != 0)
                 {
-                    var hasPayment = await _shoppingCartService.PaymentAsync(buyer, shoppingCart);
+                    var hasPayment = _shoppingCartService.Payment(buyer, shoppingCart);
                     messsage = hasPayment ? Properties.Strings.SuccessfulPayment : Properties.Strings.SuccessfulNotPayment;
                     Display(messsage);
                 }

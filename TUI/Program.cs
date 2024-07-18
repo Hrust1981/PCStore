@@ -7,14 +7,21 @@ namespace TUI
 {
     public class Program
     {
-        async static Task Main(string[] args)
+        static void Main(string[] args)
         {
+            var path = "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\appsettings.json";
+
             IConfiguration configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile(path, optional: false)
                 .Build();
 
-            var serviceProvider = CustomServiceProvider.BuildServiceProvider(configuration);
+            var serviceCollection = CustomServiceProvider.BuildServiceProvider();
+            serviceCollection.AddOptions<LoggerOptions>().Bind(configuration.GetSection(LoggerOptions.ConfigKey));
+            serviceCollection.AddOptions<DiscountCardsOptions>().Bind(configuration.GetSection(DiscountCardsOptions.ConfigKeyQuantumDC));
+            serviceCollection.AddOptions<DiscountCardsOptions>().Bind(configuration.GetSection(DiscountCardsOptions.ConfigKeyCheerfulDC));
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
             var ui = serviceProvider.GetRequiredService<UI>();
 
 
@@ -37,7 +44,7 @@ namespace TUI
                                     ui.ShowPathForLoggingFile();
                                     break;
                                 case Constants.SettingsDiscountCards:
-                                    await ui.SettingsForDiscountCardsAsync();
+                                    ui.SettingsForDiscountCardsAsync();
                                     break;
                                 case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
@@ -55,7 +62,7 @@ namespace TUI
                                     ui.ShowCart(buyer);
                                     break;
                                 case Constants.BuyCheerfulDiscountCard:
-                                    await ui.BuyCheerfulDiscountCardAsync(buyer);
+                                    ui.BuyCheerfulDiscountCardAsync(buyer);
                                     break;
                                 case Constants.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
