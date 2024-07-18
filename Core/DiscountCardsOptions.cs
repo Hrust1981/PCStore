@@ -2,6 +2,8 @@
 {
     public class DiscountCardsOptions
     {
+        public const string ConfigKey = "SETUP_OPTIONS_DC";
+
         // Settings for issuance for Quantum discount cards
         public int AmountDays {  get; set; }
         public string DateIssue {  get; set; }

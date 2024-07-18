@@ -1,26 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\",
+  "WorkspaceRootPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\services\\discountcardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\services\\discountcardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\services\\discountcardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\entities\\cheerfuldiscountcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\tui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\entities\\cheerfuldiscountcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\entities\\cheerfuldiscountcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\tui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\tui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\sharipovrr\\source\\repos\\pcstore\\core\\customconfigurationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\core\\customconfigurationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD1A2CB0-7F4F-4978-9D70-CD31240F377C}|Core\\Core.csproj|solutionrelative:core\\customconfigurationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|c:\\users\\hrust\\source\\repos\\pcstore\\tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BACF26E9-2E50-4ED7-A2F0-34E40845D584}|TUI\\TUI.csproj|solutionrelative:tui\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,24 +42,37 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\appsettings.json",
+              "RelativeDocumentMoniker": "TUI\\appsettings.json",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\appsettings.json",
+              "RelativeToolTip": "TUI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-18T01:36:30.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\Program.cs",
               "RelativeDocumentMoniker": "TUI\\Program.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\Program.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\Program.cs",
               "RelativeToolTip": "TUI\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-17T12:07:41.512Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CheerfulDiscountCard.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Entities\\CheerfulDiscountCard.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Entities\\CheerfulDiscountCard.cs",
               "RelativeDocumentMoniker": "Core\\Entities\\CheerfulDiscountCard.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Entities\\CheerfulDiscountCard.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Entities\\CheerfulDiscountCard.cs",
               "RelativeToolTip": "Core\\Entities\\CheerfulDiscountCard.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -66,11 +83,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "DiscountCardService.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\DiscountCardService.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Services\\DiscountCardService.cs",
               "RelativeDocumentMoniker": "Core\\Services\\DiscountCardService.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Services\\DiscountCardService.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Services\\DiscountCardService.cs",
               "RelativeToolTip": "Core\\Services\\DiscountCardService.cs",
-              "ViewState": "AQIAAFsAAAAAAAAAAAAiwH8AAAAyAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAIkAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-16T16:34:18Z",
               "EditorCaption": ""
@@ -79,26 +96,26 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "CustomConfigurationManager.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\CustomConfigurationManager.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\CustomConfigurationManager.cs",
               "RelativeDocumentMoniker": "Core\\CustomConfigurationManager.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\CustomConfigurationManager.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\CustomConfigurationManager.cs",
               "RelativeToolTip": "Core\\CustomConfigurationManager.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T15:00:00.462Z"
+              "WhenOpened": "2024-07-16T15:00:00.462Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "UI.cs",
-              "DocumentMoniker": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\UI.cs",
+              "DocumentMoniker": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\UI.cs",
               "RelativeDocumentMoniker": "TUI\\UI.cs",
-              "ToolTip": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\UI.cs",
+              "ToolTip": "C:\\Users\\Hrust\\source\\repos\\PCStore\\TUI\\UI.cs",
               "RelativeToolTip": "TUI\\UI.cs",
               "ViewState": "AQIAAHAAAAAAAAAAAAApwIkAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-06T17:04:50.011Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-06T17:04:50.011Z"
             }
           ]
         }

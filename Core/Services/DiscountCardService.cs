@@ -7,20 +7,20 @@ namespace Core.Services
     public class DiscountCardService : IDiscountCardService
     {
         private readonly Random _random;
-        private readonly IOptionsMonitor<LoggerOptions> _optionsMonitor;
+        private readonly DiscountCardsOptions _setupOptions;
 
-        public DiscountCardService(IOptionsMonitor<LoggerOptions> optionsMonitor)
+        public DiscountCardService(IOptionsMonitor<DiscountCardsOptions> setupOptions)
         {
             _random = new Random();
-            _optionsMonitor = optionsMonitor;
+            _setupOptions = setupOptions.CurrentValue;
         }
 
         public async Task AddDiscountCardAsync(Buyer buyer, int totalAmount = 0)
         {
             var discountCards = buyer.DiscountCards;
             var totalPurchaseAmount = buyer.TotalPurchaseAmount;
-            var dateIssueQuantumDiscountCard = DateTime.Parse(await GetValueFromJsonAsync("DateIssue"));
-            var numberDaysUntilCloseQuantumDiscountCard = int.Parse(await GetValueFromJsonAsync("AmountDays"));
+            var dateIssueQuantumDiscountCard = DateTime.Parse(_setupOptions.DateIssue);
+            var numberDaysUntilCloseQuantumDiscountCard = _setupOptions.AmountDays;
 
             if (discountCards.Any(dc => dc.Name == "QuantumDiscountCard"))
             {

@@ -1,6 +1,7 @@
 ﻿using Core;
 using Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace TUI
 {
@@ -8,8 +9,14 @@ namespace TUI
     {
         async static Task Main(string[] args)
         {
-            var serviceProvider = CustomServiceProvider.BuildServiceProvider();
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false)
+                .Build();
+
+            var serviceProvider = CustomServiceProvider.BuildServiceProvider(configuration);
             var ui = serviceProvider.GetRequiredService<UI>();
+
 
             while (true)
             {
