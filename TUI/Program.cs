@@ -9,11 +9,9 @@ namespace TUI
     {
         static void Main(string[] args)
         {
-            var path = "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\appsettings.json";
-
             IConfiguration configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(path, optional: false)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
 
             var serviceCollection = CustomServiceProvider.BuildServiceProvider();

@@ -68,7 +68,6 @@ C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\System.Diagnostics
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
-C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\TUI.dll.config
 C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
 C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
 C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
@@ -121,12 +120,16 @@ C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\en-US\TUI.resource
 C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\en-US\TUI.resources.dll
 C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Properties.Strings.en-US.resources
 C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\en-US\TUI.resources.dll
-C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Properties.Strings.resources
 C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Properties.Strings.en-US.resources
 C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\en-US\TUI.resources.dll
-C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\App.config
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\SharipovRR\source\repos\PCStore\TUI\bin\Debug\net8.0\ru-RU\TUI.resources.dll
 C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Properties.Strings.ru-RU.resources
 C:\Users\SharipovRR\source\repos\PCStore\TUI\obj\Debug\net8.0\ru-RU\TUI.resources.dll
+C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\ru-RU\TUI.resources.dll
+C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\TUI.Properties.Strings.ru-RU.resources
+C:\Users\Hrust\source\repos\PCStore\TUI\obj\Debug\net8.0\ru-RU\TUI.resources.dll
+C:\Users\Hrust\source\repos\PCStore\TUI\bin\Debug\net8.0\appsettings.json

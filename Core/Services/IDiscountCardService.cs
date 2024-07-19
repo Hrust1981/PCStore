@@ -7,8 +7,8 @@ namespace Core.Services
     {
         void AddDiscountCard(Buyer buyer, int totalPurchaseAmount = 0);
         void AddCheerfulDiscountCard(Buyer buyer);
-        void SetDayForIssueQuantumDiscountCard(int amountDays);
+        void SetDayForIssueQuantumDiscountCard(IServiceCollection services, int amountDays);
         string SetDateIssueForQuantumDiscountCard(IServiceCollection services);
-        string SetWorkDatesForCheerfulDiscountCard(int upperRangeLimitInDays);
+        string SetWorkDatesForCheerfulDiscountCard(IServiceCollection services);
     }
 }

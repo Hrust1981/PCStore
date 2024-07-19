@@ -2,7 +2,6 @@
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TUI;
@@ -25,9 +24,7 @@ namespace Core
             services.AddTransient(_ => new UserRepository(DB.users));
             services.AddTransient<IDiscountCardService, DiscountCardService>();
             services.AddTransient<IAuthentication, Authentication>();
-            services.AddTransient<IServiceCollection, ServiceCollection>();
 
-            //return services.BuildServiceProvider();
             return services;
         }
     }

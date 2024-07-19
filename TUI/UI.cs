@@ -203,7 +203,7 @@ namespace TUI
 
                         var numberDays = GetEnteredNumericValue(message);
 
-                        _discountCardService.SetDayForIssueQuantumDiscountCard(numberDays);
+                        _discountCardService.SetDayForIssueQuantumDiscountCard(_services, numberDays);
                         _logger.LogInformation($"The validity period of the Quantum discount card has been changed to {numberDays} days");
                     }
                     else if (positionNumber == Constants.WorkDatesCheerfulDiscountCard)
@@ -212,7 +212,7 @@ namespace TUI
                         message = Properties.Strings.WorkDatesCheerfulDiscountCard;
                         DisplayLine(message);
 
-                        var date = _discountCardService.SetWorkDatesForCheerfulDiscountCard(10);
+                        var date = _discountCardService.SetWorkDatesForCheerfulDiscountCard(_services);
 
                         Display(date.ToString());
                         _logger.LogInformation($"{date}- date of issue of the Fun discount card");
