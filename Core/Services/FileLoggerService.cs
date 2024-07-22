@@ -1,19 +1,18 @@
-﻿namespace Core.Services
+﻿
+namespace Core.Services
 {
     public class FileLoggerService : IFileLoggerService
     {
-        public FileLoggerService() {}
-
-        public void WriteToFile(string path, string message)
+        public async Task WriteToFileAsync(string path, string message)
         {
             try
             {
                 using StreamWriter writer = new StreamWriter(path, true);
-                writer.WriteLine(message);
+                await writer.WriteLineAsync(message);
             }
             catch (Exception ex)
             {
-                throw new Exception("An error occurred while writing the log to the file");
+                throw;
             }
         }
     }

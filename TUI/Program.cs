@@ -1,7 +1,7 @@
 ﻿using Core;
 using Core.Entities;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
+using Core.Enumerations;
 
 namespace TUI
 {
@@ -9,19 +9,8 @@ namespace TUI
     {
         static void Main(string[] args)
         {
-            IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-
-            var serviceCollection = CustomServiceProvider.BuildServiceProvider();
-            serviceCollection.AddOptions<LoggerOptions>().Bind(configuration.GetSection(LoggerOptions.ConfigKey));
-            serviceCollection.AddOptions<DiscountCardsOptions>().Bind(configuration.GetSection(DiscountCardsOptions.ConfigKeyQuantumDC));
-            serviceCollection.AddOptions<DiscountCardsOptions>().Bind(configuration.GetSection(DiscountCardsOptions.ConfigKeyCheerfulDC));
-
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            var serviceProvider = CustomServiceProvider.BuildServiceProvider();
             var ui = serviceProvider.GetRequiredService<UI>();
-
 
             while (true)
             {
@@ -36,50 +25,50 @@ namespace TUI
                     switch (user.Role)
                     {
                         case Role.Admin:
-                            switch (menuItem)
+                            switch ((AdminMenu)menuItem)
                             {
-                                case Constants.PathLoggingFile:
+                                case AdminMenu.PathLoggingFile:
                                     ui.ShowPathForLoggingFile();
                                     break;
-                                case Constants.SettingsDiscountCards:
-                                    ui.SettingsForDiscountCardsAsync();
+                                case AdminMenu.SettingsDiscountCards:
+                                    ui.SettingsForDiscountCards();
                                     break;
-                                case Constants.SignOut:
+                                case AdminMenu.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
                                     break;
                             }
                             break;
                         case Role.Buyer:
                             var buyer = (Buyer)user;
-                            switch (menuItem)
+                            switch ((BuyerMenu)menuItem)
                             {
-                                case Constants.SelectProducts:
+                                case BuyerMenu.SelectProducts:
                                     ui.SelectProducts(buyer);
                                     break;
-                                case Constants.ShowCart:
+                                case BuyerMenu.ShowCart:
                                     ui.ShowCart(buyer);
                                     break;
-                                case Constants.BuyCheerfulDiscountCard:
-                                    ui.BuyCheerfulDiscountCardAsync(buyer);
+                                case BuyerMenu.BuyCheerfulDiscountCard:
+                                    ui.BuyCheerfulDiscountCard(buyer);
                                     break;
-                                case Constants.SignOut:
+                                case BuyerMenu.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
                                     break;
                             }
                             break;
                         case Role.Seller:
-                            switch (menuItem)
+                            switch ((SellerMenu)menuItem)
                             {
-                                case Constants.AddProduct:
+                                case SellerMenu.AddProduct:
                                     ui.AddProduct();
                                     break;
-                                case Constants.RemoveProduct:
+                                case SellerMenu.RemoveProduct:
                                     ui.RemoveProduct();
                                     break;
-                                case Constants.UpdateProduct:
+                                case SellerMenu.UpdateProduct:
                                     ui.UpdateProduct();
                                     break;
-                                case Constants.SignOut:
+                                case SellerMenu.SignOut:
                                     isAuthenticated = ui.SignOut(user.Login);
                                     break;
                             }

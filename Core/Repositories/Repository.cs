@@ -5,9 +5,9 @@ namespace Core.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : Entity
     {
-        private readonly List<T> _entities;
+        protected readonly List<T> _entities;
 
-        public Repository(List<T> entities)
+        protected Repository(List<T> entities)
         {
             _entities = entities;
         }

@@ -1,7 +1,7 @@
-﻿using Core.Data;
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Repositories;
 using Core.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TUI;
@@ -10,22 +10,28 @@ namespace Core
 {
     public class CustomServiceProvider
     {
-        public static IServiceCollection BuildServiceProvider()
+        public static ServiceProvider BuildServiceProvider()
         {
-            var services = new ServiceCollection();
-            
-            services.AddTransient<DiscountCardService>();
-            services.AddTransient<UI>();
-            services.AddTransient<IFileLoggerService, FileLoggerService>();
-            services.AddTransient(typeof(ILogger<>), typeof(CustomLogger<>));
-            services.AddTransient<IRepository<Product>, ProductRepository>(_ => new ProductRepository(DB.products));
-            services.AddTransient<IShoppingCartRepository, ShoppingCartRepository>(_ => new ShoppingCartRepository(DB.shoppingCarts));
-            services.AddTransient<IShoppingCartService, ShoppingCartService>();
-            services.AddTransient(_ => new UserRepository(DB.users));
-            services.AddTransient<IDiscountCardService, DiscountCardService>();
-            services.AddTransient<IAuthentication, Authentication>();
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
 
-            return services;
+            var services = new ServiceCollection();
+            services.AddTransient<UI>()
+                .AddTransient<IFileLoggerService, FileLoggerService>()
+                .AddTransient(typeof(ILogger<>), typeof(CustomLogger<>))
+                .AddTransient<IRepository<Product>, ProductRepository>()
+                .AddTransient<IShoppingCartRepository, ShoppingCartRepository>()
+                .AddTransient<IShoppingCartService, ShoppingCartService>()
+                .AddTransient<IUserRepository, UserRepository>()
+                .AddTransient<IDiscountCardService, DiscountCardService>()
+                .AddTransient<IAuthentication, Authentication>();
+            services.AddOptions<LoggerOptions>().Bind(configuration.GetSection(LoggerOptions.ConfigKey));
+            services.AddOptions<DiscountCardsOptions>().Bind(configuration.GetSection(DiscountCardsOptions.ConfigKeyQuantumDC));
+            services.AddOptions<DiscountCardsOptions>().Bind(configuration.GetSection(DiscountCardsOptions.ConfigKeyCheerfulDC));
+
+            return services.BuildServiceProvider();
         }
     }
 }

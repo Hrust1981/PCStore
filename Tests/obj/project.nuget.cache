@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YLIKeKaNgGllUe+C27kTy7zoNcNV+oTiWoCPAmwKxvYKw2qjMO82YRvdOEhPByP9fhRSVw9E6iegljxFxvlmkQ==",
+  "dgSpecHash": "uXAVPx8U3ZRvwJg6QB14nw1bzOQJT8taNIyPeAD/70kivh1ih/AAkI6qa+/wVnOWzXXLsT5osctxiaRWkLzT0A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Tests\\Tests.csproj",
+  "projectFilePath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Tests\\PCStore.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hrust\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Hrust\\.nuget\\packages\\bodi\\1.5.0\\bodi.1.5.0.nupkg.sha512",

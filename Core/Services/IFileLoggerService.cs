@@ -2,6 +2,6 @@
 {
     public interface IFileLoggerService
     {
-        public void WriteToFile(string path, string message);
+        async Task WriteToFileAsync(string path, string message) {}
     }
 }

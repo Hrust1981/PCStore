@@ -7,8 +7,8 @@ namespace Core.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
-        private readonly IRepository<Product> _productRepository;
         private readonly IShoppingCartRepository _shoppingCartRepository;
+        private readonly IRepository<Product> _productRepository;
         private readonly IDiscountCardService _discountCardService;
         private readonly ILogger<ShoppingCartService> _logger;
 
@@ -25,16 +25,15 @@ namespace Core.Services
 
         public void AddProduct(Buyer buyer, Product product)
         {
-            var shoppingCart = _shoppingCartRepository.GetByUserId(buyer.Id);
-
-            if (!_shoppingCartRepository.QuantityInStock.Any(id => id.Key == product.Id))
+            var quantityStock = _shoppingCartRepository.QuantityInStock;
+            if (!quantityStock.Any(id => id.Key == product.Id))
             {
-                _shoppingCartRepository.QuantityInStock.Add(product.Id, product.Quantity);
+                quantityStock.Add(product.Id, product.Quantity);
             }
 
             if (product.Quantity > 0)
             {
-                var products = shoppingCart.Products;
+                var products = _shoppingCartRepository.GetByUserId(buyer.Id).Products;
                 if (products.Any(p => p.Id == product.Id))
                 {
                     products.FirstOrDefault(p => p.Id == product.Id)!.Quantity++;
@@ -44,7 +43,7 @@ namespace Core.Services
                     products.Add(new Product(product.Id, product.Name,
                                              product.Description, product.Price, 1));
                 }
-                product.Quantity--;
+                _productRepository.Get(product.Id).Quantity--;
             }
             _logger.LogInformation($"Product with ID:{product.Id} has been added to shopping cart");
         }
@@ -74,14 +73,12 @@ namespace Core.Services
 
         public void DeleteProduct(Buyer buyer, Product product)
         {
-            var shoppingCart = _shoppingCartRepository.GetByUserId(buyer.Id);
             var productFromDB = _productRepository.GetAll().FirstOrDefault(p => p.Id == product.Id);
-
             if (productFromDB != null && product != null)
             {
                 productFromDB.Quantity += product.Quantity;
                 _productRepository.Update(productFromDB);
-                shoppingCart.Products.Remove(product);
+                _shoppingCartRepository.GetByUserId(buyer.Id).Products.Remove(product);
             }
             _logger.LogInformation($"Product with ID:{product.Id} has been removed from the shopping cart");
         }

@@ -4,12 +4,12 @@
     "C:\\Users\\Hrust\\source\\repos\\PCStore\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Core.csproj": {
+    "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\PCStore.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Core.csproj",
-        "projectName": "Core",
-        "projectPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\PCStore.Core.csproj",
+        "projectName": "PCStore.Core",
+        "projectPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\PCStore.Core.csproj",
         "packagesPath": "C:\\Users\\Hrust\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\obj\\",
         "projectStyle": "PackageReference",
@@ -69,10 +69,6 @@
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
               "version": "[8.0.0, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.8.1, )"
             }
           },
           "imports": [
@@ -124,8 +120,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\Core.csproj"
+              "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\PCStore.Core.csproj": {
+                "projectPath": "C:\\Users\\Hrust\\source\\repos\\PCStore\\Core\\PCStore.Core.csproj"
               }
             }
           }

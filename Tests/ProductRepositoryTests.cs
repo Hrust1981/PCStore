@@ -1,11 +1,11 @@
 ﻿using Core.Repositories;
 using Core.Entities;
 
-namespace Tests
+namespace PCStore.Tests
 {
     public class ProductRepositoryTests
     {
-        private List<Product> prvGetListProduct()
+        private List<Product> PrvGetListProduct()
         {
             return new List<Product>()
             {
@@ -16,40 +16,40 @@ namespace Tests
             };
         }
 
-        private IRepository<Product> prvGetProductRepository()
+        private IRepository<Product> PrvGetProductRepository()
         {
-            var listProduct = prvGetListProduct();
-            return new ProductRepository(listProduct);
+            var listProduct = PrvGetListProduct();
+            return new ProductRepository();
         }
 
         [Fact]
         public void GetAll_Nothing_ListOfProducts()
         {
-            prvGetProductRepository().GetAll();
+            PrvGetProductRepository().GetAll();
         }
 
         [Fact]
         public void Get_Guid_Product()
         {
-            prvGetProductRepository().Get(Guid.Parse("1e720551-e86e-47f7-bf4e-dcbf8773759f"));
+            PrvGetProductRepository().Get(Guid.Parse("1e720551-e86e-47f7-bf4e-dcbf8773759f"));
         }
 
         [Fact]
         public void Add_Product()
         {
-            prvGetProductRepository().Add(new Product("product", "product", 1, 1));
+            PrvGetProductRepository().Add(new Product("product", "product", 1, 1));
         }
 
         [Fact]
         public void Update_Product_UpdatableProduct()
         {
-            prvGetProductRepository().Update(new Product(Guid.Parse("40e7c7b4-92b1-4bf5-a224-ae7d54f1828d"), "Printer Brother HL-1210W", "A4, 2400x600 dpi, USB, Wi-Fi", 9199, 12));
+            PrvGetProductRepository().Update(new Product(Guid.Parse("40e7c7b4-92b1-4bf5-a224-ae7d54f1828d"), "Printer Brother HL-1210W", "A4, 2400x600 dpi, USB, Wi-Fi", 9199, 12));
         }
 
         [Fact]
         public void Delete_Guid()
         {
-            prvGetProductRepository().Delete(Guid.Parse("f34b41a0-c7d8-4f18-86de-8dba869d9d0a"));
+            PrvGetProductRepository().Delete(Guid.Parse("f34b41a0-c7d8-4f18-86de-8dba869d9d0a"));
         }
     }
 }

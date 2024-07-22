@@ -1,8 +1,8 @@
 ﻿using Core;
 using Core.Entities;
+using Core.Enumerations;
 using Core.Repositories;
 using Core.Services;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Globalization;
@@ -17,7 +17,6 @@ namespace TUI
         private readonly IAuthentication _authentication;
         private readonly IDiscountCardService _discountCardService;
         private readonly LoggerOptions _setupOptions;
-        private readonly IServiceCollection _services;
         private readonly ILogger<UI> _logger;
 
         public UI(IRepository<Product> repository,
@@ -35,32 +34,34 @@ namespace TUI
             _authentication = authentication;
             _discountCardService = discountCardService;
             _setupOptions = setupOptions.CurrentValue;
-            _services = CustomServiceProvider.BuildServiceProvider();
         }
 
         public void SelectCulture()
         {
             try
             {
-                var message = Properties.Strings.SelectLanguage;
-                var positionNumber = (Culture)GetEnteredNumericValue(message);
+                var displayMessage = Properties.Strings.SelectLanguage;
+                var positionNumber = (Culture)GetEnteredNumericValue(displayMessage);
 
-                if (positionNumber == Culture.Russian)
-                {
-                    SetCulture("ru-RU");
-                }
-                else if (positionNumber == Culture.English)
+                if (positionNumber == Culture.English)
                 {
                     SetCulture("en-US");
                 }
-                else
+                else if (positionNumber == Culture.Russian)
                 {
                     SetCulture("ru-RU");
+                }
+                else
+                {
+                    throw new Exception($"""
+                        Entered value: '{positionNumber}'.
+                        Expected values: '{displayMessage}'
+                        """);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Exception in the SelectCulture method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(1500);
         }
@@ -69,92 +70,90 @@ namespace TUI
         {
             try
             {
-                string message = Properties.Strings.Login;
-                Display(message);
+                string outputMessage = Properties.Strings.Login;
+                Display(outputMessage);
                 string login = DataInput();
 
-                message = Properties.Strings.Password;
-                DisplayLine(message);
+                outputMessage = Properties.Strings.Password;
+                DisplayLine(outputMessage);
                 string password = HiddenPasswordInput();
 
                 var user = _authentication.Authenticate(login, password);
 
                 if (user.IsAuthenticated)
                 {
-                    message = Properties.Strings.Hello + user.Name + ", " + Properties.Strings.LoggedIn;
-                    _logger.LogInformation($"User with login:{user.Login} is authorized");
+                    outputMessage = Properties.Strings.Hello + user.Name + ", " + Properties.Strings.LoggedIn;
+                    _logger.LogInformation($"User with login:{user.Login} is authorized.");
                 }
                 else
                 {
-                    message = Properties.Strings.NotLoggedIn;
-                    _logger.LogWarning($"User with login:{user.Login} is not authorized");
+                    outputMessage = Properties.Strings.NotLoggedIn;
+                    _logger.LogWarning($"User with login:{user.Login} is not authorized.");
                 }
 
-                DisplayLine(message);
+                DisplayLine(outputMessage);
                 Clear(2000);
                 return user;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the Authentication method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
                 Clear(100);
                 return User.Empty;
             }
         }
 
-        public string Menu(User user)
+        public int Menu(User user)
         {
+            var value = 0;
             try
             {
-                string message = string.Empty;
-
+                string displayMessage = string.Empty;
                 if (user.Role == Role.Admin)
                 {
-                    message = Properties.Strings.MenuForAdmin;
+                    displayMessage = Properties.Strings.MenuForAdmin;
                 }
                 else if (user.Role == Role.Buyer)
                 {
-                    message = Properties.Strings.MenuForBuyer;
+                    displayMessage = Properties.Strings.MenuForBuyer;
                 }
                 else if (user.Role == Role.Seller)
                 {
-                    message = Properties.Strings.MenuForSeller;
+                    displayMessage = Properties.Strings.MenuForSeller;
                 }
-                Display(message);
-                string value = DataInput();
+                value = GetEnteredNumericValue(displayMessage);
                 Clear(0);
-                return value;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the Menu method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
                 Clear(100);
-                return string.Empty;
             }
+            return value;
         }
 
-        public void BuyCheerfulDiscountCardAsync(Buyer buyer)
+        public void BuyCheerfulDiscountCard(Buyer buyer)
         {
             try
             {
-                var message = string.Empty;
+                var displayMessage = string.Empty;
                 var discountCards = buyer.DiscountCards;
 
                 if (!discountCards.Any(dc => string.Equals(dc.Name, "CheerfulDiscountCard")))
                 {
                     _discountCardService.AddCheerfulDiscountCard(buyer);
-                    message = Properties.Strings.CheerfulDiscountCardPurchased;
+                    displayMessage = Properties.Strings.CheerfulDiscountCardPurchased;
                 }
                 else
                 {
-                    message = Properties.Strings.CheerfulDiscountCardAlreadyPurchased;
+                    displayMessage = Properties.Strings.CheerfulDiscountCardAlreadyPurchased;
                 }
-                Display(message);
+                Display(displayMessage);
                 Clear(2500);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the BuyCheerfulDiscountCard method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(100);
         }
@@ -170,59 +169,59 @@ namespace TUI
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the ShowPathForLoggingFile method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(100);
         }
 
-        public void SettingsForDiscountCardsAsync()
+        public void SettingsForDiscountCards()
         {
             try
             {
-                var positionNumber = 0;
-                while (positionNumber != Constants.Exit)
+                var positionNumber = default(SettingValueDiscountCard);
+                while (positionNumber != SettingValueDiscountCard.Exit)
                 {
-                    var message = Properties.Strings.DiscountCardSettingsMenu;
-                    positionNumber = GetEnteredNumericValue(message);
+                    var displayMessage = Properties.Strings.DiscountCardSettingsMenu;
+                    positionNumber = (SettingValueDiscountCard)GetEnteredNumericValue(displayMessage);
 
-                    if (positionNumber == Constants.DateIssueQuantumDiscountCard)
+                    if (positionNumber == SettingValueDiscountCard.DateIssueQuantumDiscountCard)
                     {
                         Clear(100);
-                        message = Properties.Strings.SpecialDayForQuantumDiscountCard;
-                        DisplayLine(message);
+                        displayMessage = Properties.Strings.SpecialDayForQuantumDiscountCard;
+                        DisplayLine(displayMessage);
 
-                        var date = _discountCardService.SetDateIssueForQuantumDiscountCard(_services);
+                        var date = _discountCardService.SetDateIssueForQuantumDiscountCard();
 
                         Display(date.ToString());
-                        _logger.LogInformation($"The day for issuing a quantum discount card has been determined - {date}");
+                        _logger.LogInformation($"The day for issuing a quantum discount card has been determined - {date}.");
                     }
-                    else if (positionNumber == Constants.ValidityPeriodQuantumDiscountCard)
+                    else if (positionNumber == SettingValueDiscountCard.ValidityPeriodQuantumDiscountCard)
                     {
                         Clear(100);
-                        message = Properties.Strings.ValidityPeriodQuantumDiscountCard;
+                        displayMessage = Properties.Strings.ValidityPeriodQuantumDiscountCard;
 
-                        var numberDays = GetEnteredNumericValue(message);
+                        var numberDays = GetEnteredNumericValue(displayMessage);
 
-                        _discountCardService.SetDayForIssueQuantumDiscountCard(_services, numberDays);
-                        _logger.LogInformation($"The validity period of the Quantum discount card has been changed to {numberDays} days");
+                        _discountCardService.SetDayForIssueQuantumDiscountCard(numberDays);
+                        _logger.LogInformation($"The validity period of the Quantum discount card has been changed to {numberDays} days.");
                     }
-                    else if (positionNumber == Constants.WorkDatesCheerfulDiscountCard)
+                    else if (positionNumber == SettingValueDiscountCard.WorkDatesCheerfulDiscountCard)
                     {
                         Clear(100);
-                        message = Properties.Strings.WorkDatesCheerfulDiscountCard;
-                        DisplayLine(message);
+                        displayMessage = Properties.Strings.WorkDatesCheerfulDiscountCard;
+                        DisplayLine(displayMessage);
 
-                        var date = _discountCardService.SetWorkDatesForCheerfulDiscountCard(_services);
+                        var date = _discountCardService.SetWorkDatesForCheerfulDiscountCard();
 
                         Display(date.ToString());
-                        _logger.LogInformation($"{date}- date of issue of the Fun discount card");
+                        _logger.LogInformation($"{date}- date of issue of the Fun discount card.");
                     }
                     Clear(2500);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the SettingsForDiscountCards method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(100);
         }
@@ -232,17 +231,17 @@ namespace TUI
             try
             {
                 var shoppingCart = _shoppingCartRepository.GetByUserId(buyer.Id).Products;
-                string messsage;
+                string displayMesssage;
                 if (shoppingCart.Count != 0)
                 {
                     var hasPayment = _shoppingCartService.Payment(buyer, shoppingCart);
-                    messsage = hasPayment ? Properties.Strings.SuccessfulPayment : Properties.Strings.SuccessfulNotPayment;
-                    Display(messsage);
+                    displayMesssage = hasPayment ? Properties.Strings.SuccessfulPayment : Properties.Strings.SuccessfulNotPayment;
+                    Display(displayMesssage);
                 }
                 else
                 {
-                    messsage = Properties.Strings.CartIsEmpty;
-                    Display(messsage);
+                    displayMesssage = Properties.Strings.CartIsEmpty;
+                    Display(displayMesssage);
                 }
                 Clear(2500);
             }
@@ -257,12 +256,12 @@ namespace TUI
             try
             {
                 var productId = 0;
-                while (productId != Constants.Exit)
+                while (productId != Constants.EXIT)
                 {
                     var products = _productRepository.GetAll();
                     if (products.Count == 0)
                     {
-                        _logger.LogWarning("There are no products in the database");
+                        _logger.LogWarning("There are no products in the database.");
                     }
 
                     var idCounter = 0;
@@ -271,11 +270,11 @@ namespace TUI
                         DisplayLine(++idCounter + product.ToString());
                     }
 
-                    var message = Properties.Strings.Exit;
-                    DisplayLine(message);
+                    var displayMessage = Properties.Strings.Exit;
+                    DisplayLine(displayMessage);
 
-                    message = Properties.Strings.AddItemToCart;
-                    productId = GetEnteredNumericValue(message);
+                    displayMessage = Properties.Strings.AddItemToCart;
+                    productId = GetEnteredNumericValue(displayMessage);
 
                     if (productId > 0)
                     {
@@ -286,17 +285,17 @@ namespace TUI
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the SelectProducts method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(0);
         }
 
         public void ShowCart(Buyer buyer)
         {
-            var positionNumber = 0;
+            var positionNumber = default(ShowCartMenu);
             try
             {
-                while (positionNumber != Constants.Exit)
+                while (positionNumber != ShowCartMenu.Exit)
                 {
                     var products = _shoppingCartRepository.GetByUserId(buyer.Id).Products;
                     var idCounter = 0;
@@ -305,37 +304,37 @@ namespace TUI
                         DisplayLine(++idCounter + product.ToString());
                     }
 
-                    string? message;
+                    string? displayMessage;
                     if (products.Count != 0)
                     {
                         var totalAmount = _shoppingCartService.CalculateTotalAmount(buyer);
 
-                        message = Properties.Strings.AmountToPay + totalAmount + Properties.Strings.RUB;
-                        DisplayLine(message);
+                        displayMessage = Properties.Strings.AmountToPay + totalAmount + Properties.Strings.RUB;
+                        DisplayLine(displayMessage);
                     }
 
-                    message = Properties.Strings.MenuShowCart;
-                    positionNumber = GetEnteredNumericValue(message);
+                    displayMessage = Properties.Strings.MenuShowCart;
+                    positionNumber = (ShowCartMenu)GetEnteredNumericValue(displayMessage);
 
-                    message = Properties.Strings.EnterProductID;
+                    displayMessage = Properties.Strings.EnterProductID;
                     switch (positionNumber)
                     {
-                        case Constants.PayGoods:
+                        case ShowCartMenu.PayGoods:
                             Payment(buyer);
                             break;
-                        case Constants.ChangeProductQuantity:
+                        case ShowCartMenu.ChangeProductQuantity:
                             {
-                                var productId = GetEnteredNumericValue(message);
+                                var productId = GetEnteredNumericValue(displayMessage);
 
-                                message = Properties.Strings.EnterQuantity;
-                                var quantity = GetEnteredNumericValue(message);
+                                displayMessage = Properties.Strings.EnterQuantity;
+                                var quantity = GetEnteredNumericValue(displayMessage);
 
                                 _shoppingCartService.UpdateQuantityProduct(buyer, products[productId - 1], quantity);
                                 break;
                             }
-                        case Constants.RemoveItemFromCart:
+                        case ShowCartMenu.RemoveItemFromCart:
                             {
-                                var productId = GetEnteredNumericValue(message);
+                                var productId = GetEnteredNumericValue(displayMessage);
                                 _shoppingCartService.DeleteProduct(buyer, products[productId - 1]);
                                 break;
                             }
@@ -345,7 +344,7 @@ namespace TUI
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the ShowCart method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(0);
         }
@@ -354,24 +353,24 @@ namespace TUI
         {
             try
             {
-                var message = Properties.Strings.EnterProductName;
-                var name = GetEnteredStringValue(message);
+                var displayMessage = Properties.Strings.EnterProductName;
+                var name = GetEnteredStringValue(displayMessage);
 
-                message = Properties.Strings.EnterProductDescription;
-                var description = GetEnteredStringValue(message);
+                displayMessage = Properties.Strings.EnterProductDescription;
+                var description = GetEnteredStringValue(displayMessage);
 
-                message = Properties.Strings.EnterPriceProduct;
-                var price = GetEnteredNumericValue(message);
+                displayMessage = Properties.Strings.EnterPriceProduct;
+                var price = GetEnteredNumericValue(displayMessage);
 
-                message = Properties.Strings.EnterQuantityProduct;
-                var quantity = GetEnteredNumericValue(message);
+                displayMessage = Properties.Strings.EnterQuantityProduct;
+                var quantity = GetEnteredNumericValue(displayMessage);
 
                 _productRepository.Add(new Product(name, description, price, quantity));
-                _logger.LogInformation($"The new product named '{name}' has been added to the product repository");
+                _logger.LogInformation($"The new product named '{name}' has been added to the product repository.");
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the AddProduct method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(0);
         }
@@ -381,12 +380,12 @@ namespace TUI
             var productId = 0;
             try
             {
-                while (productId != Constants.Exit)
+                while (productId != Constants.EXIT)
                 {
                     var products = _productRepository.GetAll();
                     if (products.Count == 0)
                     {
-                        _logger.LogWarning("There are no products in the database");
+                        _logger.LogWarning("There are no products in the database.");
                     }
 
                     var idCounter = 0;
@@ -395,11 +394,11 @@ namespace TUI
                         DisplayLine(++idCounter + product.ToString());
                     }
 
-                    var message = Properties.Strings.Exit;
-                    DisplayLine(message);
+                    var displayMessage = Properties.Strings.Exit;
+                    DisplayLine(displayMessage);
 
-                    message = Properties.Strings.ToDeleteEnterProductID;
-                    productId = GetEnteredNumericValue(message);
+                    displayMessage = Properties.Strings.ToDeleteEnterProductID;
+                    productId = GetEnteredNumericValue(displayMessage);
 
                     if (productId > 0)
                     {
@@ -407,12 +406,12 @@ namespace TUI
                         if (deletetableProduct != null)
                         {
                             _productRepository.Delete(deletetableProduct.Id);
-                            _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository");
+                            _logger.LogInformation($"Product with ID:{productId} has been removed from the product repository.");
                         }
                         else
                         {
-                            _logger.LogWarning($"Product with ID:{productId} not found");
-                            throw new Exception($"Product with ID:{productId} is not found");
+                            _logger.LogWarning($"Product with ID:{productId} not found.");
+                            throw new Exception($"Product with ID:{productId} is not found.");
                         }
                     }
                     Clear(0);
@@ -420,7 +419,7 @@ namespace TUI
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the RemoveProduct method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(0);
         }
@@ -430,12 +429,12 @@ namespace TUI
             var productId = 0;
             try
             {
-                while (productId != Constants.Exit)
+                while (productId != Constants.EXIT)
                 {
                     var products = _productRepository.GetAll();
                     if (products.Count == 0)
                     {
-                        _logger.LogWarning("There are no products in the database");
+                        _logger.LogWarning("There are no products in the database.");
                     }
 
                     var idCounter = 0;
@@ -444,40 +443,40 @@ namespace TUI
                         DisplayLine(++idCounter + product.ToString());
                     }
 
-                    var message = Properties.Strings.Exit;
-                    DisplayLine(message);
+                    var displayMessage = Properties.Strings.Exit;
+                    DisplayLine(displayMessage);
 
-                    message = Properties.Strings.ToEditEnterProductID;
-                    productId = GetEnteredNumericValue(message);
+                    displayMessage = Properties.Strings.ToEditEnterProductID;
+                    productId = GetEnteredNumericValue(displayMessage);
 
                     if (productId > 0)
                     {
                         var updatableProduct = products[productId - 1];
                         if (updatableProduct != null)
                         {
-                            message = Properties.Strings.EnterProductName;
-                            var enteredName = GetEnteredStringValue(message);
+                            displayMessage = Properties.Strings.EnterProductName;
+                            var enteredName = GetEnteredStringValue(displayMessage);
                             var name = string.IsNullOrEmpty(enteredName) ? updatableProduct.Name : enteredName;
 
-                            message = Properties.Strings.EnterProductDescription;
-                            var enteredDescription = GetEnteredStringValue(message);
+                            displayMessage = Properties.Strings.EnterProductDescription;
+                            var enteredDescription = GetEnteredStringValue(displayMessage);
                             var description = string.IsNullOrEmpty(enteredDescription) ? updatableProduct.Description : enteredDescription;
 
-                            message = Properties.Strings.EnterPriceProduct;
-                            var enteredPrice = GetEnteredNumericValue(message);
+                            displayMessage = Properties.Strings.EnterPriceProduct;
+                            var enteredPrice = GetEnteredNumericValue(displayMessage);
                             var price = enteredPrice > 0 ? enteredPrice : updatableProduct.Price;
 
-                            message = Properties.Strings.EnterQuantityProduct;
-                            var enteredQuantity = GetEnteredNumericValue(message);
+                            displayMessage = Properties.Strings.EnterQuantityProduct;
+                            var enteredQuantity = GetEnteredNumericValue(displayMessage);
                             var quantity = enteredQuantity > 0 ? enteredQuantity : updatableProduct.Quantity;
 
                             _productRepository.Update(new Product(updatableProduct.Id, name, description, price, quantity));
-                            _logger.LogInformation($"Product with ID:{updatableProduct.Id} updated");
+                            _logger.LogInformation($"Product with ID:{updatableProduct.Id} updated.");
                         }
                         else
                         {
-                            _logger.LogWarning($"Product with ID:{productId} not found");
-                            throw new Exception($"Product with ID:{productId} is not found");
+                            _logger.LogWarning($"Product with ID:{productId} not found.");
+                            throw new Exception($"Product with ID:{productId} is not found.");
                         }
                     }
                     Clear(0);
@@ -485,7 +484,7 @@ namespace TUI
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Exception in the UpdateProduct method. Message - {ex.Message}");
+                _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
             }
             Clear(0);
         }

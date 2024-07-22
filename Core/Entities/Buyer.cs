@@ -1,4 +1,6 @@
-﻿namespace Core.Entities
+﻿using Core.Enumerations;
+
+namespace Core.Entities
 {
     public class Buyer : User
     {

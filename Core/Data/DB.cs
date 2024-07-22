@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Enumerations;
 
 namespace Core.Data
 {

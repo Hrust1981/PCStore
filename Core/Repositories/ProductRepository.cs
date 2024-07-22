@@ -1,14 +1,12 @@
-﻿using Core.Entities;
+﻿using Core.Data;
+using Core.Entities;
 
 namespace Core.Repositories
 {
     public class ProductRepository : Repository<Product>
     {
-        private readonly List<Product> _products;
-
-        public ProductRepository(List<Product> products) : base(products)
+        public ProductRepository() : base(DB.products)
         {
-            _products = products;
         }
     }
 }

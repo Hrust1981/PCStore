@@ -1,0 +1,13 @@
+C:\Users\Hrust\source\repos\PCStore\Core\bin\Debug\net8.0\PCStore.Core.deps.json
+C:\Users\Hrust\source\repos\PCStore\Core\bin\Debug\net8.0\PCStore.Core.dll
+C:\Users\Hrust\source\repos\PCStore\Core\bin\Debug\net8.0\PCStore.Core.pdb
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\PCStore.Core.csproj.AssemblyReference.cache
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\PCStore.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\PCStore.Core.AssemblyInfoInputs.cache
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\PCStore.Core.AssemblyInfo.cs
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\PCStore.Core.csproj.CoreCompileInputs.cache
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\PCStore.Core.sourcelink.json
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\PCStore.Core.dll
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\refint\PCStore.Core.dll
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\PCStore.Core.pdb
+C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\ref\PCStore.Core.dll

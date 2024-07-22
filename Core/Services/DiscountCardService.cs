@@ -2,28 +2,26 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Globalization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Core.Services
 {
     public class DiscountCardService : IDiscountCardService
     {
         private readonly Random _random;
-        private readonly DiscountCardsOptions _setupOptions;
+        private readonly DiscountCardsOptions _discountCardOptions;
 
-        public DiscountCardService(IOptionsMonitor<DiscountCardsOptions> setupOptions)
+        public DiscountCardService(IOptionsMonitor<DiscountCardsOptions> discountCardOptionsMonitor)
         {
             _random = new Random();
-            _setupOptions = setupOptions.CurrentValue;
+            _discountCardOptions = discountCardOptionsMonitor.CurrentValue;
         }
 
         public void AddDiscountCard(Buyer buyer, int totalAmount = 0)
         {
             var discountCards = buyer.DiscountCards;
             var totalPurchaseAmount = buyer.TotalPurchaseAmount;
-            var dateIssueQuantumDiscountCard = DateTime.Parse(_setupOptions.DateIssue);
-            var numberDaysUntilCloseQuantumDiscountCard = _setupOptions.AmountDays;
+            var dateIssueQuantumDiscountCard = DateTime.Parse(_discountCardOptions.DateIssue);
+            var numberDaysUntilCloseQuantumDiscountCard = _discountCardOptions.AmountDays;
 
             if (discountCards.Any(dc => dc.Name == "QuantumDiscountCard"))
             {
@@ -79,9 +77,9 @@ namespace Core.Services
 
         public void AddCheerfulDiscountCard(Buyer buyer)
         {
-            var stringRepresentationDate = _setupOptions.WorkDates;
+            var stringRepresentationDate = _discountCardOptions.WorkDates;
             var date = DateTime.Parse(stringRepresentationDate);
-            var numberDays = _setupOptions.NumberDays;
+            var numberDays = _discountCardOptions.NumberDays;
             var discountValue =  DateTime.Today >= date && DateTime.Today <= date.AddDays(numberDays) ? 10 : 0;
             buyer.DiscountCards.Add(new CheerfulDiscountCard(discountValue));
         }
@@ -100,25 +98,22 @@ namespace Core.Services
                 $"{dayTimeNow.Year}.{dayTimeNow.Month}.{day}";
         }
 
-        public void SetDayForIssueQuantumDiscountCard(IServiceCollection services, int amountDays)
+        public void SetDayForIssueQuantumDiscountCard(int amountDays)
         {
-            _setupOptions.AmountDays = amountDays;
-            JsonSerializer.Serialize(_setupOptions);
+            _discountCardOptions.AmountDays = amountDays;
         }
 
-        public string SetDateIssueForQuantumDiscountCard(IServiceCollection services)
+        public string SetDateIssueForQuantumDiscountCard()
         {
             var date = GenerateDate();
-            _setupOptions.DateIssue = date;
-            JsonSerializer.Serialize(_setupOptions);
+            _discountCardOptions.DateIssue = date;
             return date;
         }
 
-        public string SetWorkDatesForCheerfulDiscountCard(IServiceCollection services)
+        public string SetWorkDatesForCheerfulDiscountCard()
         {
             var date = GenerateDate();
-            _setupOptions.WorkDates = date;
-            JsonSerializer.Serialize(_setupOptions);
+            _discountCardOptions.WorkDates = date;
             return date;
         }
     }
