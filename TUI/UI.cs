@@ -3,6 +3,7 @@ using Core.Entities;
 using Core.Enumerations;
 using Core.Repositories;
 using Core.Services;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Globalization;
@@ -16,6 +17,7 @@ namespace TUI
         private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly IAuthentication _authentication;
         private readonly IDiscountCardService _discountCardService;
+        private readonly IStringLocalizer _stringLocalizer;
         private readonly LoggerOptions _setupOptions;
         private readonly ILogger<UI> _logger;
 
@@ -24,6 +26,7 @@ namespace TUI
                   IShoppingCartRepository shoppingCartRepository,
                   IAuthentication authentication,
                   IDiscountCardService discountCardService,
+                  IStringLocalizer stringLocalizer,
                   IOptionsMonitor<LoggerOptions> setupOptions,
                   ILogger<UI> logger)
         {
@@ -33,6 +36,7 @@ namespace TUI
             _logger = logger;
             _authentication = authentication;
             _discountCardService = discountCardService;
+            _stringLocalizer = stringLocalizer;
             _setupOptions = setupOptions.CurrentValue;
         }
 
@@ -40,7 +44,7 @@ namespace TUI
         {
             try
             {
-                var displayMessage = Properties.Strings.SelectLanguage;
+                var displayMessage = _stringLocalizer["SelectLanguage"];
                 var positionNumber = (Culture)GetEnteredNumericValue(displayMessage);
 
                 if (positionNumber == Culture.English)
@@ -70,11 +74,11 @@ namespace TUI
         {
             try
             {
-                string outputMessage = Properties.Strings.Login;
+                string outputMessage = _stringLocalizer["Login"];
                 Display(outputMessage);
                 string login = DataInput();
 
-                outputMessage = Properties.Strings.Password;
+                outputMessage = _stringLocalizer["Password"];
                 DisplayLine(outputMessage);
                 string password = HiddenPasswordInput();
 
@@ -82,12 +86,12 @@ namespace TUI
 
                 if (user.IsAuthenticated)
                 {
-                    outputMessage = Properties.Strings.Hello + user.Name + ", " + Properties.Strings.LoggedIn;
+                    outputMessage = _stringLocalizer["Hello"] + user.Name + ", " + _stringLocalizer["LoggedIn"];
                     _logger.LogInformation($"User with login:{user.Login} is authorized.");
                 }
                 else
                 {
-                    outputMessage = Properties.Strings.NotLoggedIn;
+                    outputMessage = _stringLocalizer["NotLoggedIn"];
                     _logger.LogWarning($"User with login:{user.Login} is not authorized.");
                 }
 
@@ -111,15 +115,15 @@ namespace TUI
                 string displayMessage = string.Empty;
                 if (user.Role == Role.Admin)
                 {
-                    displayMessage = Properties.Strings.MenuForAdmin;
+                    displayMessage = _stringLocalizer["MenuForAdmin"];
                 }
                 else if (user.Role == Role.Buyer)
                 {
-                    displayMessage = Properties.Strings.MenuForBuyer;
+                    displayMessage = _stringLocalizer["MenuForBuyer"];
                 }
                 else if (user.Role == Role.Seller)
                 {
-                    displayMessage = Properties.Strings.MenuForSeller;
+                    displayMessage = _stringLocalizer["MenuForSeller"];
                 }
                 value = GetEnteredNumericValue(displayMessage);
                 Clear(0);
@@ -142,11 +146,11 @@ namespace TUI
                 if (!discountCards.Any(dc => string.Equals(dc.Name, "CheerfulDiscountCard")))
                 {
                     _discountCardService.AddCheerfulDiscountCard(buyer);
-                    displayMessage = Properties.Strings.CheerfulDiscountCardPurchased;
+                    displayMessage = _stringLocalizer["CheerfulDiscountCardPurchased"];
                 }
                 else
                 {
-                    displayMessage = Properties.Strings.CheerfulDiscountCardAlreadyPurchased;
+                    displayMessage = _stringLocalizer["CheerfulDiscountCardAlreadyPurchased"];
                 }
                 Display(displayMessage);
                 Clear(2500);
@@ -162,7 +166,7 @@ namespace TUI
         {
             try
             {
-                DisplayLine(Properties.Strings.PathToLogFile);
+                DisplayLine(_stringLocalizer["PathToLogFile"]);
                 var path = _setupOptions.PathToLoggerFile;
                 Display(path);
                 Clear(2500);
@@ -181,13 +185,13 @@ namespace TUI
                 var positionNumber = default(SettingValueDiscountCard);
                 while (positionNumber != SettingValueDiscountCard.Exit)
                 {
-                    var displayMessage = Properties.Strings.DiscountCardSettingsMenu;
+                    var displayMessage = _stringLocalizer["DiscountCardSettingsMenu"];
                     positionNumber = (SettingValueDiscountCard)GetEnteredNumericValue(displayMessage);
 
                     if (positionNumber == SettingValueDiscountCard.DateIssueQuantumDiscountCard)
                     {
                         Clear(100);
-                        displayMessage = Properties.Strings.SpecialDayForQuantumDiscountCard;
+                        displayMessage = _stringLocalizer["SpecialDayForQuantumDiscountCard"];
                         DisplayLine(displayMessage);
 
                         var date = _discountCardService.SetDateIssueForQuantumDiscountCard();
@@ -198,7 +202,7 @@ namespace TUI
                     else if (positionNumber == SettingValueDiscountCard.ValidityPeriodQuantumDiscountCard)
                     {
                         Clear(100);
-                        displayMessage = Properties.Strings.ValidityPeriodQuantumDiscountCard;
+                        displayMessage = _stringLocalizer["ValidityPeriodQuantumDiscountCard"];
 
                         var numberDays = GetEnteredNumericValue(displayMessage);
 
@@ -208,7 +212,7 @@ namespace TUI
                     else if (positionNumber == SettingValueDiscountCard.WorkDatesCheerfulDiscountCard)
                     {
                         Clear(100);
-                        displayMessage = Properties.Strings.WorkDatesCheerfulDiscountCard;
+                        displayMessage = _stringLocalizer["WorkDatesCheerfulDiscountCard"];
                         DisplayLine(displayMessage);
 
                         var date = _discountCardService.SetWorkDatesForCheerfulDiscountCard();
@@ -235,12 +239,12 @@ namespace TUI
                 if (shoppingCart.Count != 0)
                 {
                     var hasPayment = _shoppingCartService.Payment(buyer, shoppingCart);
-                    displayMesssage = hasPayment ? Properties.Strings.SuccessfulPayment : Properties.Strings.SuccessfulNotPayment;
+                    displayMesssage = hasPayment ? _stringLocalizer["SuccessfulPayment"] : _stringLocalizer["SuccessfulNotPayment"];
                     Display(displayMesssage);
                 }
                 else
                 {
-                    displayMesssage = Properties.Strings.CartIsEmpty;
+                    displayMesssage = _stringLocalizer["CartIsEmpty"];
                     Display(displayMesssage);
                 }
                 Clear(2500);
@@ -270,10 +274,10 @@ namespace TUI
                         DisplayLine(++idCounter + product.ToString());
                     }
 
-                    var displayMessage = Properties.Strings.Exit;
+                    var displayMessage = _stringLocalizer["Exit"];
                     DisplayLine(displayMessage);
 
-                    displayMessage = Properties.Strings.AddItemToCart;
+                    displayMessage = _stringLocalizer["AddItemToCart"];
                     productId = GetEnteredNumericValue(displayMessage);
 
                     if (productId > 0)
@@ -309,14 +313,14 @@ namespace TUI
                     {
                         var totalAmount = _shoppingCartService.CalculateTotalAmount(buyer);
 
-                        displayMessage = Properties.Strings.AmountToPay + totalAmount + Properties.Strings.RUB;
+                        displayMessage = _stringLocalizer["AmountToPay"] + totalAmount + _stringLocalizer["RUB"];
                         DisplayLine(displayMessage);
                     }
 
-                    displayMessage = Properties.Strings.MenuShowCart;
+                    displayMessage = _stringLocalizer["MenuShowCart"];
                     positionNumber = (ShowCartMenu)GetEnteredNumericValue(displayMessage);
 
-                    displayMessage = Properties.Strings.EnterProductID;
+                    displayMessage = _stringLocalizer["EnterProductID"];
                     switch (positionNumber)
                     {
                         case ShowCartMenu.PayGoods:
@@ -326,7 +330,7 @@ namespace TUI
                             {
                                 var productId = GetEnteredNumericValue(displayMessage);
 
-                                displayMessage = Properties.Strings.EnterQuantity;
+                                displayMessage = _stringLocalizer["EnterQuantity"];
                                 var quantity = GetEnteredNumericValue(displayMessage);
 
                                 _shoppingCartService.UpdateQuantityProduct(buyer, products[productId - 1], quantity);
@@ -353,16 +357,16 @@ namespace TUI
         {
             try
             {
-                var displayMessage = Properties.Strings.EnterProductName;
+                var displayMessage = _stringLocalizer["EnterProductName"];
                 var name = GetEnteredStringValue(displayMessage);
 
-                displayMessage = Properties.Strings.EnterProductDescription;
+                displayMessage = _stringLocalizer["EnterProductDescription"];
                 var description = GetEnteredStringValue(displayMessage);
 
-                displayMessage = Properties.Strings.EnterPriceProduct;
+                displayMessage = _stringLocalizer["EnterPriceProduct"];
                 var price = GetEnteredNumericValue(displayMessage);
 
-                displayMessage = Properties.Strings.EnterQuantityProduct;
+                displayMessage = _stringLocalizer["EnterQuantityProduct"];
                 var quantity = GetEnteredNumericValue(displayMessage);
 
                 _productRepository.Add(new Product(name, description, price, quantity));
@@ -394,10 +398,10 @@ namespace TUI
                         DisplayLine(++idCounter + product.ToString());
                     }
 
-                    var displayMessage = Properties.Strings.Exit;
+                    var displayMessage = _stringLocalizer["Exit"];
                     DisplayLine(displayMessage);
 
-                    displayMessage = Properties.Strings.ToDeleteEnterProductID;
+                    displayMessage = _stringLocalizer["ToDeleteEnterProductID"];
                     productId = GetEnteredNumericValue(displayMessage);
 
                     if (productId > 0)
@@ -443,10 +447,10 @@ namespace TUI
                         DisplayLine(++idCounter + product.ToString());
                     }
 
-                    var displayMessage = Properties.Strings.Exit;
+                    var displayMessage = _stringLocalizer["Exit"];
                     DisplayLine(displayMessage);
 
-                    displayMessage = Properties.Strings.ToEditEnterProductID;
+                    displayMessage = _stringLocalizer["ToEditEnterProductID"];
                     productId = GetEnteredNumericValue(displayMessage);
 
                     if (productId > 0)
@@ -454,19 +458,19 @@ namespace TUI
                         var updatableProduct = products[productId - 1];
                         if (updatableProduct != null)
                         {
-                            displayMessage = Properties.Strings.EnterProductName;
+                            displayMessage = _stringLocalizer["EnterProductName"];
                             var enteredName = GetEnteredStringValue(displayMessage);
                             var name = string.IsNullOrEmpty(enteredName) ? updatableProduct.Name : enteredName;
 
-                            displayMessage = Properties.Strings.EnterProductDescription;
+                            displayMessage = _stringLocalizer["EnterProductDescription"];
                             var enteredDescription = GetEnteredStringValue(displayMessage);
                             var description = string.IsNullOrEmpty(enteredDescription) ? updatableProduct.Description : enteredDescription;
 
-                            displayMessage = Properties.Strings.EnterPriceProduct;
+                            displayMessage = _stringLocalizer["EnterPriceProduct"];
                             var enteredPrice = GetEnteredNumericValue(displayMessage);
                             var price = enteredPrice > 0 ? enteredPrice : updatableProduct.Price;
 
-                            displayMessage = Properties.Strings.EnterQuantityProduct;
+                            displayMessage = _stringLocalizer["EnterQuantityProduct"];
                             var enteredQuantity = GetEnteredNumericValue(displayMessage);
                             var quantity = enteredQuantity > 0 ? enteredQuantity : updatableProduct.Quantity;
 
