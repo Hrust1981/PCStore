@@ -24,5 +24,3 @@ C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\Core.pdb
 C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\ref\Core.dll
 C:\Users\SharipovRR\source\repos\PCStore\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
 C:\Users\Hrust\source\repos\PCStore\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
-C:\Users\SharipovRR\source\repos\PCStore\Core\bin\Debug\net8.0\Core.runtimeconfig.json
-C:\Users\SharipovRR\source\repos\PCStore\Core\obj\Debug\net8.0\Core.genruntimeconfig.cache

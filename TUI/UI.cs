@@ -7,6 +7,8 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+using System.Reflection;
+using TUI.Properties;
 
 namespace TUI
 {
@@ -72,6 +74,7 @@ namespace TUI
 
         public User Authentication()
         {
+            User? user = null;
             try
             {
                 string outputMessage = _stringLocalizer["Login"];
@@ -82,7 +85,7 @@ namespace TUI
                 DisplayLine(outputMessage);
                 string password = HiddenPasswordInput();
 
-                var user = _authentication.Authenticate(login, password);
+                user = _authentication.Authenticate(login, password);
 
                 if (user.IsAuthenticated)
                 {
@@ -97,14 +100,13 @@ namespace TUI
 
                 DisplayLine(outputMessage);
                 Clear(2000);
-                return user;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"{ex.Message}. This exception occurred in the {ex.TargetSite} method.");
                 Clear(100);
-                return User.Empty;
             }
+            return user;
         }
 
         public int Menu(User user)

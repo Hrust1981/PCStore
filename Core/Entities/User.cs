@@ -4,8 +4,6 @@ namespace Core.Entities
 {
     public class User : Entity
     {
-        private User() { }
-
         public User(string name, string login, string password, string email, Role role)
         {
             Id = Guid.NewGuid();
@@ -21,6 +19,5 @@ namespace Core.Entities
         public string? Email { get; set; }
         public Role Role { get; set; }
         public bool IsAuthenticated { get; set; }
-        public static User Empty { get => new User(); }
     }
 }

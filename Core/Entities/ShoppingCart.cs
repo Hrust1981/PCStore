@@ -2,6 +2,14 @@
 {
     public class ShoppingCart : Entity
     {
+        // For testing
+        public ShoppingCart(Guid id, List<Product> products, Guid userId)
+        {
+            UserId = id;
+            Products = products;
+            UserId = userId;
+        }
+
         public ShoppingCart(List<Product> products, Guid userId)
         {
             Id = Guid.NewGuid();
