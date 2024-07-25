@@ -2032,9 +2032,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\TUI\\TUI.csproj",
+      "projectUniqueName": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\TUI.csproj",
       "projectName": "TUI",
-      "projectPath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\TUI\\TUI.csproj",
+      "projectPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\TUI.csproj",
       "packagesPath": "C:\\Users\\SharipovRR\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\TUI\\obj\\",
       "projectStyle": "PackageReference",
@@ -2053,8 +2053,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\Core\\Core.csproj"
+            "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Core.csproj"
             }
           }
         }

@@ -6239,11 +6239,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\PCStore.UnitTests\\PCStore.UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\PCStore.UnitTests\\PCStore.UnitTests.csproj",
       "projectName": "PCStore.UnitTests",
-      "projectPath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\PCStore.UnitTests\\PCStore.UnitTests.csproj",
+      "projectPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\PCStore.UnitTests\\PCStore.UnitTests.csproj",
       "packagesPath": "C:\\Users\\SharipovRR\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\PCStore.UnitTests\\obj\\",
+      "outputPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\PCStore.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\SharipovRR\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6260,8 +6260,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\Core\\Core.csproj"
+            "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Core.csproj"
             }
           }
         }

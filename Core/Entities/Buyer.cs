@@ -8,6 +8,7 @@ namespace Core.Entities
         public Buyer(Guid id, string name, string login, string password, string email, Role role)
             : base(name, login, password, email, role)
         {
+            Id = id;
             DiscountCards = new List<DiscountCard>();
         }
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oYgoGU7DUvFhWqztIsYrPEeswlEpDYYmYlnJouRjTtfyXy9LwB/7dxXGlRHt0b8DKhzNZcQ/1MbhdK9N1aq9Iw==",
+  "dgSpecHash": "hvDPE3UDxgeNG0Bcg2oUqeIIWAweGmxL6m6P0XxTlE6wCS5xuMn9+kQBRU+VECXnpmKf8PRnj7yOdTu771O9Wg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\PCStore.UnitTests\\PCStore.UnitTests.csproj",
+  "projectFilePath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\PCStore.UnitTests\\PCStore.UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SharipovRR\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\SharipovRR\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

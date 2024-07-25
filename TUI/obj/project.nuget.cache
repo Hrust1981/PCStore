@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vYc4u6AsiQTy8b49euEgvkKeRFnZxzfi/FcCmmD7xqdBJcZwIHtmWm+bfpp5F6ULmiMcjxz1xHddwOgmPJL6Dg==",
+  "dgSpecHash": "ylISWHJ4TMkWV/YMBPrAPXkdZoXBh2gq4qq2yT8J2AxbfKd1jtT6DFsUq1rjwbL3d2pKejz1gH8TEpxCmrMMHQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\TUI\\TUI.csproj",
+  "projectFilePath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\TUI\\TUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SharipovRR\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",

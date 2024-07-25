@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fVVkXM3m/Lrf5ykWmQ3ds4a5imrY+rNtpN3NidClpqAne0xWrBXXtGHLt8eyXDNr93mAcMUUZOC79OvOkIUZuw==",
+  "dgSpecHash": "vdA9EeKSTqiyHdVnhkyZe9ZcEaKzfUbPcEQKjpAzhfnD977fDWTj9WTVtl2Zt97kIpyXeVXeLsaIB/pz4Jwq+Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SharipovRR\\Source\\Repos\\PCStore\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\SharipovRR\\source\\repos\\PCStore\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SharipovRR\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\SharipovRR\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
