@@ -54,6 +54,8 @@ namespace PCStore.UnitTests
 
 
             // Assert
+            Assert.NotEmpty(products);
+            Assert.Equal(product.Id, products.First()?.Id);
         }
 
     }

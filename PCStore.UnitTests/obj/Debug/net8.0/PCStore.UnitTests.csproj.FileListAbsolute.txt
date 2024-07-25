@@ -234,3 +234,5 @@ C:\Users\SharipovRR\Source\Repos\PCStore\PCStore.UnitTests\obj\Debug\net8.0\refi
 C:\Users\SharipovRR\Source\Repos\PCStore\PCStore.UnitTests\obj\Debug\net8.0\PCStore.UnitTests.pdb
 C:\Users\SharipovRR\Source\Repos\PCStore\PCStore.UnitTests\obj\Debug\net8.0\PCStore.UnitTests.genruntimeconfig.cache
 C:\Users\SharipovRR\Source\Repos\PCStore\PCStore.UnitTests\obj\Debug\net8.0\ref\PCStore.UnitTests.dll
+C:\Users\Hrust\source\repos\PCStore\PCStore.UnitTests\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\Hrust\source\repos\PCStore\PCStore.UnitTests\bin\Debug\net8.0\Moq.dll
